@@ -1,0 +1,15 @@
+.space-top2{
+    margin-top: 6%;
+}
+
+.text-left {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.container-d{
+    display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+   grid-column-gap: 45px;
+   grid-row-gap: 20px;
+}

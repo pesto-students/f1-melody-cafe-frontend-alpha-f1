@@ -1,0 +1,24 @@
+.blue{
+    // background-color: blue;
+}
+.sideImage{
+   width: 305px;
+   height: 100%;
+   top: 60px;
+   bottom: 74px;
+   right: 0;
+   position: fixed;
+   flex-direction: column;
+   overflow: hidden;
+}
+
+
+.space-top{
+    position: relative;
+    top:100px;
+}
+
+.backgroundColour{
+    background-color: #1b1b1b;
+    color:white
+}
