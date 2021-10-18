@@ -33,7 +33,7 @@ const Routes = () => {
       <Route exact path="/">
         <Home />
       </Route>
-      <Route path="/:id/:slug?/:filter?">
+      <Route exact path="/:type/:slug?">
         <CurrentSection />
       </Route>
       {routes.map((route, index) => (

@@ -40,34 +40,46 @@ const CustomCarousel = ({ items, cols, rows }) => {
   //     </Carousel.Item> */}
   //   </Carousel>
   // );
+
+  const [showArrow, setShowArrow] = useState(true);
+
+  const toggleShowArrow = (flag) => {
+    setShowArrow(flag);
+  };
+
   return (
-    <Carousel
-      cols={cols}
-      rows={rows}
-      gap={20}
-      loop
-      // showDots
-      // hideArrow={true}
-      responsiveLayout={[
-        {
-          breakpoint: 1200,
-          cols: 3,
-        },
-        {
-          breakpoint: 990,
-          cols: 2,
-        },
-      ]}
-      mobileBreakpoint={670}
-      // arrowRight={<ArrowBtn type="right" />}
-      // arrowLeft={<ArrowBtn type="left" />}
+    <div
+      onMouseEnter={() => toggleShowArrow(false)}
+      onMouseLeave={() => toggleShowArrow(true)}
     >
-      {items.map((item, i) => (
-        <Carousel.Item key={i}>
-          <Card>{item}</Card>
-        </Carousel.Item>
-      ))}
-    </Carousel>
+      <Carousel
+        cols={cols}
+        rows={rows}
+        gap={20}
+        loop
+        // showDots
+        hideArrow={showArrow}
+        responsiveLayout={[
+          {
+            breakpoint: 1200,
+            cols: 3,
+          },
+          {
+            breakpoint: 990,
+            cols: 2,
+          },
+        ]}
+        mobileBreakpoint={670}
+        // arrowRight={<ArrowBtn type="right" />}
+        // arrowLeft={<ArrowBtn type="left" />}>
+      >
+        {items?.map((item, i) => (
+          <Carousel.Item key={i}>
+            <Card>{item}</Card>
+          </Carousel.Item>
+        ))}
+      </Carousel>
+    </div>
   );
 };
 

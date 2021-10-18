@@ -1,7 +1,19 @@
 import React, { useState } from "react";
-import { Container, Nav, Navbar, NavDropdown, Button } from "react-bootstrap";
+import {
+  Container,
+  Nav,
+  Navbar,
+  NavDropdown,
+  Button,
+  Image,
+  Form,
+  FormControl,
+} from "react-bootstrap";
+import { Link } from "react-router-dom";
 import AuthModal from "../Auth/AuthModal";
 import SideBar from "../SideBar/SideBar";
+import Logo from "../../assets/TheMelodyCafeLogo.gif";
+import "./Header.scss";
 
 const Header = () => {
   const [show, setShow] = useState(false);
@@ -12,33 +24,57 @@ const Header = () => {
 
   return (
     <>
-      <Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar
+        fixed="top"
+        collapseOnSelect
+        expand="lg"
+        // bg="dark"
+        variant="dark"
+        className="headerHome"
+      >
         <Container>
           <Button variant="primary" onClick={toggleShow} className="me-2">
-            Sidebar
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-list"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
+              />
+            </svg>
           </Button>
-          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+
+          <Navbar.Brand>
+            <Link to="/">
+              {" "}
+              <Image src={Logo} width="100px" height="50px" />
+            </Link>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#features">Features</Nav.Link>
-              <Nav.Link href="#pricing">Pricing</Nav.Link>
-              <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Something
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
-              </NavDropdown>
+              <Form className="d-flex">
+                <FormControl
+                  type="search"
+                  placeholder="Search"
+                  className="me-2"
+                  aria-label="Search"
+                />
+                <Button variant="outline-success">Search</Button>
+              </Form>
             </Nav>
             <Nav>
-              <Nav.Link href="#deets">More deets</Nav.Link>
+              <Nav.Link>
+                <Button variant="light">Go Ad Free</Button>
+              </Nav.Link>
+              <Nav.Link>
+                <Button variant="light">Get Melody Plus</Button>
+              </Nav.Link>
               <Nav.Link eventKey={2}>
                 <Button
                   variant="primary"

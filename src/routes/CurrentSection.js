@@ -1,15 +1,23 @@
 import React from "react";
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import FilteredDetails from "../pages/home/FilteredDetails";
 import FilteredSection from "../pages/home/FilteredSection";
 
 const CurrentSection = () => {
-  let { id, slug, filter } = useParams();
-  console.log(id, slug, filter);
-  if (id && slug) {
-    return <FilteredDetails title={slug} />;
+  let location = useLocation();
+  let { type, slug, filter } = useParams();
+  console.log(type, slug, filter);
+  if (type === "song" || type === "playlist") {
+    return <FilteredDetails title={slug} location={location} />;
   }
-  return <FilteredSection title={id} />;
+  if (
+    type === "album" ||
+    type === "radio" ||
+    type === "podcast" ||
+    type === "genre"
+  ) {
+    return <FilteredSection title={slug} location={location} />;
+  }
 };
 
 export default CurrentSection;

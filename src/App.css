@@ -36,3 +36,455 @@
     transform: rotate(360deg);
   }
 }
+
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
+
+/* body {
+  scrollbar-width: thin;
+  scrollbar-color: #00000020 orange;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #00000020;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: orange;
+  border-radius: 10px;
+}
+
+.root-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #13172C;
+} */
+
+.content {
+  height: calc(100vh - 128px);
+}
+
+.controls {
+  position: fixed;
+  bottom:0;
+  width: 100%;
+  height: 128px;
+  padding: 40px;
+  background-color: #13172C;
+  z-index: 9999999;
+}
+
+.sidebar {
+  height: 100%;
+  border-bottom-left-radius: 32px;
+  background: rgb(11, 20, 55);
+  background: linear-gradient(180deg, rgba(11, 20, 55, 1) 0%, rgba(10, 24, 69, 1) 100%);
+}
+
+.page-container {
+  height: 100%;
+  border-bottom-right-radius: 32px;
+  background: rgb(8, 17, 78);
+  background: linear-gradient(90deg, rgba(8, 17, 78, 1) 0%, rgba(21, 36, 92, 1) 100%);
+}
+
+.logo {
+  width: 100%;
+  margin-top: 40px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.page-headline {
+  font-size: 28px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  color: white;
+  cursor: default;
+}
+
+.page-root {
+  height: 100%;
+  width: 100%;
+}
+
+.controller-song-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 40px;
+  padding: 0;
+  width: calc(100% - 68px - 40px);
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  float: left;
+  color: white;
+  font-size: 18px;
+  cursor: default;
+}
+
+.controller-song-artist {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  cursor: default;
+  margin-right: 40px;
+  padding: 0;
+  color: white;
+  display: block;
+  float: left;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: calc(100% - 68px - 40px);
+  font-size: 14px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 400;
+}
+
+.controller-song-art {
+  float: left;
+  object-fit: cover;
+  margin: 0;
+  padding: 0;
+  margin-right: 20px;
+  width: 48px;
+  height: 48px;
+}
+
+.song-listing-title {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: 18px;
+}
+
+.song-listing-artist {
+  margin: 0;
+  padding: 0;
+  color: white;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 50%;
+  font-size: 14px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 400;
+}
+
+.song-listing-art {
+  object-fit: cover;
+  width: 48px;
+  height: 48px;
+}
+
+.song-listing {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: relative;
+  float: left;
+  width: 100%;
+  cursor: pointer;
+}
+
+.song-listing-active {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 64px;
+  background-color: #00000030;
+  position: relative;
+  float: left;
+  width: 100%;
+  cursor: pointer;
+}
+
+.controller-song-details {
+  position: relative;
+  width: 100%;
+}
+
+.controller-play {
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  background-color: orange;
+}
+
+.controller-play-icon {
+  width: 48px;
+  height: 48px;
+  padding: 16px;
+}
+
+.controller-controls-container {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.controller-options-container {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-left: 40px;
+}
+
+.controller-seekbar-container {
+  position: relative;
+  margin-left: 40px;
+  height: 100%;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+}
+
+.controller-time {
+  float: left;
+  font-size: 16px;
+  font-family: monospace;
+  font-weight: 400;
+  color: white;
+  cursor: default;
+}
+
+.seekbar {
+  flex: auto;
+}
+
+.controller-icon {
+  cursor: pointer;
+  float: left;
+}
+
+.artists-container {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.settings-container {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.library-container {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.artists-list-container {
+  flex-grow: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.settings-list-container {
+  flex-grow: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.flex-fill {
+  flex-grow: 1;
+}
+
+.pointer-cursor {
+  cursor: pointer;
+}
+
+.library-headline-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.bottom-border {
+  border-bottom: 2px solid #00000020;
+  padding-bottom: 20px;
+}
+
+.song-list-container {
+  flex-grow: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.menu-item-active {
+  color: orange !important;
+  background: linear-gradient(90deg, rgba(255, 166, 0, 0.25) 0%, rgba(0, 0, 0, 0) 50%);
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  position: relative;
+  cursor: pointer;
+}
+
+.menu-icon {
+  float: left;
+  width: 16px;
+  height: 16px;
+  margin-right: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.menu-label {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.lyric-body {
+  white-space: pre-wrap;
+  height: 60vh;
+  overflow-y: auto;
+}
+
+/* RANGE SEEKBAR STYLES */
+
+/*Chrome*/
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  input[type='range'] {
+    overflow: hidden;
+    -webkit-appearance: none;
+    background-color: #15245C;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  input[type='range']::-webkit-slider-runnable-track {
+    height: 8px;
+    -webkit-appearance: none;
+    color: #FFA600;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  input[type='range']::-webkit-slider-thumb {
+    width: 8px;
+    height: 8px;
+    -webkit-appearance: none;
+    cursor: ew-resize;
+    background: #FFA600;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: -100vw 0 0 100vw #FFA600;
+  }
+
+}
+
+/** FF*/
+input[type="range"]::-moz-range-progress {
+  background-color: #FFA600;
+  border-radius: 4px;
+}
+
+input[type="range"]::-moz-range-track {
+  background-color: #15245C;
+  border-radius: 4px;
+}
+
+/* IE*/
+input[type="range"]::-ms-fill-lower {
+  background-color: #FFA600;
+  border-radius: 4px;
+}
+
+input[type="range"]::-ms-fill-upper {
+  background-color: #15245C;
+  border-radius: 4px;
+}
+
+/** HYPERLINK COLORS */
+
+a:link {
+  color: orange;
+}
+
+a:visited {
+  color: #FFA600;
+}
+
+a:hover {
+  color: #EE9500;
+}
+
+a:active {
+  color: #EE9500;
+}
+
+.artist-list-image {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.artist-list-name {
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+}
+
+.artist-list-item {
+  cursor: pointer;
+}
+
+.regular-text {
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 400;
+}
+
+.bold-text {
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+}
+
+.about-container {
+  text-align: justify;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

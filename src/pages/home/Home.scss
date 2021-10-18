@@ -4,12 +4,13 @@
 .sideImage{
    width: 305px;
    height: 100%;
-   top: 60px;
+   top: 130px;
    bottom: 74px;
    right: 0;
    position: fixed;
    flex-direction: column;
    overflow: hidden;
+   z-index: 9999999;
 }
 
 
@@ -20,5 +21,6 @@
 
 .backgroundColour{
     background-color: #1b1b1b;
-    color:white
+    color:white;
+    
 }
