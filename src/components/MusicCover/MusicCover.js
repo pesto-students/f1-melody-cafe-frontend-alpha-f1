@@ -35,7 +35,7 @@ const MusicCover = ({ isRounded, data, type, slug }) => {
 
   const dispatchSelector = () => {
     if (type === "playlist") {
-      dispatch(onPlaylistSelect(data.playlistInfo.playlistId, slug));
+      dispatch(onPlaylistSelect(data?.playlistInfo?.playlistId, slug));
     }
     if (type === "genre") {
       dispatch(onPageSelect(slug));

@@ -215,8 +215,15 @@ const Controller = (props) => {
       audio.currentTime = 0;
       pauseAudio();
       if (song?.id !== undefined) {
+        let video_id = null;
+        if (song?.kind === "youtube#playlistItem") {
+          video_id = song?.snippet?.resourceId?.videoId;
+        }
+        if (song?.kind === "youtube#video") {
+          video_id = song?.id;
+        }
         setBuffering(true);
-        getAudio(song?.id, getStreamQuality()).then((response) => {
+        getAudio(video_id, getStreamQuality()).then((response) => {
           console.log(response);
           if (response.status === 200) {
             const streamingUrl = response.data;

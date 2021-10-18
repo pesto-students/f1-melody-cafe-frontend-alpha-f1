@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import _ from "lodash";
 
 // Actions
@@ -7,8 +7,12 @@ import { onVideoSelect } from "../../entities";
 import SongListItems from "./SongListItem";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import GlobalState from "../../contexts/GlobalState";
+import { shufflePlaylist } from "../../utils/utils";
 
 const SongList = (props) => {
+  const [state, setState] = useContext(GlobalState);
+
   const cachedPlaylists = useSelector(
     (state) => state.playlists.cachedPlaylists
   );
@@ -94,13 +98,32 @@ const SongList = (props) => {
   };
 
   const playAll = () => {
-    dispatch(() =>
+    dispatch(
       onVideoSelect(
         cachedPlaylists[genre][props.playlistId].songs[0],
         cachedPlaylists[genre][props.playlistId].songs
       )
     );
-    player.target.playVideo();
+    player?.target.playVideo();
+
+    let newOriginalQueue;
+    let newQueue = [
+      ...state.originalQueue,
+      cachedPlaylists[genre][props.playlistId].songs[0],
+      ...cachedPlaylists[genre][props.playlistId].songs,
+    ];
+    if (state.shuffleOn) {
+      newQueue = shufflePlaylist(
+        newQueue,
+        cachedPlaylists[genre][props.playlistId].songs[0]
+      );
+    }
+    setState((state) => ({
+      ...state,
+      currentSong: cachedPlaylists[genre][props.playlistId].songs[0],
+      queue: newQueue,
+      originalQueue: [...state.originalQueue, ...newQueue],
+    }));
   };
 
   // DRY shortcut for this playlist
@@ -152,7 +175,7 @@ const SongList = (props) => {
           <SongListItems
             key={video.etag}
             video={video}
-            onVideoSelect={dispatch(onVideoSelect)}
+            onVideoSelect={onVideoSelect}
             selectedSong={selectedSong}
             cachedPlaylist={cachedPlaylists[genre][props.playlistId].songs}
             savedSongs={props.savedSongs}

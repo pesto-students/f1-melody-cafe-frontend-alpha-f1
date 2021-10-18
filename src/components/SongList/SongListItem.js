@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import _ from "lodash";
 import regex from "../../helpers/helper-functions"; // Regex functions for splitting the titles
+import { useDispatch } from "react-redux";
+import GlobalState from "../../contexts/GlobalState";
+import { shufflePlaylist } from "../../utils/utils";
 
 const SongListItems = (props) => {
+  const [state, setState] = useContext(GlobalState);
+
+  const dispatch = useDispatch();
   // Set this song to selected if it matches the selectedSong state
   var addSelectedClass;
 
@@ -11,6 +17,19 @@ const SongListItems = (props) => {
   } else {
     addSelectedClass = "list-item";
   }
+
+  const callPlay = (song) => {
+    let newQueue = [...state.originalQueue, song];
+    if (state.shuffleOn) {
+      newQueue = shufflePlaylist(newQueue, song);
+    }
+    setState((state) => ({
+      ...state,
+      currentSong: song,
+      queue: newQueue,
+      originalQueue: [...state.originalQueue, song],
+    }));
+  };
 
   if (!props.video.channelTitle) {
     return (
@@ -55,25 +74,37 @@ const SongListItems = (props) => {
       {renderSaveRemoveButton()}
       <td
         className="list-track"
-        onClick={() => props.onVideoSelect(props.video, props.cachedPlaylist)}
+        onClick={() => {
+          dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
+          callPlay(props.video);
+        }}
       >
         {regex.editTitle(props.video.snippet.title)}
       </td>
       <td
         className="list-artist"
-        onClick={() => props.onVideoSelect(props.video, props.cachedPlaylist)}
+        onClick={() => {
+          dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
+          callPlay(props.video);
+        }}
       >
         {regex.editArtist(props.video.channelTitle)}
       </td>
       <td
         className="list-duration"
-        onClick={() => props.onVideoSelect(props.video, props.cachedPlaylist)}
+        onClick={() => {
+          dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
+          callPlay(props.video);
+        }}
       >
         {regex.editDuration(props.video.duration)}
       </td>
       <td
         className="list-play-count"
-        onClick={() => props.onVideoSelect(props.video, props.cachedPlaylist)}
+        onClick={() => {
+          dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
+          callPlay(props.video);
+        }}
       >
         {regex.editPlayCount(props.video.viewCount)}
       </td>
