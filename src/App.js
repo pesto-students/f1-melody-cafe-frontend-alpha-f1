@@ -44,15 +44,6 @@ function App() {
           <Controller className="controls m-0 p-0" />
         </Router>
       </GlobalState.Provider>
-      {/* header -> constant */}
-      {/* Search */}
-      {/* Auth */}
-
-      {/* sidebar */}
-      {/* Banner ->constant */}
-      {/* Filter Bar */}
-      {/* Footer */}
-      {/* Music Mini Player -> constant */}
     </div>
   );
 }

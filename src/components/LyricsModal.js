@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import GeniusLogo from "../assets/genius-logo.jpg";
-// import { getSongLyrics } from "../api/manager";
+// import { getSongLyrics } from "../api/";
 
 const LyricsModal = (props) => {
-  const [lyrics, setLyrics] = useState(null);
+  const [lyrics, setLyrics] = useState("Fetching song lyrics, please wait ...");
 
   const callGetSongLyrics = () => {
     setLyrics(props.song.lyrics);
@@ -37,9 +36,9 @@ const LyricsModal = (props) => {
       <Modal.Header closeButton>
         <p className="m-0 p-0">
           <span className="mr-3">
-            <img alt="" src={GeniusLogo} width="36px" />
+            <img alt="" src={""} width="36px" />
           </span>
-          Lyrics powered by Genius
+          Song Lyrics
         </p>
       </Modal.Header>
       <Modal.Body className="lyric-body">{lyrics}</Modal.Body>

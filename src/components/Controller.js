@@ -14,7 +14,6 @@ import RepeatIcon from "../assets/repeat.svg";
 import RepeatAllIcon from "../assets/repeat-all.svg";
 import RepeatOneIcon from "../assets/repeat-one.svg";
 import LyricsIcon from "../assets/lyrics.svg";
-import YoutubeIcon from "../assets/youtube.svg";
 import LikeIcon from "../assets/like.svg";
 import LikeActiveIcon from "../assets/like-active.svg";
 
@@ -244,7 +243,7 @@ const Controller = (props) => {
   );
 
   const showLyricsModal = () => {
-    setShowLyrics(song?.lyrics !== null);
+    setShowLyrics(song?.lyrics !== null || true);
   };
 
   const albumArt = song?.art !== "" ? song?.art : AlbumArtBlank;
@@ -341,15 +340,6 @@ const Controller = (props) => {
               height="16px"
               className="mr-5 controller-icon"
             />
-            <a href={song.url} target="_blank" rel="noreferrer">
-              <img
-                alt=""
-                src={YoutubeIcon}
-                width="16px"
-                height="16px"
-                className="mr-3 controller-icon"
-              />
-            </a>
             <img
               alt=""
               src={LyricsIcon}
