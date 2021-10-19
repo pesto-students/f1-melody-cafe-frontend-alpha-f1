@@ -10,7 +10,7 @@ import {
   FormControl,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import AuthModal from "../Auth/AuthModal";
+import Login from "../Login/Login";
 import SideBar from "../SideBar/SideBar";
 import Logo from "../../assets/TheMelodyCafeLogo.gif";
 import "./Header.scss";
@@ -18,9 +18,7 @@ import SearchBar from "../SearchBar/SearchBar";
 
 const Header = () => {
   const [show, setShow] = useState(false);
-  const [authModalShow, setAuthModalShow] = useState(false);
-
-  const handleClose = () => setShow(false);
+    const handleClose = () => setShow(false);
   const toggleShow = () => setShow((s) => !s);
 
   return (
@@ -69,22 +67,13 @@ const Header = () => {
                 <Button variant="light">Get Melody Plus</Button>
               </Nav.Link>
               <Nav.Link eventKey={2}>
-                <Button
-                  variant="primary"
-                  onClick={() => {
-                    setAuthModalShow(true);
-                    handleClose();
-                  }}
-                >
-                  Login/Signup
-                </Button>
+                <Login></Login>
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
       <SideBar show={show} handleClose={handleClose} />
-      <AuthModal show={authModalShow} onHide={() => setAuthModalShow(false)} />
     </>
   );
 };
