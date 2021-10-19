@@ -14,6 +14,7 @@ import AuthModal from "../Auth/AuthModal";
 import SideBar from "../SideBar/SideBar";
 import Logo from "../../assets/TheMelodyCafeLogo.gif";
 import "./Header.scss";
+import SearchBar from "../SearchBar/SearchBar";
 
 const Header = () => {
   const [show, setShow] = useState(false);
@@ -58,15 +59,7 @@ const Header = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Form className="d-flex">
-                <FormControl
-                  type="search"
-                  placeholder="Search"
-                  className="me-2"
-                  aria-label="Search"
-                />
-                <Button variant="outline-success">Search</Button>
-              </Form>
+              <SearchBar />
             </Nav>
             <Nav>
               <Nav.Link>
