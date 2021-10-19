@@ -181,20 +181,20 @@ const Home = () => {
             header="Top Bollywood"
             items={songObj.topBolloywood}
             cols={4}
-            type="playlist"
+            type="song"
           />
           {renderGenreList()}
           <RowLayout
             header="Best Of Ed Sheeran"
             items={songObj.edSheeran}
             cols={4}
-            type="playlist"
+            type="song"
           />
           <RowLayout
             header="Romantic Mood"
             items={songObj.romanticSongs}
             cols={4}
-            type="playlist"
+            type="song"
           />
         </Col>
         <Col xl={3} className="d-none d-xl-block blue sideImage">

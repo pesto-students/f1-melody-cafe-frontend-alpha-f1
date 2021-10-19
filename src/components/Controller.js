@@ -251,7 +251,7 @@ const Controller = (props) => {
   return (
     <div className="controls">
       <Row className="m-0">
-        <Col className="p-0 m-0" md={2}>
+        <Col className="p-0 m-0" md={3}>
           <div className="controller-song-details">
             <Image
               alt=""
@@ -267,7 +267,7 @@ const Controller = (props) => {
             </p>
           </div>
         </Col>
-        <Col className="p-0 m-0" md="auto">
+        <Col className="p-0 m-0" sm="auto">
           <div className="controller-controls-container">
             <img
               alt=""
@@ -315,7 +315,7 @@ const Controller = (props) => {
             <p className="controller-time p-0 m-0 pl-3">{toHHMMSS(duration)}</p>
           </div>
         </Col>
-        <Col className="p-0 m-0" md="auto">
+        <Col className="p-0 m-0  d-none d-md-block" sm="auto">
           <div className="controller-options-container">
             <img
               alt=""
