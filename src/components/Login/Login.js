@@ -27,9 +27,7 @@ const LoginButton = () => {
     }
   };
   var lock = new Auth0Lock(clientId, domain,options);
-  let accessToken = null;
-  let profile = null;
-
+  
 
   lock.on('authenticated', function (authResult) {
   lock.getUserInfo(authResult.accessToken, function (error, profileResult) {
@@ -38,8 +36,8 @@ const LoginButton = () => {
       return;
     }
 
-    accessToken = authResult.accessToken;
-    profile = profileResult;
+    localStorage.setItem('token',authResult.accessToken);
+    localStorage.setItem('profile',JSON.stringify(profileResult));
 
     // Update DOM
   });
