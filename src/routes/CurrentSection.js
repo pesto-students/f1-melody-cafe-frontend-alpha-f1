@@ -9,14 +9,15 @@ const CurrentSection = () => {
   console.log(type, slug, filter);
   if (type === "song" || type === "playlist") {
     return <FilteredDetails title={slug} location={location} />;
-  }
-  if (
+  } else if (
     type === "album" ||
     type === "radio" ||
     type === "podcast" ||
     type === "genre"
   ) {
-    return <FilteredSection title={slug} location={location} />;
+    return <FilteredSection title={type} location={location} />;
+  } else {
+    return <FilteredSection title={type} location={location} />;
   }
 };
 
