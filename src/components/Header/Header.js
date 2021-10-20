@@ -55,33 +55,33 @@ const Header = () => {
               <Image src={Logo} width="100px" height="50px" />
             </Link>
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-              <SearchBar />
-            </Nav>
-            <Nav>
-              <Nav.Link className="d-none d-md-block">
-                <Button variant="light">Go Ad Free</Button>
-              </Nav.Link>
-              <Nav.Link>
-                <Button variant="light" className="d-none d-md-block">
-                  Get Melody Plus
-                </Button>
-              </Nav.Link>
-              <Nav.Link eventKey={2} className="d-none d-md-block">
-                <Button
-                  variant="primary"
-                  onClick={() => {
-                    setAuthModalShow(true);
-                    handleClose();
-                  }}
-                >
-                  Login/Signup
-                </Button>
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
+          {/* <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav"> */}
+          <Nav className="me-auto">
+            <SearchBar />
+          </Nav>
+          <Nav>
+            <Nav.Link className="d-none d-md-block">
+              <Button variant="light">Go Ad Free</Button>
+            </Nav.Link>
+            <Nav.Link>
+              <Button variant="light" className="d-none d-md-block">
+                Get Melody Plus
+              </Button>
+            </Nav.Link>
+            <Nav.Link eventKey={2} className="d-none d-md-block">
+              <Button
+                variant="primary"
+                onClick={() => {
+                  setAuthModalShow(true);
+                  handleClose();
+                }}
+              >
+                Login/Signup
+              </Button>
+            </Nav.Link>
+          </Nav>
+          {/* </Navbar.Collapse> */}
         </Container>
       </Navbar>
       <SideBar show={show} handleClose={handleClose} />

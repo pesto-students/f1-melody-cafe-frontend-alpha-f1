@@ -7,6 +7,10 @@
     width: 100%;
     z-index: 4;
     padding: 60px 0px 30px 0px;    
-    // height: 100px;
-    background-color: #222428
+    //height: 100px;
+    background-color: #222428;
+    flex-wrap:wrap !important;
+    //overflow: auto;
+    // align-items:center;
+    // justify-content: center;
 }
