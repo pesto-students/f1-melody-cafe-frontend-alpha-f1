@@ -3,7 +3,7 @@ import CustomCarousel from "../CustomCarousel/CustomCarousel";
 import MusicCover from "../MusicCover/MusicCover";
 import "./RowLayout.scss";
 
-const RowLayout = ({ header, items, cols, rows, type, slug }) => {
+const RowLayout = ({ header, items, cols, rows, type, slug, isRounded }) => {
   let songItems = items?.map((item) => {
     console.log(item);
     return (
@@ -12,12 +12,13 @@ const RowLayout = ({ header, items, cols, rows, type, slug }) => {
         data={item}
         type={type}
         slug={item.id || item.genreSlug || slug}
+        isRounded={isRounded}
       />
     );
   });
   return (
     <div className="space-top">
-      <h2 className="text-left">{header}</h2>
+      <h3 className="text-left">{header}</h3>
       <CustomCarousel items={songItems} rows={rows} cols={cols} />
       {/* <CustomCarousel>
         {children.map((item) => (

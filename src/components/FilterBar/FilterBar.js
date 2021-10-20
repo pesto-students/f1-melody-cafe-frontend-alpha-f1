@@ -9,13 +9,13 @@ const FilterBar = ({ filterList }) => {
       <p>Will be of two types simple, home page and rounded ones</p> */
   }
   return (
-    <Container className="filter filterHome">
+    <Container fluid className="filter filterHome">
       <Nav
         // style={{ top: "50px", position: "sticky" }}
         variant="pills"
         activeKey="0"
         // onSelect={handleSelect}
-        className="justify-content-start"
+        className="justify-content-center"
         navbarScroll={true}
       >
         {filterList?.map((filter, _ind) =>

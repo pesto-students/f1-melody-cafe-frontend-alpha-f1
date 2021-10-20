@@ -226,7 +226,7 @@ const SearchBar = (props) => {
           placeholder="Search artists, songs, playlists.."
           onClick={decoratedOnClick}
         />
-        <Button variant="outline-success">Search</Button>
+        {/* <Button variant="outline-success">Search</Button> */}
       </Form>
     );
   }

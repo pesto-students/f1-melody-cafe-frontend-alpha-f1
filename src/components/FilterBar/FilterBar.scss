@@ -1,27 +1,21 @@
-.nav123{
-    position:sticky;
-    top: 50px;
-    //left: 40px;
-    background-color: #1b1b1b;
-    //background-color: blue;
-        color:white;
-    z-index: 333;
-    //margin-top: 50px;
-    padding: 30px;
-}
 
 .filter{
     position: relative;
-    height: 50px;
     display: flex;
     width: 100%;
     z-index: 3;
     background-color: #1b1b1b;
-    color:white;
+    // color:white;
+    // flex-wrap: wrap;
+    overflow: auto;
+    height: 90px;
     // padding-top: 30px;
 }
 
 .filterHome{
     position: sticky;
     top: 100px;
+    padding: 10px 0px 30px 0px;
+    left: 30px;
+    //width: 100%;
 }

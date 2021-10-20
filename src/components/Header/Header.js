@@ -27,8 +27,8 @@ const Header = () => {
     <>
       <Navbar
         fixed="top"
-        collapseOnSelect
-        expand="lg"
+        // collapseOnSelect
+        //expand="sm"
         // bg="dark"
         variant="dark"
         className="headerHome"
@@ -52,7 +52,6 @@ const Header = () => {
 
           <Navbar.Brand>
             <Link to="/">
-              {" "}
               <Image src={Logo} width="100px" height="50px" />
             </Link>
           </Navbar.Brand>
@@ -62,13 +61,15 @@ const Header = () => {
               <SearchBar />
             </Nav>
             <Nav>
-              <Nav.Link>
+              <Nav.Link className="d-none d-md-block">
                 <Button variant="light">Go Ad Free</Button>
               </Nav.Link>
               <Nav.Link>
-                <Button variant="light">Get Melody Plus</Button>
+                <Button variant="light" className="d-none d-md-block">
+                  Get Melody Plus
+                </Button>
               </Nav.Link>
-              <Nav.Link eventKey={2}>
+              <Nav.Link eventKey={2} className="d-none d-md-block">
                 <Button
                   variant="primary"
                   onClick={() => {

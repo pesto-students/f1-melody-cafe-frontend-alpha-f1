@@ -189,6 +189,7 @@ const Home = () => {
             items={songObj.edSheeran}
             cols={4}
             type="song"
+            isRounded={true}
           />
           <RowLayout
             header="Romantic Mood"
