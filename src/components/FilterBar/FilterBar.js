@@ -2,14 +2,14 @@ import React from "react";
 import { Nav, Navbar, NavDropdown, Row, Col, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./FilterBar.scss";
-const FilterBar = ({ filterList }) => {
+const FilterBar = ({ filterList, isHome }) => {
   // const handleSelect = (eventKey) => alert(`selected ${eventKey}`);
   {
     /* <p>This is a filter bar </p>
       <p>Will be of two types simple, home page and rounded ones</p> */
   }
   return (
-    <Container fluid className="filter filterHome">
+    <Container fluid className={isHome ? "filter filterHome" : "filter"}>
       <Nav
         // style={{ top: "50px", position: "sticky" }}
         variant="pills"

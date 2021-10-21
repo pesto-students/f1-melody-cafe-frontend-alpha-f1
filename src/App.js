@@ -25,6 +25,8 @@ function App() {
     originalQueue: [],
     shuffleOn: false,
     repeatMode: REPEAT_MODE.NONE,
+    userPlaylist: [],
+    userPublish: [],
   });
 
   useEffect(() => {

@@ -2,6 +2,7 @@ import React from "react";
 import { useLocation, useParams } from "react-router";
 import FilteredDetails from "../pages/home/FilteredDetails";
 import FilteredSection from "../pages/home/FilteredSection";
+import MyMusic from "../pages/MyMusic/MyMusic";
 
 const CurrentSection = () => {
   let location = useLocation();
@@ -15,7 +16,9 @@ const CurrentSection = () => {
     type === "podcast" ||
     type === "genre"
   ) {
-    return <FilteredSection title={type} location={location} />;
+    return <FilteredSection title={slug} location={location} />;
+  } else if (type === "my-music") {
+    return <MyMusic />;
   } else {
     return <FilteredSection title={type} location={location} />;
   }

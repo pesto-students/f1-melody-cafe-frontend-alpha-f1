@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import GlobalState from "../../contexts/GlobalState";
 import { shufflePlaylist } from "../../utils/utils";
 import { onPageSelect, onPlaylistSelect } from "../../entities";
+import regex from "../../helpers/helper-functions";
 
 const MusicCover = ({ isRounded, data, type, slug }) => {
   const [state, setState] = useContext(GlobalState);
@@ -88,7 +89,7 @@ const MusicCover = ({ isRounded, data, type, slug }) => {
           {" "}
           {data?.playlistInfo?.playlistTitle ||
             data?.genreTitle ||
-            data?.snippet?.title.slice(0, 70) + " ..."}
+            regex.editTitle(data?.snippet?.title)}
         </Figure.Caption>
       </Figure>
     </Link>

@@ -156,11 +156,11 @@ const Home = () => {
     <Container fluid className="backgroundColour">
       <Row className="content m-0 p-0">
         <Col lg={12} xl={9}>
-          <FilterBar filterList={filtersListHome} />
+          <FilterBar filterList={filtersListHome} isHome={true} />
 
           <Container
             // onMouseOver={() => toggleShowArrow(false)}
-            className="space-top"
+            className="space-top-home"
           >
             <CustomCarousel items={data} cols={2} />
           </Container>

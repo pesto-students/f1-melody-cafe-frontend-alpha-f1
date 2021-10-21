@@ -23,6 +23,7 @@ import { REPEAT_MODE } from "../utils/constants";
 import { shufflePlaylist, toHHMMSS } from "../utils/utils";
 import getAudioLink from "../api/services/getAudioLink";
 import { getStreamQuality } from "../utils/storage";
+import regex from "../helpers/helper-functions";
 
 let previousStreamUrl = "";
 let audio = new Audio();
@@ -51,8 +52,8 @@ const Controller = (props) => {
           ...state.currentSong,
           lyrics: null,
           art: state.currentSong?.snippet?.thumbnails?.high?.url,
-          name: state.currentSong?.snippet?.title?.slice(0, 70) + " ...",
-          artist: "Play one from your library",
+          name: regex.editTitle(state.currentSong?.snippet?.title),
+          artist: regex.editArtist(state.currentSong?.channelTitle),
         };
 
   const [currentTime, setCurrentTime] = useState(0);
@@ -262,8 +263,8 @@ const Controller = (props) => {
             <p className="controller-song-title" title={song?.name}>
               {song?.name}
             </p>
-            <p className="controller-song-artist" title={song.artist}>
-              {song.artist}
+            <p className="controller-song-artist" title={song?.artist}>
+              {song?.artist}
             </p>
           </div>
         </Col>

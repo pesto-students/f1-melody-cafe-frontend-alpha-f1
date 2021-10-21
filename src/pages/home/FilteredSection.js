@@ -5,6 +5,7 @@ import FilterBar from "../../components/FilterBar/FilterBar";
 import "./FilteredSection.scss";
 import _ from "lodash";
 import RowLayout from "../../components/RowLayout/RowLayout";
+import { filtersListHome } from "../../utils/constants";
 
 const FilteredSection = ({ title, isDetails }) => {
   const playlistList = useSelector((state) => state.playlistList);
@@ -37,8 +38,25 @@ const FilteredSection = ({ title, isDetails }) => {
             <Breadcrumb.Item active>Data</Breadcrumb.Item>
           </Breadcrumb>
           <h1 className="text-left">{title}</h1>
-          <FilterBar />
-          <div className="container-d">{renderSpecificGenre()}</div>
+          <FilterBar filterList={filtersListHome} />
+          {renderSpecificGenre()}
+          {renderSpecificGenre()}
+          {renderSpecificGenre()}
+          {renderSpecificGenre()}
+          {renderSpecificGenre()}
+          {renderSpecificGenre()}
+          {renderSpecificGenre()}
+          {renderSpecificGenre()}
+          {renderSpecificGenre()}
+          {renderSpecificGenre()}
+          {renderSpecificGenre()}
+          {renderSpecificGenre()}
+          {renderSpecificGenre()}
+          {renderSpecificGenre()}
+          {renderSpecificGenre()}
+          {renderSpecificGenre()}
+          {renderSpecificGenre()}
+          {renderSpecificGenre()}
         </Col>
         <Col xl={3} className="d-none d-xl-block blue sideImage">
           <Image src="rhs_banner_v5.jpg" width={"100%"} height={"100%"} />

@@ -38,7 +38,7 @@ const SongListItems = (props) => {
         <td className="list-track">Loading...</td>
         <td className="list-artist"></td>
         <td className="list-duration"></td>
-        <td className="list-play-count"></td>
+        {/* <td className="list-play-count"></td> */}
       </tr>
     );
   }
@@ -99,7 +99,7 @@ const SongListItems = (props) => {
       >
         {regex.editDuration(props.video.duration)}
       </td>
-      <td
+      {/* <td
         className="list-play-count"
         onClick={() => {
           dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
@@ -107,7 +107,7 @@ const SongListItems = (props) => {
         }}
       >
         {regex.editPlayCount(props.video.viewCount)}
-      </td>
+      </td> */}
     </tr>
   );
 };
