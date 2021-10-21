@@ -24,6 +24,7 @@ function App() {
     currentSong: null,
     originalQueue: [],
     shuffleOn: false,
+    fullscreen: false,
     repeatMode: REPEAT_MODE.NONE,
     userPlaylist: [],
     userPublish: [],

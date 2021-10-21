@@ -13,6 +13,7 @@ import ShuffleOnIcon from "../assets/shuffle-active.svg";
 import RepeatIcon from "../assets/repeat.svg";
 import RepeatAllIcon from "../assets/repeat-all.svg";
 import RepeatOneIcon from "../assets/repeat-one.svg";
+import Playlist from "../assets/playlist.svg";
 import LyricsIcon from "../assets/lyrics.svg";
 import LikeIcon from "../assets/like.svg";
 import LikeActiveIcon from "../assets/like-active.svg";
@@ -24,6 +25,7 @@ import { shufflePlaylist, toHHMMSS } from "../utils/utils";
 import getAudioLink from "../api/services/getAudioLink";
 import { getStreamQuality } from "../utils/storage";
 import regex from "../helpers/helper-functions";
+import FullScreenController from "./FullScreenController";
 
 let previousStreamUrl = "";
 let audio = new Audio();
@@ -154,6 +156,15 @@ const Controller = (props) => {
   const changeShuffle = () => {
     state.shuffleOn ? unshuffleQueue() : shuffleQueue();
     setState((state) => ({ ...state, shuffleOn: !state.shuffleOn }));
+  };
+
+  const toggleFullScreen = () => {
+    state.fullscreen ? (
+      <FullScreenController show={false} />
+    ) : (
+      <FullScreenController show={true} />
+    );
+    setState((state) => ({ ...state, fullscreen: !state.fullscreen }));
   };
 
   const changeRepeat = () => {
@@ -348,6 +359,14 @@ const Controller = (props) => {
               height="16px"
               className="controller-icon"
               onClick={() => showLyricsModal()}
+            />
+            <img
+              alt=""
+              src={Playlist}
+              width="16px"
+              height="16px"
+              className="mr-4 controller-icon"
+              onClick={() => toggleFullScreen()}
             />
           </div>
         </Col>

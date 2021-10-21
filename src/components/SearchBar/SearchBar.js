@@ -20,6 +20,7 @@ import {
   Form,
   FormControl,
   Button,
+  Modal,
 } from "react-bootstrap";
 
 const SearchBar = (props) => {
@@ -28,6 +29,10 @@ const SearchBar = (props) => {
     items: [],
   });
   const [searchHistory, setSearchHistory] = useState([]);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const selectedSong = useSelector(
     (state) => state.songController.selectedSong
@@ -209,31 +214,22 @@ const SearchBar = (props) => {
     }
   };
 
-  function CustomToggle({ children, eventKey }) {
-    const decoratedOnClick = useAccordionButton(eventKey, () =>
-      console.log("totally custom!")
-    );
+  // function CustomToggle({ children, eventKey }) {
+  //   // const decoratedOnClick = useAccordionButton(eventKey, () =>
+  //   //   console.log("totally custom!")
+  //   // );
 
-    return (
-      <Form className="d-flex" onSubmit={onFormSubmit}>
-        <FormControl
-          type="search"
-          className="me-2"
-          aria-label="Search"
-          value={term}
-          onChange={(e) => onInputChange(e)}
-          autoFocus={true}
-          placeholder="Search artists, songs, playlists.."
-          onClick={decoratedOnClick}
-        />
-        {/* <Button variant="outline-success">Search</Button> */}
-      </Form>
-    );
-  }
+  //   return (
+  //     <>
+  //       <input onClick={handleShow} placeholder="search songs" />
+  //       {children}
+  //     </>
+  //   );
+  // }
 
   return (
     <div>
-      <Accordion>
+      {/* <Accordion>
         <Card>
           <Card.Header>
             <CustomToggle eventKey="0">Click me!</CustomToggle>
@@ -242,7 +238,33 @@ const SearchBar = (props) => {
             <Card.Body>{renderResults()}</Card.Body>
           </Accordion.Collapse>
         </Card>
-      </Accordion>
+      </Accordion> */}
+      <input onClick={handleShow} placeholder="search songs" />
+      <Modal show={show} onHide={handleClose} scrollable={true}>
+        <Modal.Header>
+          <Form className="d-flex" onSubmit={onFormSubmit}>
+            <FormControl
+              type="search"
+              className="me-2"
+              aria-label="Search"
+              value={term}
+              onChange={(e) => onInputChange(e)}
+              autoFocus={true}
+              placeholder="Search artists, songs, playlists.."
+              onClick={handleShow}
+            />
+          </Form>
+        </Modal.Header>
+        <Modal.Body>{renderResults()}</Modal.Body>
+        {/* <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              Save Changes
+            </Button>
+          </Modal.Footer> */}
+      </Modal>
     </div>
   );
 };
