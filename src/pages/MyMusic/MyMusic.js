@@ -38,13 +38,18 @@ const MyMusic = () => {
               <MusicContainer
                 title="My Published Ones"
                 items={state.userPublish}
+                seeAllLink={"my-published-one"}
               />
             ) : (
               ""
             )}
 
             {state.userPlaylist?.length ? (
-              <MusicContainer title="My Playlists" items={state.userPlaylist} />
+              <MusicContainer
+                title="My Playlists"
+                items={state.userPlaylist}
+                seeAllLink={"my-playlists"}
+              />
             ) : (
               ""
             )}
@@ -53,6 +58,17 @@ const MyMusic = () => {
               <MusicContainer
                 title="Favourite Playlists"
                 items={state.userPlaylist}
+                seeAllLink={"my-favourite-playlists"}
+              />
+            ) : (
+              ""
+            )}
+
+            {state.userFavouriteSongs?.length ? (
+              <MusicContainer
+                title="Favourite Songs"
+                items={state.userFavouriteSongs}
+                seeAllLink={"my-favourite-songs"}
               />
             ) : (
               ""

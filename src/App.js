@@ -28,6 +28,7 @@ function App() {
     repeatMode: REPEAT_MODE.NONE,
     userPlaylist: [],
     userPublish: [],
+    userFavouriteSongs: [],
   });
 
   useEffect(() => {

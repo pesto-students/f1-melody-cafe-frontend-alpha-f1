@@ -1,18 +1,25 @@
 import React from "react";
 import { Breadcrumb, Container, Row, Col, Image } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import MusicContainer from "../../components/MusicContainer/MusicContainer";
 import FilterBar from "../../components/FilterBar/FilterBar";
 import "./FilteredSection.scss";
 import _ from "lodash";
 import RowLayout from "../../components/RowLayout/RowLayout";
 import { filtersListHome } from "../../utils/constants";
+import { useLocation, useRouteMatch } from "react-router";
 
-const FilteredSection = ({ title, isDetails }) => {
+const FilteredSection = ({ title, isDetails, location }) => {
   const playlistList = useSelector((state) => state.playlistList);
+
   const showPage = useSelector((state) => state.playlists.showPage);
+
   const cachedPlaylists = useSelector(
     (state) => state.playlists.cachedPlaylists
   );
+
+  let match = location.pathname.startsWith("/my-");
+
   const renderSpecificGenre = () => {
     if (showPage !== "browse" && showPage !== false) {
       const genreInfo = _.find(playlistList, { genreSlug: showPage });
@@ -39,23 +46,7 @@ const FilteredSection = ({ title, isDetails }) => {
           </Breadcrumb>
           <h1 className="text-left">{title}</h1>
           <FilterBar filterList={filtersListHome} />
-          {renderSpecificGenre()}
-          {renderSpecificGenre()}
-          {renderSpecificGenre()}
-          {renderSpecificGenre()}
-          {renderSpecificGenre()}
-          {renderSpecificGenre()}
-          {renderSpecificGenre()}
-          {renderSpecificGenre()}
-          {renderSpecificGenre()}
-          {renderSpecificGenre()}
-          {renderSpecificGenre()}
-          {renderSpecificGenre()}
-          {renderSpecificGenre()}
-          {renderSpecificGenre()}
-          {renderSpecificGenre()}
-          {renderSpecificGenre()}
-          {renderSpecificGenre()}
+          {match ? <MusicContainer items={location?.state?.items} /> : ""}
           {renderSpecificGenre()}
         </Col>
         <Col xl={3} className="d-none d-xl-block blue sideImage">

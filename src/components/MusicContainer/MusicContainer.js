@@ -7,14 +7,23 @@ const MusicContainer = ({ title, seeAllLink, items }) => {
   return (
     <Container>
       <div className="d-flex align-items-center justify-content-between">
-        <h3 className="m-card-text">{title}</h3>
-        <Link to={seeAllLink}>
-          <p>See All</p>
-        </Link>
+        {title ? <h3 className="m-card-text">{title}</h3> : ""}
+        {seeAllLink ? (
+          <Link
+            to={{
+              pathname: seeAllLink,
+              state: { items: items },
+            }}
+          >
+            <p>See All</p>
+          </Link>
+        ) : (
+          ""
+        )}
       </div>
       <div className="d-flex flex-wrap align-items-center">
-        {items?.map((item) => (
-          <Card className="bg-secondary m-card">
+        {items?.map((item, _i) => (
+          <Card key={_i} className="bg-secondary m-card">
             <Card.Img variant="top" src={AlbumArt} />
             <Card.Body>
               <p className="m-card-text">{item.title}</p>

@@ -15,6 +15,7 @@ const PublishMusicModal = ({ show, setShow }) => {
   const [validated, setValidated] = useState(false);
 
   const publishSongHandler = (e) => {
+    e.preventDefault();
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.preventDefault();

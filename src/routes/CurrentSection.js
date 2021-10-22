@@ -19,7 +19,7 @@ const CurrentSection = () => {
     return <FilteredSection title={slug} location={location} />;
   } else if (type === "my-music") {
     return <MyMusic />;
-  } else {
+  } else if (type && !slug) {
     return <FilteredSection title={type} location={location} />;
   }
 };

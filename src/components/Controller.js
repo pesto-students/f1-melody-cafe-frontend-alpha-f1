@@ -63,6 +63,11 @@ const Controller = (props) => {
   const [isPlaying, setPlaying] = useState(false);
   const [isBuffering, setBuffering] = useState(false);
   const [showLyrics, setShowLyrics] = useState(false);
+  const [songLiked, setSongLiked] = useState(false);
+
+  useEffect(() => {
+    setSongLiked(false);
+  }, [song.name]);
 
   const pauseAudio = () => {
     audio.pause();
@@ -165,6 +170,25 @@ const Controller = (props) => {
       <FullScreenController show={true} />
     );
     setState((state) => ({ ...state, fullscreen: !state.fullscreen }));
+  };
+
+  const likeSongHandler = (e) => {
+    e.preventDefault();
+    setSongLiked((liked) => !liked);
+    console.log(songLiked);
+    if (!songLiked) {
+      setState((state) => ({
+        ...state,
+        userFavouriteSongs: [...state.userFavouriteSongs, song],
+      }));
+    } else {
+      setState((state) => ({
+        ...state,
+        userFavouriteSongs: state.userFavouriteSongs.filter(
+          (favouriteSong) => favouriteSong.id !== song.id
+        ),
+      }));
+    }
   };
 
   const changeRepeat = () => {
@@ -347,10 +371,11 @@ const Controller = (props) => {
             />
             <img
               alt=""
-              src={song.liked ? LikeActiveIcon : LikeIcon}
+              src={songLiked ? LikeActiveIcon : LikeIcon}
               width="16px"
               height="16px"
               className="mr-5 controller-icon"
+              onClick={(e) => likeSongHandler(e)}
             />
             <img
               alt=""

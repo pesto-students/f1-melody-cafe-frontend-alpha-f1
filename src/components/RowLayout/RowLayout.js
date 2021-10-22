@@ -5,7 +5,7 @@ import "./RowLayout.scss";
 
 const RowLayout = ({ header, items, cols, rows, type, slug, isRounded }) => {
   let songItems = items?.map((item) => {
-    console.log(item);
+    // console.log(item);
     return (
       <MusicCover
         key={item.id || item.genreSlug}
