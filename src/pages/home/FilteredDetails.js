@@ -1,14 +1,14 @@
 import React, { useContext, useState } from "react";
 import { Breadcrumb, Container, Row, Col, Image, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import MusicDetail from "../../components/MusicDetail/MusicDetail";
 import SongList from "../../components/SongList/SongList";
 import GlobalState from "../../contexts/GlobalState";
 // import "./FilteredSection.scss";
 
 const FilteredDetails = ({ title, location }) => {
-  let data = location?.state?.songData;
+  let data = location?.state?.songData || location?.state?.playlistData;
   const showPage = useSelector((state) => state.playlists.showPage);
   const [state, setState] = useContext(GlobalState);
 
@@ -29,13 +29,11 @@ const FilteredDetails = ({ title, location }) => {
     <Container fluid className="space-top2 backgroundColour detail_wrap">
       <Row>
         <Col xs={12} md={12} xl={9}>
-          <Breadcrumb>
-            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="">Library</Breadcrumb.Item>
-            <Breadcrumb.Item active>Data</Breadcrumb.Item>
-          </Breadcrumb>
+          <Breadcrumbs />
           <h1 className="text-left">
-            {data?.snippet?.title?.slice(0, 70) + " ..."}
+            {data?.snippet?.title?.slice(0, 70)
+              ? data?.snippet?.title?.slice(0, 70) + " ..."
+              : title}
           </h1>
           <MusicDetail data={data} />
           <SongList

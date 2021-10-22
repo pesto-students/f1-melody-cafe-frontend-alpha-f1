@@ -4,6 +4,7 @@ import GlobalState from "../../contexts/GlobalState";
 import { shufflePlaylist } from "../../utils/utils";
 
 const MusicDetail = ({ data }) => {
+  console.log(data);
   const [state, setState] = useContext(GlobalState);
 
   const callPlay = (song) => {
@@ -27,7 +28,9 @@ const MusicDetail = ({ data }) => {
       <div className="info">
         <div className="_a">
           <h1 className="title">
-            {data?.snippet?.title?.slice(0, 70) + " ..."}
+            {data?.snippet?.title?.slice(0, 70)
+              ? data?.snippet?.title?.slice(0, 70) + " ..."
+              : data?.title}
           </h1>
         </div>
         <div className="_b">

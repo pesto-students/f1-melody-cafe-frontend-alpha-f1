@@ -8,6 +8,7 @@ import _ from "lodash";
 import RowLayout from "../../components/RowLayout/RowLayout";
 import { filtersListHome } from "../../utils/constants";
 import GlobalState from "../../contexts/GlobalState";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 
 const FilteredSection = ({ title, isDetails, location, type }) => {
   const [state, setState] = useContext(GlobalState);
@@ -40,11 +41,7 @@ const FilteredSection = ({ title, isDetails, location, type }) => {
     <Container fluid className="space-top2 backgroundColour">
       <Row>
         <Col xs={12} md={12} xl={9}>
-          <Breadcrumb>
-            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="">Library</Breadcrumb.Item>
-            <Breadcrumb.Item active>Data</Breadcrumb.Item>
-          </Breadcrumb>
+          <Breadcrumbs />
           <h1 className="text-left">{title}</h1>
           <FilterBar filterList={filtersListHome} />
           {match ? (

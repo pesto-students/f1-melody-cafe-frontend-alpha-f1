@@ -25,7 +25,13 @@ const MusicContainer = ({ title, seeAllLink, items, type }) => {
         {items?.map((item, _i) => (
           <Card key={_i} className="bg-secondary m-card">
             <Link
-              to={{ pathname: `${type}/${item.slug}`, state: { items: items } }}
+              to={{
+                pathname: `${type}/${item.slug}`,
+                state:
+                  type === "playlist"
+                    ? { playlistData: item }
+                    : { songData: item },
+              }}
             >
               <Card.Img variant="top" src={AlbumArt} />
             </Link>
