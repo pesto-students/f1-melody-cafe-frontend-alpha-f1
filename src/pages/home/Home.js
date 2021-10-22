@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 
@@ -15,6 +15,7 @@ import { filtersListHome } from "../../utils/constants";
 import youtubeSearch from "../../api/services/youtubeSearch";
 
 import { useSelector } from "react-redux";
+import GlobalState from "../../contexts/GlobalState";
 
 // make a permanent playlist object with few songs catergory
 const playlistsIds = {
@@ -30,6 +31,7 @@ const playlistsIds = {
 let slowConnectionTimeout;
 
 const Home = () => {
+  const [state, setState] = useContext(GlobalState);
   const [songObj, setSongObj] = useState({});
   const playlistList = useSelector((state) => state.playlistList);
   const showPage = useSelector((state) => state.playlists.showPage);
@@ -198,7 +200,12 @@ const Home = () => {
             type="song"
           />
         </Col>
-        <Col xl={3} className="d-none d-xl-block blue sideImage">
+        <Col
+          xl={3}
+          className={`blue sideImage ${
+            state.fullscreen ? "d-none" : "d-none d-xl-block"
+          }`}
+        >
           <Image src="rhs_banner_v5.jpg" width={"100%"} height={"100%"} />
         </Col>
       </Row>

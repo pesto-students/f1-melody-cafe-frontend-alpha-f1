@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Breadcrumb, Container, Row, Col, Image } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import MusicContainer from "../../components/MusicContainer/MusicContainer";
@@ -7,9 +7,10 @@ import "./FilteredSection.scss";
 import _ from "lodash";
 import RowLayout from "../../components/RowLayout/RowLayout";
 import { filtersListHome } from "../../utils/constants";
-import { useLocation, useRouteMatch } from "react-router";
+import GlobalState from "../../contexts/GlobalState";
 
-const FilteredSection = ({ title, isDetails, location }) => {
+const FilteredSection = ({ title, isDetails, location, type }) => {
+  const [state, setState] = useContext(GlobalState);
   const playlistList = useSelector((state) => state.playlistList);
 
   const showPage = useSelector((state) => state.playlists.showPage);
@@ -46,10 +47,19 @@ const FilteredSection = ({ title, isDetails, location }) => {
           </Breadcrumb>
           <h1 className="text-left">{title}</h1>
           <FilterBar filterList={filtersListHome} />
-          {match ? <MusicContainer items={location?.state?.items} /> : ""}
+          {match ? (
+            <MusicContainer items={location?.state?.items} type={type} />
+          ) : (
+            ""
+          )}
           {renderSpecificGenre()}
         </Col>
-        <Col xl={3} className="d-none d-xl-block blue sideImage">
+        <Col
+          xl={3}
+          className={`blue sideImage ${
+            state.fullscreen ? "d-none" : "d-none d-xl-block"
+          }`}
+        >
           <Image src="rhs_banner_v5.jpg" width={"100%"} height={"100%"} />
         </Col>
       </Row>

@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Breadcrumb, Container, Row, Col, Image, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import MusicDetail from "../../components/MusicDetail/MusicDetail";
 import SongList from "../../components/SongList/SongList";
+import GlobalState from "../../contexts/GlobalState";
 // import "./FilteredSection.scss";
 
 const FilteredDetails = ({ title, location }) => {
   let data = location?.state?.songData;
   const showPage = useSelector((state) => state.playlists.showPage);
+  const [state, setState] = useContext(GlobalState);
 
   const [savedSongs, setSavedSongs] = useState({});
   const [items, setItems] = useState({});
@@ -46,7 +48,12 @@ const FilteredDetails = ({ title, location }) => {
             removeSong={removeSong}
           />
         </Col>
-        <Col xl={3} className="d-none d-xl-block blue sideImage">
+        <Col
+          xl={3}
+          className={`blue sideImage ${
+            state.fullscreen ? "d-none" : "d-none d-xl-block"
+          }`}
+        >
           <Image
             src="http://localhost:3000/rhs_banner_v5.jpg"
             width={"100%"}

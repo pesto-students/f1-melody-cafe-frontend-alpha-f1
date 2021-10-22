@@ -10,7 +10,10 @@ const CreatePlaylistModal = ({ show, setShow }) => {
     e.preventDefault();
     setState((state) => ({
       ...state,
-      userPlaylist: [...state.userPlaylist, { title: playlistName, songs: [] }],
+      userPlaylist: [
+        ...state.userPlaylist,
+        { title: playlistName, songs: [], slug: playlistName },
+      ],
     }));
     setShow(false);
     setPlaylistName("");

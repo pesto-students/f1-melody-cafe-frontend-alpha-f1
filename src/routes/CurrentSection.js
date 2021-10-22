@@ -16,11 +16,11 @@ const CurrentSection = () => {
     type === "podcast" ||
     type === "genre"
   ) {
-    return <FilteredSection title={slug} location={location} />;
+    return <FilteredSection type={type} title={slug} location={location} />;
   } else if (type === "my-music") {
-    return <MyMusic />;
+    return <MyMusic type="playlist" />;
   } else if (type && !slug) {
-    return <FilteredSection title={type} location={location} />;
+    return <FilteredSection type={type} title={type} location={location} />;
   }
 };
 

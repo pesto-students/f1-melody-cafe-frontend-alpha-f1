@@ -5,7 +5,7 @@ import CreatePlaylistModal from "../../components/Playlist/CreatePlaylistModal";
 import PublishMusicModal from "../../components/Playlist/PublishMusicModal";
 import GlobalState from "../../contexts/GlobalState";
 
-const MyMusic = () => {
+const MyMusic = ({ type }) => {
   const [showPlaylistModal, setShowPlaylistModal] = useState(false);
   const [showPublishModal, setShowPublishModal] = useState(false);
   const [state, setState] = useContext(GlobalState);
@@ -39,6 +39,7 @@ const MyMusic = () => {
                 title="My Published Ones"
                 items={state.userPublish}
                 seeAllLink={"my-published-one"}
+                type={"song"}
               />
             ) : (
               ""
@@ -49,6 +50,7 @@ const MyMusic = () => {
                 title="My Playlists"
                 items={state.userPlaylist}
                 seeAllLink={"my-playlists"}
+                type={type}
               />
             ) : (
               ""
@@ -59,6 +61,7 @@ const MyMusic = () => {
                 title="Favourite Playlists"
                 items={state.userPlaylist}
                 seeAllLink={"my-favourite-playlists"}
+                type={type}
               />
             ) : (
               ""
@@ -69,13 +72,19 @@ const MyMusic = () => {
                 title="Favourite Songs"
                 items={state.userFavouriteSongs}
                 seeAllLink={"my-favourite-songs"}
+                type={"song"}
               />
             ) : (
               ""
             )}
           </div>
         </Col>
-        <Col xl={3} className="d-none d-xl-block blue sideImage">
+        <Col
+          xl={3}
+          className={`blue sideImage ${
+            state.fullscreen ? "d-none" : "d-none d-xl-block"
+          }`}
+        >
           <Image src="rhs_banner_v5.jpg" width={"100%"} height={"100%"} />
         </Col>
       </Row>

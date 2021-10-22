@@ -62,8 +62,9 @@ const Controller = (props) => {
   const [duration, setDuration] = useState(0);
   const [isPlaying, setPlaying] = useState(false);
   const [isBuffering, setBuffering] = useState(false);
-  const [showLyrics, setShowLyrics] = useState(false);
   const [songLiked, setSongLiked] = useState(false);
+  const [showLyrics, setShowLyrics] = useState(false);
+  const [showFullScreen, setShowFullScreen] = useState(false);
 
   useEffect(() => {
     setSongLiked(false);
@@ -163,13 +164,10 @@ const Controller = (props) => {
     setState((state) => ({ ...state, shuffleOn: !state.shuffleOn }));
   };
 
-  const toggleFullScreen = () => {
-    state.fullscreen ? (
-      <FullScreenController show={false} />
-    ) : (
-      <FullScreenController show={true} />
-    );
-    setState((state) => ({ ...state, fullscreen: !state.fullscreen }));
+  const toggleFullScreen = (e) => {
+    e.preventDefault();
+    setShowFullScreen((state) => !state);
+    setState((state) => ({ ...state, fullscreen: !showFullScreen }));
   };
 
   const likeSongHandler = (e) => {
@@ -391,7 +389,7 @@ const Controller = (props) => {
               width="16px"
               height="16px"
               className="mr-4 controller-icon"
-              onClick={() => toggleFullScreen()}
+              onClick={(e) => toggleFullScreen(e)}
             />
           </div>
         </Col>
@@ -402,6 +400,8 @@ const Controller = (props) => {
         showLyrics={showLyrics}
         setShowLyrics={setShowLyrics}
       />
+
+      <FullScreenController show={showFullScreen} setShow={setShowFullScreen} />
     </div>
   );
 };

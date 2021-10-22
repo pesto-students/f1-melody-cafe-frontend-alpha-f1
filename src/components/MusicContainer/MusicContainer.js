@@ -3,7 +3,7 @@ import { Card, Container } from "react-bootstrap";
 import "./MusicContainer.scss";
 import AlbumArt from "../../assets/album_art_blank.jpg";
 import { Link } from "react-router-dom";
-const MusicContainer = ({ title, seeAllLink, items }) => {
+const MusicContainer = ({ title, seeAllLink, items, type }) => {
   return (
     <Container>
       <div className="d-flex align-items-center justify-content-between">
@@ -24,7 +24,11 @@ const MusicContainer = ({ title, seeAllLink, items }) => {
       <div className="d-flex flex-wrap align-items-center">
         {items?.map((item, _i) => (
           <Card key={_i} className="bg-secondary m-card">
-            <Card.Img variant="top" src={AlbumArt} />
+            <Link
+              to={{ pathname: `${type}/${item.slug}`, state: { items: items } }}
+            >
+              <Card.Img variant="top" src={AlbumArt} />
+            </Link>
             <Card.Body>
               <p className="m-card-text">{item.title}</p>
               {/* <Card.Subtitle className="mb-2 text-muted">
