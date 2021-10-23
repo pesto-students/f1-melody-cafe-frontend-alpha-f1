@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Row, Container, Col, Button, Image } from "react-bootstrap";
 import MusicContainer from "../../components/MusicContainer/MusicContainer";
-import CreatePlaylistModal from "../../components/Playlist/CreatePlaylistModal";
+import PlaylistModal from "../../components/Playlist/PlaylistModal";
 import PublishMusicModal from "../../components/Playlist/PublishMusicModal";
 import GlobalState from "../../contexts/GlobalState";
 
@@ -88,9 +88,10 @@ const MyMusic = ({ type }) => {
           <Image src="rhs_banner_v5.jpg" width={"100%"} height={"100%"} />
         </Col>
       </Row>
-      <CreatePlaylistModal
+      <PlaylistModal
         show={showPlaylistModal}
         setShow={setShowPlaylistModal}
+        type="CREATE"
       />
       <PublishMusicModal
         show={showPublishModal}

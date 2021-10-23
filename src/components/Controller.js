@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import GlobalState from "../contexts/GlobalState";
 
-import { Col, Image, Row } from "react-bootstrap";
+import { Col, Dropdown, DropdownButton, Image, Row } from "react-bootstrap";
 
 import AlbumArtBlank from "../assets/album_art_blank.jpg";
 import PlayIcon from "../assets/play.svg";
@@ -26,6 +26,7 @@ import getAudioLink from "../api/services/getAudioLink";
 import { getStreamQuality } from "../utils/storage";
 import regex from "../helpers/helper-functions";
 import FullScreenController from "./FullScreenController";
+import PlaylistModal from "./Playlist/PlaylistModal";
 
 let previousStreamUrl = "";
 let audio = new Audio();
@@ -65,6 +66,7 @@ const Controller = (props) => {
   const [songLiked, setSongLiked] = useState(false);
   const [showLyrics, setShowLyrics] = useState(false);
   const [showFullScreen, setShowFullScreen] = useState(false);
+  const [showPlaylist, setShowPlaylist] = useState(false);
 
   useEffect(() => {
     setSongLiked(false);
@@ -173,7 +175,6 @@ const Controller = (props) => {
   const likeSongHandler = (e) => {
     e.preventDefault();
     setSongLiked((liked) => !liked);
-    console.log(songLiked);
     if (!songLiked) {
       setState((state) => ({
         ...state,
@@ -187,6 +188,24 @@ const Controller = (props) => {
         ),
       }));
     }
+  };
+
+  const addToPlaylistHandler = (e) => {
+    e.preventDefault();
+    setShowPlaylist((state) => !state);
+    // if (!songLiked) {
+    //   setState((state) => ({
+    //     ...state,
+    //     userFavouriteSongs: [...state.userFavouriteSongs, song],
+    //   }));
+    // } else {
+    //   setState((state) => ({
+    //     ...state,
+    //     userFavouriteSongs: state.userFavouriteSongs.filter(
+    //       (favouriteSong) => favouriteSong.id !== song.id
+    //     ),
+    //   }));
+    // }
   };
 
   const changeRepeat = () => {
@@ -351,6 +370,28 @@ const Controller = (props) => {
         </Col>
         <Col className="p-0 m-0  d-none d-md-block" sm="auto">
           <div className="controller-options-container">
+            <DropdownButton
+              key={"up"}
+              id={`dropdown-button-drop-up`}
+              drop={"up"}
+              variant="secondary"
+              title=""
+              className="removeBackBorder"
+              size="sm"
+            >
+              <Dropdown.Item
+                eventKey="1"
+                onClick={(e) => addToPlaylistHandler(e)}
+              >
+                Add to Playlist
+              </Dropdown.Item>
+              <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
+              <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
+            </DropdownButton>
+            {/* </div> */}
+
             <img
               alt=""
               src={state.shuffleOn ? ShuffleOnIcon : ShuffleIcon}
@@ -402,6 +443,7 @@ const Controller = (props) => {
       />
 
       <FullScreenController show={showFullScreen} setShow={setShowFullScreen} />
+      <PlaylistModal show={showPlaylist} setShow={setShowPlaylist} type="ADD" />
     </div>
   );
 };
