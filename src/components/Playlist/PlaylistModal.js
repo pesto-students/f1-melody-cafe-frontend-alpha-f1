@@ -27,7 +27,7 @@ const PlaylistModal = ({ show, setShow, type }) => {
       ...state,
       userPlaylist: [
         ...state.userPlaylist,
-        { title: playlistName, songs: [], slug: playlistName, scr: null },
+        { title: playlistName, songs: [], slug: playlistName, src: null },
       ],
     }));
     if (type === "ADD") {

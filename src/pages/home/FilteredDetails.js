@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Breadcrumb, Container, Row, Col, Image, Table } from "react-bootstrap";
+import { Container, Row, Col, Image } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import MusicDetail from "../../components/MusicDetail/MusicDetail";
@@ -9,6 +9,8 @@ import GlobalState from "../../contexts/GlobalState";
 
 const FilteredDetails = ({ title, location }) => {
   let data = location?.state?.songData || location?.state?.playlistData;
+
+  console.log(data);
   const showPage = useSelector((state) => state.playlists.showPage);
   const [state, setState] = useContext(GlobalState);
 
@@ -30,11 +32,11 @@ const FilteredDetails = ({ title, location }) => {
       <Row>
         <Col xs={12} md={12} xl={9}>
           <Breadcrumbs />
-          <h1 className="text-left">
+          {/* <h1 className="text-left">
             {data?.snippet?.title?.slice(0, 70)
               ? data?.snippet?.title?.slice(0, 70) + " ..."
               : title}
-          </h1>
+          </h1> */}
           <MusicDetail data={data} />
           <SongList
             playlistId={showPage}

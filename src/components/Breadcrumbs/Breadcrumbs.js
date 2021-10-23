@@ -7,7 +7,7 @@ const Breadcrumbs = () => {
   let history = useHistory();
   let pathnameArray = history.location.pathname.split("/");
 
-  console.log(history, pathnameArray);
+  // console.log(history, pathnameArray);
 
   const breadcrumbsHandler = (e, n) => {
     e.preventDefault();
