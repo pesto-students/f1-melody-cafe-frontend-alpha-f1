@@ -26,6 +26,7 @@ const SongList = (props) => {
   if (!cachedPlaylists[genre]) {
     return null;
   }
+  console.log(props.songs);
   // state = {};
 
   // playAll = playAll.bind(this);
@@ -213,6 +214,31 @@ const SongList = (props) => {
     }
   });
 
+  const songsListArray = _.map(props.songs, (video) => {
+    console.log(video);
+    if (
+      video.snippet.title !== "Deleted video" &&
+      video.snippet.title !== "Private video"
+    ) {
+      // let index = _.findIndex(props.savedSongs, { id: video.id });
+
+      return (
+        <SongListItems
+          key={video.etag}
+          video={video}
+          onVideoSelect={onVideoSelect}
+          selectedSong={selectedSong}
+          // cachedPlaylist={cachedPlaylists[genre][props.playlistId].songs}
+          // savedSongs={props.savedSongs}
+          // saveSong={props.saveSong}
+          // removeSong={props.removeSong}
+          // index={index}
+          user={props.user}
+        />
+      );
+    }
+  });
+
   return (
     <div className="outer-container">
       <div className="song-list-container" style={background}>
@@ -240,6 +266,7 @@ const SongList = (props) => {
 
             {songListArray}
             {props.renderQueue ? queueListArray : ""}
+            {props.songs ? songsListArray : ""}
           </tbody>
         </table>
       </div>

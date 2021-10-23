@@ -3,6 +3,7 @@ import { Container, Row, Col, Image } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import MusicDetail from "../../components/MusicDetail/MusicDetail";
+import RefactorSongList from "../../components/SongList/RefactorSongList";
 import SongList from "../../components/SongList/SongList";
 import GlobalState from "../../contexts/GlobalState";
 // import "./FilteredSection.scss";
@@ -38,14 +39,15 @@ const FilteredDetails = ({ title, location }) => {
               : title}
           </h1> */}
           <MusicDetail data={data} />
-          <SongList
-            playlistId={showPage}
-            what={() => ({})}
+          <RefactorSongList
+            // playlistId={"charts"}
+            // what={() => ({})}
             user={null}
-            items={items}
-            savedSongs={savedSongs}
-            saveSong={saveSong}
-            removeSong={removeSong}
+            renderQueue={true}
+            // items={{}}
+            // savedSongs={[]}
+            // saveSong={() => null}
+            // removeSong={() => null}
           />
         </Col>
         <Col

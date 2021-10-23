@@ -1,5 +1,6 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
+import RefactorSongList from "./SongList/RefactorSongList";
 import SongList from "./SongList/SongList";
 
 const FullScreenController = ({ show, setShow }) => {
@@ -28,7 +29,7 @@ const FullScreenController = ({ show, setShow }) => {
               Light
             </Button>
           </div>
-          <SongList
+          <RefactorSongList
             // playlistId={"charts"}
             // what={() => ({})}
             user={null}

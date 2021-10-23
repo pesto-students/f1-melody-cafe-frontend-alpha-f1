@@ -33,7 +33,26 @@ const SongListItems = (props) => {
     }));
   };
 
-  if (!props.video.channelTitle) {
+  let songModel = () => {
+    if (props.video.kind === "youtube#video") {
+      return {
+        channelTitle: props.video?.snippet?.channelTitle,
+        title: props.video.snippet.title,
+        duration: null,
+      };
+    }
+    if (props.video.kind === "youtube#playlistItem") {
+      return {
+        channelTitle: props.video?.channelTitle,
+        title: props.video.snippet.title,
+        duration: props.video.duration,
+      };
+    }
+  };
+
+  let song = songModel();
+
+  if (!song.title) {
     return (
       <tr className="list-item">
         <td className="list-save"></td>
@@ -81,7 +100,7 @@ const SongListItems = (props) => {
           callPlay(props.video);
         }}
       >
-        {regex.editTitle(props.video.snippet.title)}
+        {regex.editTitle(song.title)}
       </td>
       <td
         className="list-artist"
@@ -90,7 +109,7 @@ const SongListItems = (props) => {
           callPlay(props.video);
         }}
       >
-        {regex.editArtist(props.video.channelTitle)}
+        {regex.editArtist(song.channelTitle)}
       </td>
       <td
         className="list-duration"
@@ -99,7 +118,7 @@ const SongListItems = (props) => {
           callPlay(props.video);
         }}
       >
-        {regex.editDuration(props.video.duration)}
+        {song.duration ? regex.editDuration(song.duration) : "00:00"}
       </td>
       {/* <td
         className="list-play-count"
