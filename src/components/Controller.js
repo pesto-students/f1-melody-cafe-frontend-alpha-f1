@@ -193,19 +193,6 @@ const Controller = (props) => {
   const addToPlaylistHandler = (e) => {
     e.preventDefault();
     setShowPlaylist((state) => !state);
-    // if (!songLiked) {
-    //   setState((state) => ({
-    //     ...state,
-    //     userFavouriteSongs: [...state.userFavouriteSongs, song],
-    //   }));
-    // } else {
-    //   setState((state) => ({
-    //     ...state,
-    //     userFavouriteSongs: state.userFavouriteSongs.filter(
-    //       (favouriteSong) => favouriteSong.id !== song.id
-    //     ),
-    //   }));
-    // }
   };
 
   const changeRepeat = () => {
