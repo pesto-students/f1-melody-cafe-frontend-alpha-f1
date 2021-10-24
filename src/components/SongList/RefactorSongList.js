@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import _ from "lodash";
 import GlobalState from "../../contexts/GlobalState";
 import SongListItems from "./SongListItem";
+import { Table } from "react-bootstrap";
 
 const RefactorSongList = (props) => {
   const [state, setState] = useContext(GlobalState);
@@ -98,19 +99,21 @@ const RefactorSongList = (props) => {
           </div> 
         </div>*/}
 
-      <table className="list-group">
-        <tbody>
+      <Table hover variant="dark" className="my-3 mx-3 px-5">
+        <thead>
           <tr>
-            <th></th>
-            <th>Title</th>
-            <th>Artist</th>
-            <th>Dur</th>
-            <th>Plays</th>
+            {/* <th></th> */}
+            <th className="text-start px-5">Title</th>
+            <th className="text-center px-5">Artist</th>
+            <th className="text-end px-5">Dur</th>
+            {/* <th>Plays</th> */}
           </tr>
+        </thead>
+        <tbody>
           {props.renderQueue ? queueListArray : ""}
           {props.songs ? songsListArray : ""}
         </tbody>
-      </table>
+      </Table>
       {/* </div> */}
     </div>
   );

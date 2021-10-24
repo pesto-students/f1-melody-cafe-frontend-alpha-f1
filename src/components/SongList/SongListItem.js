@@ -55,11 +55,11 @@ const SongListItems = (props) => {
 
   if (!song.title) {
     return (
-      <tr className="list-item">
-        <td className="list-save"></td>
-        <td className="list-track">Loading...</td>
-        <td className="list-artist"></td>
-        <td className="list-duration"></td>
+      <tr className="list-item ">
+        {/* <td className="list-save"></td> */}
+        <td className="list-track text-start px-5">Loading...</td>
+        <td className="list-artist text-center px-5">Loading...</td>
+        <td className="list-duration text-end px-5">Loading...</td>
         {/* <td className="list-play-count"></td> */}
       </tr>
     );
@@ -92,10 +92,10 @@ const SongListItems = (props) => {
   }
 
   return (
-    <tr className={addSelectedClass}>
-      {renderSaveRemoveButton()}
+    <tr className="py-5">
+      {/* {renderSaveRemoveButton()} */}
       <td
-        className="list-track"
+        className="list-track text-start px-5"
         onClick={() => {
           dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
           callPlay(props.video);
@@ -104,7 +104,7 @@ const SongListItems = (props) => {
         {regex.editTitle(song.title)}
       </td>
       <td
-        className="list-artist"
+        className="list-artist text-center px-5"
         onClick={() => {
           dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
           callPlay(props.video);
@@ -113,7 +113,7 @@ const SongListItems = (props) => {
         {regex.editArtist(song.channelTitle)}
       </td>
       <td
-        className="list-duration"
+        className="list-duration text-end px-5"
         onClick={() => {
           dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
           callPlay(props.video);

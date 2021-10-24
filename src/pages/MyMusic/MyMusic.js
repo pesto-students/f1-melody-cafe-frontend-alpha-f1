@@ -11,8 +11,8 @@ const MyMusic = ({ type }) => {
   const [state, setState] = useContext(GlobalState);
 
   return (
-    <Container fluid className="backgroundColour">
-      <Row className="content mt-5 pt-5">
+    <Container fluid className="backgroundColour my-5 py-5">
+      <Row className="my-5 py-5">
         <Col lg={12} xl={9}>
           <div>
             <Button
