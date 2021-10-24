@@ -6,6 +6,8 @@ import MusicDetail from "../../components/MusicDetail/MusicDetail";
 import RefactorSongList from "../../components/SongList/RefactorSongList";
 import SongList from "../../components/SongList/SongList";
 import GlobalState from "../../contexts/GlobalState";
+import SideImage from "../../assets/rhs_banner_v5.jpg";
+import RowLayout from "../../components/RowLayout/RowLayout";
 // import "./FilteredSection.scss";
 
 const FilteredDetails = ({ title, location }) => {
@@ -29,7 +31,10 @@ const FilteredDetails = ({ title, location }) => {
   };
 
   return (
-    <Container fluid className="space-top2 backgroundColour detail_wrap">
+    <Container
+      fluid
+      className="space-top2 backgroundColour detail_wrap my-5 py-5"
+    >
       <Row>
         <Col xs={12} md={12} xl={9}>
           <Breadcrumbs />
@@ -49,6 +54,29 @@ const FilteredDetails = ({ title, location }) => {
             // saveSong={() => null}
             // removeSong={() => null}
           />
+          <RowLayout header="Similar Type" type="song" items={null} cols={4} />
+          <RowLayout
+            header="More From Artist"
+            items={null}
+            cols={4}
+            type="song"
+          />
+          <RowLayout
+            header="Type(Album/Songs) Artists"
+            items={null}
+            cols={4}
+            type="song"
+            isRounded={true}
+          />
+
+          <div className="py-3 px-4 mt-4 mb-2 mx-3 d-flex-column flex-wrap text-start">
+            <h5>About Title of song/album</h5>
+            <p>details about album songs</p>
+            <h6>Released On: </h6>
+            <h6>Duration: </h6>
+            <h6>Language:</h6>
+            <p>Label Name</p>
+          </div>
         </Col>
         <Col
           xl={3}
@@ -56,11 +84,7 @@ const FilteredDetails = ({ title, location }) => {
             state.fullscreen ? "d-none" : "d-none d-xl-block"
           }`}
         >
-          <Image
-            src="http://localhost:3000/rhs_banner_v5.jpg"
-            width={"100%"}
-            height={"100%"}
-          />
+          <Image src={SideImage} width={"100%"} height={"100%"} />
         </Col>
       </Row>
     </Container>

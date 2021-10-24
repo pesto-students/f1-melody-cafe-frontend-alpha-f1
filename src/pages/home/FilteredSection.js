@@ -38,12 +38,12 @@ const FilteredSection = ({ title, isDetails, location, type }) => {
   };
 
   return (
-    <Container fluid className="space-top2 backgroundColour">
+    <Container fluid className="space-top2 backgroundColour my-5 py-5">
       <Row>
         <Col xs={12} md={12} xl={9}>
           <Breadcrumbs />
           <h1 className="text-left">{title}</h1>
-          <FilterBar filterList={filtersListHome} />
+          {/* <FilterBar filterList={filtersListHome} /> */}
           {match ? (
             <MusicContainer items={location?.state?.items} type={type} />
           ) : (

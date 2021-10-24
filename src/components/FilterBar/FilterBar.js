@@ -9,7 +9,7 @@ const FilterBar = ({ filterList, isHome }) => {
       <p>Will be of two types simple, home page and rounded ones</p> */
   }
   return (
-    <Container fluid className={isHome ? "filter filterHome" : "filter"}>
+    <Container fluid className={isHome ? "filter filterHome  px-4 " : "filter"}>
       <Nav
         // style={{ top: "50px", position: "sticky" }}
         variant="pills"
@@ -20,7 +20,7 @@ const FilterBar = ({ filterList, isHome }) => {
       >
         {filterList?.map((filter, _ind) =>
           !filter.subFilters ? (
-            <Nav.Item key={_ind}>
+            <Nav.Item key={_ind} className="text-nowrap">
               <Nav.Link eventKey={_ind}>
                 <Link to={filter.url}>{filter.name}</Link>
               </Nav.Link>

@@ -10,8 +10,6 @@ import CustomCarousel from "../../components/CustomCarousel/CustomCarousel";
 import FilterBar from "../../components/FilterBar/FilterBar";
 import RowLayout from "../../components/RowLayout/RowLayout";
 
-import { filtersListHome } from "../../utils/constants";
-
 import youtubeSearch from "../../api/services/youtubeSearch";
 
 import { useSelector } from "react-redux";
@@ -155,11 +153,9 @@ const Home = () => {
   };
 
   return (
-    <Container fluid className="backgroundColour">
-      <Row className="content m-0 p-0">
+    <Container fluid className="backgroundColour my-5 py-2 space-top2">
+      <Row className="m-0 p-0">
         <Col lg={12} xl={9}>
-          <FilterBar filterList={filtersListHome} isHome={true} />
-
           <Container
             // onMouseOver={() => toggleShowArrow(false)}
             className="space-top-home"

@@ -10,16 +10,16 @@ import {
   FormControl,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import AuthModal from "../Auth/AuthModal";
+import Login from "../Login/Login";
 import SideBar from "../SideBar/SideBar";
 import Logo from "../../assets/TheMelodyCafeLogo.gif";
 import "./Header.scss";
 import SearchBar from "../SearchBar/SearchBar";
+import { filtersListHome } from "../../utils/constants";
+import FilterBar from "../FilterBar/FilterBar";
 
 const Header = () => {
   const [show, setShow] = useState(false);
-  const [authModalShow, setAuthModalShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const toggleShow = () => setShow((s) => !s);
 
@@ -33,7 +33,7 @@ const Header = () => {
         variant="dark"
         className="headerHome"
       >
-        <Container>
+        <Container fluid className="mx-2 px-4 my-2 flex-nowrap">
           <Button variant="primary" onClick={toggleShow} className="me-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -55,37 +55,27 @@ const Header = () => {
               <Image src={Logo} width="100px" height="50px" />
             </Link>
           </Navbar.Brand>
-          {/* <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav"> */}
-          <Nav className="me-auto">
-            <SearchBar />
-          </Nav>
-          <Nav>
-            <Nav.Link className="d-none d-md-block">
-              <Button variant="light">Go Ad Free</Button>
-            </Nav.Link>
-            <Nav.Link>
-              <Button variant="light" className="d-none d-md-block">
-                Get Melody Plus
-              </Button>
-            </Nav.Link>
-            <Nav.Link eventKey={2} className="d-none d-md-block">
-              <Button
-                variant="primary"
-                onClick={() => {
-                  setAuthModalShow(true);
-                  handleClose();
-                }}
-              >
-                Login/Signup
-              </Button>
-            </Nav.Link>
-          </Nav>
-          {/* </Navbar.Collapse> */}
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav" className="d-flex">
+            <Nav className="me-auto">
+              <SearchBar />
+            </Nav>
+            <Nav className="d-none d-md-flex flex-wrap">
+              <Nav.Link>
+                <Button variant="light">Go Ad Free</Button>
+              </Nav.Link>
+              <Nav.Link>
+                <Button variant="light">Get Melody Plus</Button>
+              </Nav.Link>
+              <Nav.Link eventKey={2}>
+                <Login></Login>
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
         </Container>
+        <FilterBar filterList={filtersListHome} isHome={true} />
       </Navbar>
       <SideBar show={show} handleClose={handleClose} />
-      <AuthModal show={authModalShow} onHide={() => setAuthModalShow(false)} />
     </>
   );
 };

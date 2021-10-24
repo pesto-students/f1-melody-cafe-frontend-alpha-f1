@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Offcanvas, Button } from "react-bootstrap";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
-import AuthModal from "../Auth/AuthModal";
+import Login from "../Login/Login";
 
 const SideBar = ({ show, handleClose, ...props }) => {
-  const [authModalShow, setAuthModalShow] = useState(false);
   const routes = [
     {
       path: "/",
@@ -28,15 +27,7 @@ const SideBar = ({ show, handleClose, ...props }) => {
       <Offcanvas show={show} onHide={handleClose} {...props}>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>
-            <Button
-              variant="primary"
-              onClick={() => {
-                setAuthModalShow(true);
-                handleClose();
-              }}
-            >
-              Login/Signup
-            </Button>
+            <Login></Login>
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
@@ -72,7 +63,6 @@ const SideBar = ({ show, handleClose, ...props }) => {
           </Router>
         </Offcanvas.Body>
       </Offcanvas>
-      <AuthModal show={authModalShow} onHide={() => setAuthModalShow(false)} />
     </>
   );
 };

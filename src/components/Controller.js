@@ -291,8 +291,8 @@ const Controller = (props) => {
   return (
     <div className="controls">
       <Row className="m-0">
-        <Col className="p-0 m-0" md={3}>
-          <div className="controller-song-details">
+        <Col className="p-0 m-0 d-flex">
+          <div className="controller-song-details col-sm-5 col-md-3 col-lg-2 d-none d-sm-block">
             <Image
               alt=""
               src={albumArt}
@@ -306,9 +306,7 @@ const Controller = (props) => {
               {song?.artist}
             </p>
           </div>
-        </Col>
-        <Col className="p-0 m-0" sm="auto">
-          <div className="controller-controls-container">
+          <div className="controller-controls-container col-4 col-sm-2 col-md-2 col-lg-1">
             <img
               alt=""
               src={PrevIcon}
@@ -338,9 +336,7 @@ const Controller = (props) => {
               onClick={() => goToNextSong(true)}
             />
           </div>
-        </Col>
-        <Col className="p-0 m-0">
-          <div className="controller-seekbar-container">
+          <div className="controller-seekbar-container d-none d-md-flex col-md-3 col-lg">
             <p className="controller-time p-0 m-0 pr-3">
               {toHHMMSS(currentTime)}
             </p>
@@ -354,9 +350,7 @@ const Controller = (props) => {
             />
             <p className="controller-time p-0 m-0 pl-3">{toHHMMSS(duration)}</p>
           </div>
-        </Col>
-        <Col className="p-0 m-0  d-none d-md-block" sm="auto">
-          <div className="controller-options-container">
+          <div className="controller-options-container col col-md-2 col-lg-2 ">
             <DropdownButton
               key={"up"}
               id={`dropdown-button-drop-up`}
@@ -421,6 +415,9 @@ const Controller = (props) => {
             />
           </div>
         </Col>
+        {/* <Col className="p-0 m-0" sm="auto"></Col>
+        <Col className="p-0 m-0 d-none d-md-block"></Col>
+        <Col className="p-0 m-0" sm="auto"></Col> */}
       </Row>
 
       <LyricsModal
