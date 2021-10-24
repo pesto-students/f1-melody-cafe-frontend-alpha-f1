@@ -256,6 +256,7 @@
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .controller-options-container {
@@ -263,6 +264,7 @@
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content:flex-end;
   margin-left: 40px;
 }
 

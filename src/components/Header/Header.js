@@ -33,7 +33,7 @@ const Header = () => {
         variant="dark"
         className="headerHome"
       >
-        <Container fluid className="mx-2 px-4 my-2">
+        <Container fluid className="mx-2 px-4 my-2 flex-nowrap">
           <Button variant="primary" onClick={toggleShow} className="me-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -56,11 +56,11 @@ const Header = () => {
             </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-md-auto">
+          <Navbar.Collapse id="responsive-navbar-nav" className="d-flex">
+            <Nav className="me-auto">
               <SearchBar />
             </Nav>
-            <Nav className="flex-wrap">
+            <Nav className="d-none d-md-flex flex-wrap">
               <Nav.Link>
                 <Button variant="light">Go Ad Free</Button>
               </Nav.Link>

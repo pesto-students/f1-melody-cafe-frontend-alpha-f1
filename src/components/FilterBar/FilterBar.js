@@ -20,7 +20,7 @@ const FilterBar = ({ filterList, isHome }) => {
       >
         {filterList?.map((filter, _ind) =>
           !filter.subFilters ? (
-            <Nav.Item key={_ind}>
+            <Nav.Item key={_ind} className="text-nowrap">
               <Nav.Link eventKey={_ind}>
                 <Link to={filter.url}>{filter.name}</Link>
               </Nav.Link>
