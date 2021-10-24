@@ -51,6 +51,7 @@ const SongListItems = (props) => {
   };
 
   let song = songModel();
+  console.log(song);
 
   if (!song.title) {
     return (

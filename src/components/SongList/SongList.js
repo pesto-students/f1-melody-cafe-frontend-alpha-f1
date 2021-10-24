@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import GlobalState from "../../contexts/GlobalState";
 import { shufflePlaylist } from "../../utils/utils";
+import { Table } from "react-bootstrap";
 
 const SongList = (props) => {
   const [state, setState] = useContext(GlobalState);
@@ -254,21 +255,22 @@ const SongList = (props) => {
           </div>
         </div>
 
-        <table className="list-group">
-          <tbody>
+        <Table striped bordered hover variant="dark" className="list-group">
+          <thead>
             <tr>
               <th></th>
               <th>Title</th>
               <th>Artist</th>
               <th>Dur</th>
-              <th>Plays</th>
+              {/* <th>Plays</th> */}
             </tr>
-
+          </thead>
+          <tbody>
             {songListArray}
             {props.renderQueue ? queueListArray : ""}
             {props.songs ? songsListArray : ""}
           </tbody>
-        </table>
+        </Table>
       </div>
     </div>
   );
