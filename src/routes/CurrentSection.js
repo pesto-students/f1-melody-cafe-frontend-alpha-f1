@@ -2,6 +2,7 @@ import React from "react";
 import { useLocation, useParams } from "react-router";
 import FilteredDetails from "../pages/home/FilteredDetails";
 import FilteredSection from "../pages/home/FilteredSection";
+import MyMusic from "../pages/MyMusic/MyMusic";
 
 const CurrentSection = () => {
   let location = useLocation();
@@ -9,14 +10,17 @@ const CurrentSection = () => {
   console.log(type, slug, filter);
   if (type === "song" || type === "playlist") {
     return <FilteredDetails title={slug} location={location} />;
-  }
-  if (
+  } else if (
     type === "album" ||
     type === "radio" ||
     type === "podcast" ||
     type === "genre"
   ) {
-    return <FilteredSection title={slug} location={location} />;
+    return <FilteredSection type={type} title={slug} location={location} />;
+  } else if (type === "my-music") {
+    return <MyMusic type="playlist" />;
+  } else if (type && !slug) {
+    return <FilteredSection type={type} title={type} location={location} />;
   }
 };
 

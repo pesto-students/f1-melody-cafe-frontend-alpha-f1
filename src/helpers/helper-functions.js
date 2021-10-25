@@ -1,42 +1,40 @@
 const regex = {
-
   regex: /\s[-–]\s/,
 
   editTitle: (str) => {
     let seperator = " - ";
-    if (str.includes(seperator)){
+    if (str.includes(seperator)) {
       return str.split(regex.regex)[1];
     } else {
-      return str
+      return str;
     }
   },
 
   editArtist: (str) => {
-    const vevo = 'VEVO';
-    if (str.includes(vevo)){
-
-      let x = str.replace(/VEVO/g,'');
-      return x.replace(/([A-Z])/g, ' $1');
+    const vevo = "VEVO";
+    if (str?.includes(vevo)) {
+      let x = str?.replace(/VEVO/g, "");
+      return x.replace(/([A-Z])/g, " $1");
     } else {
       return str;
     }
   },
 
   editDuration: (str) => {
-    let x = str.replace(/PT/g, '');
+    let x = str.replace(/PT/g, "");
     // let y = x.replace(/M/g, ':');
     let seconds = x.substr(x.indexOf("M") + 1);
 
-    let z = seconds.replace(/S/g, '');
+    let z = seconds.replace(/S/g, "");
     if (!z) {
-      z = '00';
-    } else if (z.toString().length === 1){
+      z = "00";
+    } else if (z.toString().length === 1) {
       z = "" + z + 0;
     }
 
-    let minutes = x.substr(0, x.indexOf('M'));
+    let minutes = x.substr(0, x.indexOf("M"));
 
-    return minutes + ':' + z;
+    return minutes + ":" + z;
   },
 
   editPlayCount: (str) => {
@@ -48,21 +46,20 @@ const regex = {
       length = 50;
     }
     if (ending == null) {
-      ending = '...';
+      ending = "...";
     }
     if (str.length > length) {
       return str.substring(0, length - ending.length) + ending;
     } else {
       return str;
     }
-  }
+  },
+};
 
-}
-
-export function expiry(){
+export function expiry() {
   let today = new Date();
   let expiryDate = new Date();
-  expiryDate.setYear(today.getFullYear()+10);
+  expiryDate.setYear(today.getFullYear() + 10);
   return expiryDate;
 }
 

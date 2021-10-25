@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import GlobalState from "../../contexts/GlobalState";
 import { shufflePlaylist } from "../../utils/utils";
+import { Table } from "react-bootstrap";
 
 const SongList = (props) => {
   const [state, setState] = useContext(GlobalState);
@@ -26,6 +27,7 @@ const SongList = (props) => {
   if (!cachedPlaylists[genre]) {
     return null;
   }
+  console.log(props.songs);
   // state = {};
 
   // playAll = playAll.bind(this);
@@ -127,27 +129,27 @@ const SongList = (props) => {
   };
 
   // DRY shortcut for this playlist
-  const playlistInfo = cachedPlaylists[genre][props.playlistId].playlistInfo;
+  const playlistInfo = cachedPlaylists[genre][props.playlistId]?.playlistInfo;
 
   // Set the image URLS
   let thumbnail;
 
   if (genre === "yourmusic") {
     thumbnail = {
-      backgroundImage: "url(" + playlistInfo.thumbnail + ")",
+      backgroundImage: "url(" + playlistInfo?.thumbnail + ")",
     };
-  } else if (playlistInfo.thumbnail) {
+  } else if (playlistInfo?.thumbnail) {
     thumbnail = {
       backgroundImage:
         "url(" +
         process.env.PUBLIC_URL +
         "/images/playlists/" +
-        playlistInfo.thumbnail +
+        playlistInfo?.thumbnail +
         ")",
     };
   } else {
     thumbnail = {
-      backgroundImage: "url(" + playlistInfo.youtubeThumbnail + ")",
+      backgroundImage: "url(" + playlistInfo?.youtubeThumbnail + ")",
     };
   }
 
@@ -157,13 +159,13 @@ const SongList = (props) => {
       "url(" +
       process.env.PUBLIC_URL +
       "/images/playlists/" +
-      playlistInfo.background +
+      playlistInfo?.background +
       ")",
   };
 
   // Create an array of songs by mapping through props
   const songListArray = _.map(
-    cachedPlaylists[genre][props.playlistId].songs,
+    cachedPlaylists[genre][props.playlistId]?.songs,
     (video) => {
       if (
         video.snippet.title !== "Deleted video" &&
@@ -189,14 +191,63 @@ const SongList = (props) => {
     }
   );
 
+  const queueListArray = _.map(state.queue, (video) => {
+    if (
+      video.snippet.title !== "Deleted video" &&
+      video.snippet.title !== "Private video"
+    ) {
+      // let index = _.findIndex(props.savedSongs, { id: video.id });
+
+      return (
+        <SongListItems
+          key={video.etag}
+          video={video}
+          onVideoSelect={onVideoSelect}
+          selectedSong={selectedSong}
+          // cachedPlaylist={cachedPlaylists[genre][props.playlistId].songs}
+          // savedSongs={props.savedSongs}
+          // saveSong={props.saveSong}
+          // removeSong={props.removeSong}
+          // index={index}
+          user={props.user}
+        />
+      );
+    }
+  });
+
+  const songsListArray = _.map(props.songs, (video) => {
+    console.log(video);
+    if (
+      video.snippet.title !== "Deleted video" &&
+      video.snippet.title !== "Private video"
+    ) {
+      // let index = _.findIndex(props.savedSongs, { id: video.id });
+
+      return (
+        <SongListItems
+          key={video.etag}
+          video={video}
+          onVideoSelect={onVideoSelect}
+          selectedSong={selectedSong}
+          // cachedPlaylist={cachedPlaylists[genre][props.playlistId].songs}
+          // savedSongs={props.savedSongs}
+          // saveSong={props.saveSong}
+          // removeSong={props.removeSong}
+          // index={index}
+          user={props.user}
+        />
+      );
+    }
+  });
+
   return (
     <div className="outer-container">
       <div className="song-list-container" style={background}>
         <div className="song-list-title-block">
           <div className="song-list-thumbnail" style={thumbnail}></div>
           <div className="song-list-details">
-            <h1>{playlistInfo.playlistTitle}</h1>
-            <span>{playlistInfo.songCount} Songs</span>
+            <h1>{playlistInfo?.playlistTitle}</h1>
+            <span>{playlistInfo?.songCount} Songs</span>
             <button className="song-list-play" onClick={playAll}>
               &#9658; Play All
             </button>
@@ -204,19 +255,22 @@ const SongList = (props) => {
           </div>
         </div>
 
-        <table className="list-group">
-          <tbody>
+        <Table striped bordered hover variant="dark" className="list-group">
+          <thead>
             <tr>
               <th></th>
               <th>Title</th>
               <th>Artist</th>
               <th>Dur</th>
-              <th>Plays</th>
+              {/* <th>Plays</th> */}
             </tr>
-
+          </thead>
+          <tbody>
             {songListArray}
+            {props.renderQueue ? queueListArray : ""}
+            {props.songs ? songsListArray : ""}
           </tbody>
-        </table>
+        </Table>
       </div>
     </div>
   );

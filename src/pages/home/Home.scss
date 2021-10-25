@@ -1,6 +1,6 @@
-.blue{
-    // background-color: blue;
-}
+// .blue{
+//     background-color: blue;
+// }
 .sideImage{
    width: 305px;
    height: 100%;
@@ -14,13 +14,24 @@
 }
 
 
-.space-top{
-    position: relative;
-    top:100px;
+.space-top-home{
+    // position: relative;
+    // top:100px;
+    // bottom: 1000px;
+    // // bottom:-250px;
+    // margin-bottom: 1.5%;
+    // margin-top: 1.5%;
 }
 
 .backgroundColour{
     background-color: #1b1b1b;
     color:white;
-    
+}
+
+.space-top2 {
+    position: relative;
+    top: 100px;
+    // bottom: 900px;
+    // margin-top: 75px;
+    // margin-bottom: 300px;
 }

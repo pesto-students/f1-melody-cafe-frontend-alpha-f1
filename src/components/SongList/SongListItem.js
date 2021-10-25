@@ -8,6 +8,8 @@ import { shufflePlaylist } from "../../utils/utils";
 const SongListItems = (props) => {
   const [state, setState] = useContext(GlobalState);
 
+  console.log("inside song list items");
+
   const dispatch = useDispatch();
   // Set this song to selected if it matches the selectedSong state
   var addSelectedClass;
@@ -31,14 +33,34 @@ const SongListItems = (props) => {
     }));
   };
 
-  if (!props.video.channelTitle) {
+  let songModel = () => {
+    if (props.video.kind === "youtube#video") {
+      return {
+        channelTitle: props.video?.snippet?.channelTitle,
+        title: props.video.snippet.title,
+        duration: null,
+      };
+    }
+    if (props.video.kind === "youtube#playlistItem") {
+      return {
+        channelTitle: props.video?.channelTitle,
+        title: props.video.snippet.title,
+        duration: props.video.duration,
+      };
+    }
+  };
+
+  let song = songModel();
+  console.log(song);
+
+  if (!song.title) {
     return (
-      <tr className="list-item">
-        <td className="list-save"></td>
-        <td className="list-track">Loading...</td>
-        <td className="list-artist"></td>
-        <td className="list-duration"></td>
-        <td className="list-play-count"></td>
+      <tr className="list-item ">
+        {/* <td className="list-save"></td> */}
+        <td className="list-track text-start px-5">Loading...</td>
+        <td className="list-artist text-center px-5">Loading...</td>
+        <td className="list-duration text-end px-5">Loading...</td>
+        {/* <td className="list-play-count"></td> */}
       </tr>
     );
   }
@@ -70,36 +92,36 @@ const SongListItems = (props) => {
   }
 
   return (
-    <tr className={addSelectedClass}>
-      {renderSaveRemoveButton()}
+    <tr className="py-5">
+      {/* {renderSaveRemoveButton()} */}
       <td
-        className="list-track"
+        className="list-track text-start px-5"
         onClick={() => {
           dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
           callPlay(props.video);
         }}
       >
-        {regex.editTitle(props.video.snippet.title)}
+        {regex.editTitle(song.title)}
       </td>
       <td
-        className="list-artist"
+        className="list-artist text-center px-5"
         onClick={() => {
           dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
           callPlay(props.video);
         }}
       >
-        {regex.editArtist(props.video.channelTitle)}
+        {regex.editArtist(song.channelTitle)}
       </td>
       <td
-        className="list-duration"
+        className="list-duration text-end px-5"
         onClick={() => {
           dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
           callPlay(props.video);
         }}
       >
-        {regex.editDuration(props.video.duration)}
+        {song.duration ? regex.editDuration(song.duration) : "00:00"}
       </td>
-      <td
+      {/* <td
         className="list-play-count"
         onClick={() => {
           dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
@@ -107,7 +129,7 @@ const SongListItems = (props) => {
         }}
       >
         {regex.editPlayCount(props.video.viewCount)}
-      </td>
+      </td> */}
     </tr>
   );
 };

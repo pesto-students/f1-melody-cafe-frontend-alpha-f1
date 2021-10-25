@@ -11,6 +11,21 @@ const SearchResult = (props) => {
   let trimmedTitle = regex.truncate(title, 40);
   let channelTitle = props.result.snippet.channelTitle;
 
+  // Thumbnail logic
+  let thumbnail;
+
+  if (props.result.snippet.thumbnails) {
+    if (props.result.snippet.thumbnails.high) {
+      thumbnail = props.result.snippet.thumbnails.high.url;
+    } else if (props.result.snippet.thumbnails.medium) {
+      thumbnail = props.result.snippet.thumbnails.medium.url;
+    } else if (props.result.snippet.thumbnails.default) {
+      thumbnail = props.result.snippet.default.default.url;
+    } else {
+      thumbnail = null;
+    }
+  }
+
   // List items songs
   if (props.result.id.kind === "youtube#video") {
     if (!props.result.duration) {
@@ -121,21 +136,6 @@ const SearchResult = (props) => {
 
   // List items playlists
   if (props.result.id.kind === "youtube#playlist") {
-    // Thumbnail logic
-    let thumbnail;
-
-    if (props.result.snippet.thumbnails) {
-      if (props.result.snippet.thumbnails.high) {
-        thumbnail = props.result.snippet.thumbnails.high.url;
-      } else if (props.result.snippet.thumbnails.medium) {
-        thumbnail = props.result.snippet.thumbnails.medium.url;
-      } else if (props.result.snippet.thumbnails.default) {
-        thumbnail = props.result.snippet.default.default.url;
-      } else {
-        thumbnail = null;
-      }
-    }
-
     function playlistSelect() {
       props.onSearchPlaylistInit(
         props.result.id.playlistId,
@@ -159,12 +159,12 @@ const SearchResult = (props) => {
 
   // List items artists
   if (props.result.id.kind === "youtube#channel") {
-    return {
-      /*<li className="artist-result col-xs-6 col-sm-4 col-md-3 col-lg-3">
-        <img src={thumbnail} alt=""/>
-          <span>{regex.editArtist(channelTitle)}</span>
-        </li>*/
-    };
+    return (
+      <li className="artist-result col-xs-6 col-sm-4 col-md-3 col-lg-3">
+        <img src={thumbnail} alt="" />
+        <span>{regex.editArtist(channelTitle)}</span>
+      </li>
+    );
   }
 };
 

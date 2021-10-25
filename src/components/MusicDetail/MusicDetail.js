@@ -2,8 +2,10 @@ import React, { useContext } from "react";
 import { Image, Button } from "react-bootstrap";
 import GlobalState from "../../contexts/GlobalState";
 import { shufflePlaylist } from "../../utils/utils";
+import AlbumArt from "../../assets/album_art_blank.jpg";
 
 const MusicDetail = ({ data }) => {
+  console.log(data);
   const [state, setState] = useContext(GlobalState);
 
   const callPlay = (song) => {
@@ -20,25 +22,38 @@ const MusicDetail = ({ data }) => {
   };
 
   return (
-    <div className="info-sec">
-      <div className="atw">
-        <Image src={data?.snippet?.thumbnails?.high?.url} />
-      </div>
-      <div className="info">
-        <div className="_a">
+    <div>
+      <div className="d-flex flex-wrap justify-content-md-start align-items-end justify-content-center">
+        <Image
+          src={data?.snippet?.thumbnails?.high?.url || data?.src || AlbumArt}
+          height="300px"
+          width="300px"
+          fluid
+          className="p-3"
+        />
+
+        <div>
           <h1 className="title">
-            {data?.snippet?.title?.slice(0, 70) + " ..."}
+            {data?.snippet?.title?.slice(0, 70)
+              ? data?.snippet?.title?.slice(0, 70) + " ..."
+              : data?.title}
           </h1>
-        </div>
-        <div className="_b">
-          {/* <span className="al_name">..desc</span>
-          <span className="al_name">more desc</span>
-          <span className="al_name">number of tracks</span> */}
-        </div>
-        <div className="_c">
-          <Button onClick={() => callPlay(data)} className="btn btn_solid">
-            Play/Pause
-          </Button>
+          <p>
+            Label <span>Year</span>
+          </p>
+          <p>Various Artists</p>
+          <p>
+            {data?.songs ? data?.songs?.length + " Tracks " : ""}
+            <span>duration sec</span>
+          </p>
+
+          <div className="d-inline-flex flex-wrap align-items-center justify-content-md-start justify-content-center p-3">
+            <Button onClick={() => callPlay(data)} className="btn btn_solid">
+              Play/Pause
+            </Button>
+            <p>Favourite Button</p>
+            <p>Menu Button</p>
+          </div>
         </div>
       </div>
     </div>

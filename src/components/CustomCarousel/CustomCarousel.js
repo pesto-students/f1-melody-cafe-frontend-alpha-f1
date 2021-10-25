@@ -55,7 +55,7 @@ const CustomCarousel = ({ items, cols, rows }) => {
       <Carousel
         cols={cols}
         rows={rows}
-        gap={20}
+        gap={30}
         loop
         // showDots
         hideArrow={showArrow}
@@ -74,9 +74,7 @@ const CustomCarousel = ({ items, cols, rows }) => {
         // arrowLeft={<ArrowBtn type="left" />}>
       >
         {items?.map((item, i) => (
-          <Carousel.Item key={i}>
-            <Card>{item}</Card>
-          </Carousel.Item>
+          <Carousel.Item key={i}>{item}</Carousel.Item>
         ))}
       </Carousel>
     </div>

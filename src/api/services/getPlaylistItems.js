@@ -9,3 +9,5 @@ export default axios.create({
     key: getApiKey(),
   },
 });
+
+//let url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${id}&key=${api}`;

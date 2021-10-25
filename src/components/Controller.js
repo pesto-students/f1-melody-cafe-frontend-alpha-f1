@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import GlobalState from "../contexts/GlobalState";
 
-import { Col, Image, Row } from "react-bootstrap";
+import { Col, Dropdown, DropdownButton, Image, Row } from "react-bootstrap";
 
 import AlbumArtBlank from "../assets/album_art_blank.jpg";
 import PlayIcon from "../assets/play.svg";
@@ -13,8 +13,8 @@ import ShuffleOnIcon from "../assets/shuffle-active.svg";
 import RepeatIcon from "../assets/repeat.svg";
 import RepeatAllIcon from "../assets/repeat-all.svg";
 import RepeatOneIcon from "../assets/repeat-one.svg";
+import Playlist from "../assets/playlist.svg";
 import LyricsIcon from "../assets/lyrics.svg";
-import YoutubeIcon from "../assets/youtube.svg";
 import LikeIcon from "../assets/like.svg";
 import LikeActiveIcon from "../assets/like-active.svg";
 
@@ -24,6 +24,9 @@ import { REPEAT_MODE } from "../utils/constants";
 import { shufflePlaylist, toHHMMSS } from "../utils/utils";
 import getAudioLink from "../api/services/getAudioLink";
 import { getStreamQuality } from "../utils/storage";
+import regex from "../helpers/helper-functions";
+import FullScreenController from "./FullScreenController";
+import PlaylistModal from "./Playlist/PlaylistModal";
 
 let previousStreamUrl = "";
 let audio = new Audio();
@@ -52,15 +55,22 @@ const Controller = (props) => {
           ...state.currentSong,
           lyrics: null,
           art: state.currentSong?.snippet?.thumbnails?.high?.url,
-          name: state.currentSong?.snippet?.title?.slice(0, 70) + " ...",
-          artist: "Play one from your library",
+          name: regex.editTitle(state.currentSong?.snippet?.title),
+          artist: regex.editArtist(state.currentSong?.channelTitle),
         };
 
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isPlaying, setPlaying] = useState(false);
   const [isBuffering, setBuffering] = useState(false);
+  const [songLiked, setSongLiked] = useState(false);
   const [showLyrics, setShowLyrics] = useState(false);
+  const [showFullScreen, setShowFullScreen] = useState(false);
+  const [showPlaylist, setShowPlaylist] = useState(false);
+
+  useEffect(() => {
+    setSongLiked(false);
+  }, [song.name]);
 
   const pauseAudio = () => {
     audio.pause();
@@ -156,6 +166,35 @@ const Controller = (props) => {
     setState((state) => ({ ...state, shuffleOn: !state.shuffleOn }));
   };
 
+  const toggleFullScreen = (e) => {
+    e.preventDefault();
+    setShowFullScreen((state) => !state);
+    setState((state) => ({ ...state, fullscreen: !showFullScreen }));
+  };
+
+  const likeSongHandler = (e) => {
+    e.preventDefault();
+    setSongLiked((liked) => !liked);
+    if (!songLiked) {
+      setState((state) => ({
+        ...state,
+        userFavouriteSongs: [...state.userFavouriteSongs, song],
+      }));
+    } else {
+      setState((state) => ({
+        ...state,
+        userFavouriteSongs: state.userFavouriteSongs.filter(
+          (favouriteSong) => favouriteSong.id !== song.id
+        ),
+      }));
+    }
+  };
+
+  const addToPlaylistHandler = (e) => {
+    e.preventDefault();
+    setShowPlaylist((state) => !state);
+  };
+
   const changeRepeat = () => {
     let currentRepeat = state.repeatMode;
     currentRepeat < REPEAT_MODE.ONE
@@ -244,7 +283,7 @@ const Controller = (props) => {
   );
 
   const showLyricsModal = () => {
-    setShowLyrics(song?.lyrics !== null);
+    setShowLyrics(song?.lyrics !== null || true);
   };
 
   const albumArt = song?.art !== "" ? song?.art : AlbumArtBlank;
@@ -252,8 +291,8 @@ const Controller = (props) => {
   return (
     <div className="controls">
       <Row className="m-0">
-        <Col className="p-0 m-0" md={2}>
-          <div className="controller-song-details">
+        <Col className="p-0 m-0 d-flex">
+          <div className="controller-song-details col-sm-5 col-md-3 col-lg-2 d-none d-sm-block">
             <Image
               alt=""
               src={albumArt}
@@ -263,13 +302,11 @@ const Controller = (props) => {
             <p className="controller-song-title" title={song?.name}>
               {song?.name}
             </p>
-            <p className="controller-song-artist" title={song.artist}>
-              {song.artist}
+            <p className="controller-song-artist" title={song?.artist}>
+              {song?.artist}
             </p>
           </div>
-        </Col>
-        <Col className="p-0 m-0" md="auto">
-          <div className="controller-controls-container">
+          <div className="controller-controls-container col-4 col-sm-2 col-md-2 col-lg-1">
             <img
               alt=""
               src={PrevIcon}
@@ -299,9 +336,7 @@ const Controller = (props) => {
               onClick={() => goToNextSong(true)}
             />
           </div>
-        </Col>
-        <Col className="p-0 m-0">
-          <div className="controller-seekbar-container">
+          <div className="controller-seekbar-container d-none d-md-flex col-md-3 col-lg">
             <p className="controller-time p-0 m-0 pr-3">
               {toHHMMSS(currentTime)}
             </p>
@@ -315,9 +350,29 @@ const Controller = (props) => {
             />
             <p className="controller-time p-0 m-0 pl-3">{toHHMMSS(duration)}</p>
           </div>
-        </Col>
-        <Col className="p-0 m-0" md="auto">
-          <div className="controller-options-container">
+          <div className="controller-options-container col col-md-2 col-lg-2 ">
+            <DropdownButton
+              key={"up"}
+              id={`dropdown-button-drop-up`}
+              drop={"up"}
+              variant="secondary"
+              title=""
+              className="removeBackBorder"
+              size="sm"
+            >
+              <Dropdown.Item
+                eventKey="1"
+                onClick={(e) => addToPlaylistHandler(e)}
+              >
+                Add to Playlist
+              </Dropdown.Item>
+              <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
+              <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
+            </DropdownButton>
+            {/* </div> */}
+
             <img
               alt=""
               src={state.shuffleOn ? ShuffleOnIcon : ShuffleIcon}
@@ -336,20 +391,12 @@ const Controller = (props) => {
             />
             <img
               alt=""
-              src={song.liked ? LikeActiveIcon : LikeIcon}
+              src={songLiked ? LikeActiveIcon : LikeIcon}
               width="16px"
               height="16px"
               className="mr-5 controller-icon"
+              onClick={(e) => likeSongHandler(e)}
             />
-            <a href={song.url} target="_blank" rel="noreferrer">
-              <img
-                alt=""
-                src={YoutubeIcon}
-                width="16px"
-                height="16px"
-                className="mr-3 controller-icon"
-              />
-            </a>
             <img
               alt=""
               src={LyricsIcon}
@@ -358,8 +405,19 @@ const Controller = (props) => {
               className="controller-icon"
               onClick={() => showLyricsModal()}
             />
+            <img
+              alt=""
+              src={Playlist}
+              width="16px"
+              height="16px"
+              className="mr-4 controller-icon"
+              onClick={(e) => toggleFullScreen(e)}
+            />
           </div>
         </Col>
+        {/* <Col className="p-0 m-0" sm="auto"></Col>
+        <Col className="p-0 m-0 d-none d-md-block"></Col>
+        <Col className="p-0 m-0" sm="auto"></Col> */}
       </Row>
 
       <LyricsModal
@@ -367,6 +425,9 @@ const Controller = (props) => {
         showLyrics={showLyrics}
         setShowLyrics={setShowLyrics}
       />
+
+      <FullScreenController show={showFullScreen} setShow={setShowFullScreen} />
+      <PlaylistModal show={showPlaylist} setShow={setShowPlaylist} type="ADD" />
     </div>
   );
 };

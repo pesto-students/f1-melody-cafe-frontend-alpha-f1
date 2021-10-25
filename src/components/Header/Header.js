@@ -15,23 +15,25 @@ import SideBar from "../SideBar/SideBar";
 import Logo from "../../assets/TheMelodyCafeLogo.gif";
 import "./Header.scss";
 import SearchBar from "../SearchBar/SearchBar";
+import { filtersListHome } from "../../utils/constants";
+import FilterBar from "../FilterBar/FilterBar";
 
 const Header = () => {
   const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+  const handleClose = () => setShow(false);
   const toggleShow = () => setShow((s) => !s);
 
   return (
     <>
       <Navbar
         fixed="top"
-        collapseOnSelect
-        expand="lg"
+        // collapseOnSelect
+        //expand="sm"
         // bg="dark"
         variant="dark"
         className="headerHome"
       >
-        <Container>
+        <Container fluid className="mx-2 px-4 my-2 flex-nowrap">
           <Button variant="primary" onClick={toggleShow} className="me-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -50,16 +52,15 @@ const Header = () => {
 
           <Navbar.Brand>
             <Link to="/">
-              {" "}
               <Image src={Logo} width="100px" height="50px" />
             </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
+          <Navbar.Collapse id="responsive-navbar-nav" className="d-flex">
             <Nav className="me-auto">
               <SearchBar />
             </Nav>
-            <Nav>
+            <Nav className="d-none d-md-flex flex-wrap">
               <Nav.Link>
                 <Button variant="light">Go Ad Free</Button>
               </Nav.Link>
@@ -72,6 +73,7 @@ const Header = () => {
             </Nav>
           </Navbar.Collapse>
         </Container>
+        <FilterBar filterList={filtersListHome} isHome={true} />
       </Navbar>
       <SideBar show={show} handleClose={handleClose} />
     </>

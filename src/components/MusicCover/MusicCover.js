@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from "react";
-import { Figure } from "react-bootstrap";
+import { Figure, Image } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import GlobalState from "../../contexts/GlobalState";
 import { shufflePlaylist } from "../../utils/utils";
 import { onPageSelect, onPlaylistSelect } from "../../entities";
+import regex from "../../helpers/helper-functions";
 
 const MusicCover = ({ isRounded, data, type, slug }) => {
   const [state, setState] = useContext(GlobalState);
@@ -60,9 +61,9 @@ const MusicCover = ({ isRounded, data, type, slug }) => {
     >
       <Figure>
         {isRounded ? (
-          <Figure.Image
-            // width={171}
-            // height={180}
+          <Image
+            width={"170px"}
+            height={"170px"}
             // alt="171x180"
             src={
               data?.playlistInfo?.youtubeThumbnail ||
@@ -88,7 +89,7 @@ const MusicCover = ({ isRounded, data, type, slug }) => {
           {" "}
           {data?.playlistInfo?.playlistTitle ||
             data?.genreTitle ||
-            data?.snippet?.title.slice(0, 70) + " ..."}
+            regex.editTitle(data?.snippet?.title)}
         </Figure.Caption>
       </Figure>
     </Link>

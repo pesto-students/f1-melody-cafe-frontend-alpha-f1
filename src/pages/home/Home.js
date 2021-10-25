@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 
@@ -10,11 +10,10 @@ import CustomCarousel from "../../components/CustomCarousel/CustomCarousel";
 import FilterBar from "../../components/FilterBar/FilterBar";
 import RowLayout from "../../components/RowLayout/RowLayout";
 
-import { filtersListHome } from "../../utils/constants";
-
 import youtubeSearch from "../../api/services/youtubeSearch";
 
 import { useSelector } from "react-redux";
+import GlobalState from "../../contexts/GlobalState";
 
 // make a permanent playlist object with few songs catergory
 const playlistsIds = {
@@ -30,6 +29,7 @@ const playlistsIds = {
 let slowConnectionTimeout;
 
 const Home = () => {
+  const [state, setState] = useContext(GlobalState);
   const [songObj, setSongObj] = useState({});
   const playlistList = useSelector((state) => state.playlistList);
   const showPage = useSelector((state) => state.playlists.showPage);
@@ -153,14 +153,12 @@ const Home = () => {
   };
 
   return (
-    <Container fluid className="backgroundColour">
-      <Row className="content m-0 p-0">
+    <Container fluid className="backgroundColour my-5 py-2 space-top2">
+      <Row className="m-0 p-0">
         <Col lg={12} xl={9}>
-          <FilterBar filterList={filtersListHome} />
-
           <Container
             // onMouseOver={() => toggleShowArrow(false)}
-            className="space-top"
+            className="space-top-home"
           >
             <CustomCarousel items={data} cols={2} />
           </Container>
@@ -181,23 +179,29 @@ const Home = () => {
             header="Top Bollywood"
             items={songObj.topBolloywood}
             cols={4}
-            type="playlist"
+            type="song"
           />
           {renderGenreList()}
           <RowLayout
             header="Best Of Ed Sheeran"
             items={songObj.edSheeran}
             cols={4}
-            type="playlist"
+            type="song"
+            isRounded={true}
           />
           <RowLayout
             header="Romantic Mood"
             items={songObj.romanticSongs}
             cols={4}
-            type="playlist"
+            type="song"
           />
         </Col>
-        <Col xl={3} className="d-none d-xl-block blue sideImage">
+        <Col
+          xl={3}
+          className={`blue sideImage ${
+            state.fullscreen ? "d-none" : "d-none d-xl-block"
+          }`}
+        >
           <Image src="rhs_banner_v5.jpg" width={"100%"} height={"100%"} />
         </Col>
       </Row>
