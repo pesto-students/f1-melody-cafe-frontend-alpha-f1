@@ -27,6 +27,7 @@ import { getStreamQuality } from "../utils/storage";
 import regex from "../helpers/helper-functions";
 import FullScreenController from "./FullScreenController";
 import PlaylistModal from "./Playlist/PlaylistModal";
+import API from "../api/services/api";
 
 let previousStreamUrl = "";
 let audio = new Audio();
@@ -35,12 +36,15 @@ audio.autoplay = false;
 const Controller = (props) => {
   const [state, setState] = useContext(GlobalState);
 
-  const getAudio = async (data, audioQuality) => {
-    const res = getAudioLink.get("/song", {
-      params: { id: data },
-    });
+  let api = new API();
 
-    return res;
+  const getAudio = async (data, audioQuality) => {
+    try {
+      const res = await api.getSongUrl(data);
+      return res;
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const song =

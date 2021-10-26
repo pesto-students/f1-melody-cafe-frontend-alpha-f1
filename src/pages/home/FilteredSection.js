@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Breadcrumb, Container, Row, Col, Image } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import MusicContainer from "../../components/MusicContainer/MusicContainer";
@@ -9,9 +9,12 @@ import RowLayout from "../../components/RowLayout/RowLayout";
 import { filtersListHome } from "../../utils/constants";
 import GlobalState from "../../contexts/GlobalState";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import API from "../../api/services/api";
 
 const FilteredSection = ({ title, isDetails, location, type }) => {
   const [state, setState] = useContext(GlobalState);
+  const [items, setItems] = useState(null);
+
   const playlistList = useSelector((state) => state.playlistList);
 
   const showPage = useSelector((state) => state.playlists.showPage);
@@ -36,6 +39,25 @@ const FilteredSection = ({ title, isDetails, location, type }) => {
       );
     }
   };
+  const api = new API();
+  const getPlaylistByFilters = async (filter) => {
+    try {
+      const res = await api.getSongs("playlist", filter);
+      //console.log(res);
+      return res?.data?.items;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    if (title) {
+      getPlaylistByFilters(title).then((data) => {
+        //console.log(data);
+        setItems(data);
+      });
+    }
+  }, [title]);
 
   return (
     <Container fluid className="space-top2 backgroundColour my-5 py-5">
@@ -44,6 +66,7 @@ const FilteredSection = ({ title, isDetails, location, type }) => {
           <Breadcrumbs />
           <h1 className="text-left">{title}</h1>
           {/* <FilterBar filterList={filtersListHome} /> */}
+          <MusicContainer items={items} type={type} />
           {match ? (
             <MusicContainer items={location?.state?.items} type={type} />
           ) : (

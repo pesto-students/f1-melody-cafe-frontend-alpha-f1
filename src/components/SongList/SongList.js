@@ -255,7 +255,14 @@ const SongList = (props) => {
           </div>
         </div>
 
-        <Table striped bordered hover variant="dark" className="list-group">
+        <Table
+          striped
+          bordered
+          hover
+          variant="dark"
+          className="list-group"
+          responsive="sm"
+        >
           <thead>
             <tr>
               <th></th>

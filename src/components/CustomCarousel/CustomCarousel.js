@@ -69,7 +69,7 @@ const CustomCarousel = ({ items, cols, rows }) => {
             cols: 2,
           },
         ]}
-        mobileBreakpoint={670}
+        mobileBreakpoint={425}
         // arrowRight={<ArrowBtn type="right" />}
         // arrowLeft={<ArrowBtn type="left" />}>
       >

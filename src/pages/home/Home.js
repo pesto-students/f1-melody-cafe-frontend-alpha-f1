@@ -9,6 +9,7 @@ import CustomCarousel from "../../components/CustomCarousel/CustomCarousel";
 import RowLayout from "../../components/RowLayout/RowLayout";
 import GlobalState from "../../contexts/GlobalState";
 import API from "../../api/services/api";
+
 // make a permanent playlist object with few songs catergory
 const playlistsIds = {
   LatestSongs: "PLFgquLnL59akA2PflFpeQG9L01VFg90wS",
@@ -18,6 +19,19 @@ const playlistsIds = {
   TopBolloywood: "PLcRN7uK9CFpPkvCc-08tWOQo6PAg4u0lA",
   TopPop: "PLDcnymzs18LU4Kexrs91TVdfnplU3I5zs",
   Reggaeton: "PLS_oEMUyvA728OZPmF9WPKjsGtfC75LiN",
+};
+
+//playlist Genres
+const playlistsGenres = {
+  LatestSongs: "Latest Bollywood Songs",
+  RomanticSongs: "Best Bollywood Romantic hits",
+  TopInternational: "Top International Music Hits",
+  EvergreenBollywood: "Evergreen Bollywood Hits",
+  FitHits: "Bollywood Fit Hits",
+  BestRap: "Best of Rap bollywood",
+  Devotional: "Bhajans and aartis",
+  Artists: "best of indian singers",
+  Calm: "Best stress release music",
 };
 
 let slowConnectionTimeout;
@@ -33,13 +47,32 @@ const Home = () => {
     slowConnectionTimeout = setTimeout(() => {}, 5000);
 
     const getTrendingMusic = async () => {
-      const res = await Api.getSongs('trending')
-      return res.data;
+      try {
+        const res = await Api.getSongs("trending");
+        console.log(res);
+        return res.data.items;
+      } catch (err) {
+        console.log(err);
+      }
     };
 
     const getPlayListItems = async (data) => {
-      const res = await Api.getSongs("playlist",data);
-      return res.data;
+      try {
+        const res = await Api.getSongs("playlist", data);
+        return res.data.items;
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    const getPlayListBasedOnGenre = async (genre) => {
+      try {
+        const res = await Api.getSongs("playlist", genre);
+        console.log(res);
+        return res.data.items;
+      } catch (err) {
+        console.log(err);
+      }
     };
 
     getTrendingMusic().then((data) => {
@@ -48,29 +81,85 @@ const Home = () => {
       });
     });
 
-    getPlayListItems(playlistsIds.LatestSongs).then((data) => {
+    getPlayListBasedOnGenre(playlistsGenres?.LatestSongs).then((data) => {
       setSongObj((prevState) => {
         return { ...prevState, ...{ latestSongs: data } };
       });
     });
 
-    getPlayListItems(playlistsIds.RomanticSongs).then((data) => {
+    getPlayListBasedOnGenre(playlistsGenres?.RomanticSongs).then((data) => {
       setSongObj((prevState) => {
         return { ...prevState, ...{ romanticSongs: data } };
       });
     });
 
-    getPlayListItems(playlistsIds.TopBolloywood).then((data) => {
+    getPlayListBasedOnGenre(playlistsGenres?.TopInternational).then((data) => {
       setSongObj((prevState) => {
-        return { ...prevState, ...{ topBolloywood: data } };
+        return { ...prevState, ...{ topInternational: data } };
       });
     });
 
-    getPlayListItems(playlistsIds.BestOfEdSheeran).then((data) => {
+    getPlayListBasedOnGenre(playlistsGenres?.FitHits).then((data) => {
       setSongObj((prevState) => {
-        return { ...prevState, ...{ edSheeran: data } };
+        return { ...prevState, ...{ fitHits: data } };
       });
     });
+
+    getPlayListBasedOnGenre(playlistsGenres?.EvergreenBollywood).then(
+      (data) => {
+        setSongObj((prevState) => {
+          return { ...prevState, ...{ evergreenBollywood: data } };
+        });
+      }
+    );
+
+    getPlayListBasedOnGenre(playlistsGenres?.Devotional).then((data) => {
+      setSongObj((prevState) => {
+        return { ...prevState, ...{ devotional: data } };
+      });
+    });
+
+    getPlayListBasedOnGenre(playlistsGenres?.Calm).then((data) => {
+      setSongObj((prevState) => {
+        return { ...prevState, ...{ calm: data } };
+      });
+    });
+
+    getPlayListBasedOnGenre(playlistsGenres?.Artists).then((data) => {
+      setSongObj((prevState) => {
+        return { ...prevState, ...{ artists: data } };
+      });
+    });
+
+    getPlayListBasedOnGenre(playlistsGenres?.BestRap).then((data) => {
+      setSongObj((prevState) => {
+        return { ...prevState, ...{ bestRap: data } };
+      });
+    });
+
+    // getPlayListItems(playlistsIds.LatestSongs).then((data) => {
+    //   setSongObj((prevState) => {
+    //     return { ...prevState, ...{ latestSongs: data } };
+    //   });
+    // });
+
+    //   getPlayListItems(playlistsIds.RomanticSongs).then((data) => {
+    //     setSongObj((prevState) => {
+    //       return { ...prevState, ...{ romanticSongs: data } };
+    //     });
+    //   });
+
+    //   getPlayListItems(playlistsIds.TopBolloywood).then((data) => {
+    //     setSongObj((prevState) => {
+    //       return { ...prevState, ...{ topBolloywood: data } };
+    //     });
+    //   });
+
+    //   getPlayListItems(playlistsIds.BestOfEdSheeran).then((data) => {
+    //     setSongObj((prevState) => {
+    //       return { ...prevState, ...{ edSheeran: data } };
+    //     });
+    //   });
   };
 
   useEffect(() => {
@@ -150,32 +239,63 @@ const Home = () => {
           <RowLayout
             header="Trending Now"
             type="song"
-            items={songObj.trending}
+            items={songObj?.trending}
             cols={4}
           />
           <RowLayout
+            header="Best Of Rap"
+            type="song"
+            items={songObj?.bestRap}
+            cols={4}
+          />
+
+          <RowLayout
+            header="Your Favourite Artists"
+            type="song"
+            items={songObj?.artists}
+            cols={4}
+            isRounded={true}
+          />
+          <RowLayout
             header="Latest Music"
-            items={songObj.latestSongs}
+            items={songObj?.latestSongs}
             cols={4}
             type="song"
           />
           <RowLayout
-            header="Top Bollywood"
-            items={songObj.topBolloywood}
+            header="Romantic Mood"
+            items={songObj?.romanticSongs}
+            cols={4}
+            type="song"
+          />
+          <RowLayout
+            header="Evergreen Bollywood"
+            items={songObj?.evergreenBollywood}
+            cols={4}
+            type="song"
+          />
+          <RowLayout
+            header="Top International Hits"
+            items={songObj?.topInternational}
             cols={4}
             type="song"
           />
           {renderGenreList()}
           <RowLayout
-            header="Best Of Ed Sheeran"
-            items={songObj.edSheeran}
+            header="Hit the Gym"
+            items={songObj?.fitHits}
             cols={4}
             type="song"
-            isRounded={true}
           />
           <RowLayout
-            header="Romantic Mood"
-            items={songObj.romanticSongs}
+            header="Soothe your mind"
+            items={songObj?.calm}
+            cols={4}
+            type="song"
+          />
+          <RowLayout
+            header="Devotional"
+            items={songObj?.devotional}
             cols={4}
             type="song"
           />

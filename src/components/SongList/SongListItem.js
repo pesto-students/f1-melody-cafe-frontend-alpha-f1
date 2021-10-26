@@ -43,7 +43,7 @@ const SongListItems = (props) => {
     }
     if (props.video.kind === "youtube#playlistItem") {
       return {
-        channelTitle: props.video?.channelTitle,
+        channelTitle: props.video?.snippet.videoOwnerChannelTitle,
         title: props.video.snippet.title,
         duration: props.video.duration,
       };
@@ -97,7 +97,7 @@ const SongListItems = (props) => {
       <td
         className="list-track text-start px-5"
         onClick={() => {
-          dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
+          //dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
           callPlay(props.video);
         }}
       >
@@ -106,7 +106,7 @@ const SongListItems = (props) => {
       <td
         className="list-artist text-center px-5"
         onClick={() => {
-          dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
+          //dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
           callPlay(props.video);
         }}
       >
@@ -115,7 +115,7 @@ const SongListItems = (props) => {
       <td
         className="list-duration text-end px-5"
         onClick={() => {
-          dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
+          //dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
           callPlay(props.video);
         }}
       >
