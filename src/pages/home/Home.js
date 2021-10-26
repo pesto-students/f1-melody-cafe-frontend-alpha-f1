@@ -1,20 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import _ from "lodash";
 
 import { Col, Container, Row, Image } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 import "./Home.scss";
-
 import CustomCarousel from "../../components/CustomCarousel/CustomCarousel";
-import FilterBar from "../../components/FilterBar/FilterBar";
 import RowLayout from "../../components/RowLayout/RowLayout";
-
-import youtubeSearch from "../../api/services/youtubeSearch";
-
-import { useSelector } from "react-redux";
 import GlobalState from "../../contexts/GlobalState";
-
+import API from "../../api/services/api";
 // make a permanent playlist object with few songs catergory
 const playlistsIds = {
   LatestSongs: "PLFgquLnL59akA2PflFpeQG9L01VFg90wS",
@@ -29,6 +23,7 @@ const playlistsIds = {
 let slowConnectionTimeout;
 
 const Home = () => {
+  const Api = new API();
   const [state, setState] = useContext(GlobalState);
   const [songObj, setSongObj] = useState({});
   const playlistList = useSelector((state) => state.playlistList);
@@ -38,24 +33,13 @@ const Home = () => {
     slowConnectionTimeout = setTimeout(() => {}, 5000);
 
     const getTrendingMusic = async () => {
-      const res = await youtubeSearch.get("videos", {
-        params: {
-          chart: "mostPopular",
-          videoCategoryId: "10",
-          regionCode: "IN",
-        },
-      });
-
-      return res.data.items;
+      const res = await Api.getSongs('trending')
+      return res.data;
     };
 
     const getPlayListItems = async (data) => {
-      const res = await youtubeSearch.get("playlistItems", {
-        params: {
-          playlistId: data,
-        },
-      });
-      return res.data.items;
+      const res = await Api.getSongs("playlist",data);
+      return res.data;
     };
 
     getTrendingMusic().then((data) => {
