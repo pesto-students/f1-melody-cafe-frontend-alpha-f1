@@ -18,15 +18,15 @@ const FullScreenController = ({ show, setShow }) => {
           closeButton={() => setShow(false)}
         ></Modal.Header>
         <Modal.Body>
-          <div className="d-flex flex-wrap align-items-center justify-content-end mx-5 px-5">
-            <Modal.Title>
-              <h3>Queue</h3>
+          <div className="d-flex flex-wrap flex-column align-items-end flex-md-row align-items-md-end justify-content-md-end">
+            <Modal.Title className="">
+              <h4>Queue</h4>
             </Modal.Title>
-            <Button className="py-2 px-5 mx-4" variant="light" size="lg">
-              Lightdd
+            <Button className="ms-3 mb-2" variant="light" size="md">
+              Add to Queue
             </Button>
-            <Button className="py-2 px-5" variant="outline-light" size="lg">
-              Light
+            <Button className="ms-3 mb-2" variant="outline-light" size="md">
+              Clear Queue
             </Button>
           </div>
           <RefactorSongList

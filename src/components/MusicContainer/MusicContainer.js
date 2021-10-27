@@ -3,6 +3,7 @@ import { Card, Container } from "react-bootstrap";
 import "./MusicContainer.scss";
 import AlbumArt from "../../assets/album_art_blank.jpg";
 import { Link } from "react-router-dom";
+import regex from "../../helpers/helper-functions";
 const MusicContainer = ({ title, seeAllLink, items, type }) => {
   return (
     <Container>
@@ -26,17 +27,26 @@ const MusicContainer = ({ title, seeAllLink, items, type }) => {
           <Card key={_i} className="bg-secondary m-card">
             <Link
               to={{
-                pathname: `${type}/${item.slug}`,
+                pathname: `${"playlist"}/${item?.snippet?.title || item?.slug}`,
                 state:
                   type === "playlist"
                     ? { playlistData: item }
                     : { songData: item },
               }}
             >
-              <Card.Img variant="top" src={AlbumArt} />
+              <Card.Img
+                variant="top"
+                src={
+                  item?.playlistInfo?.youtubeThumbnail ||
+                  item?.snippet?.thumbnails.high.url ||
+                  AlbumArt
+                }
+              />
             </Link>
             <Card.Body>
-              <p className="m-card-text">{item.title}</p>
+              <p className="m-card-text">
+                {regex.editTitle(item?.snippet?.title || item?.title)}
+              </p>
               {/* <Card.Subtitle className="mb-2 text-muted">
             Card Subtitle
           </Card.Subtitle> */}

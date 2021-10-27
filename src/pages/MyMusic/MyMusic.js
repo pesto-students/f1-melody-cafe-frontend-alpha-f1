@@ -12,9 +12,9 @@ const MyMusic = ({ type }) => {
 
   return (
     <Container fluid className="backgroundColour my-5 py-5">
-      <Row className="my-5 py-5">
+      <Row className="my-5 py-5 h-100">
         <Col lg={12} xl={9}>
-          <div>
+          <div className="h-100">
             <Button
               className="d-inline-block mt-5 mb-3 mx-4"
               variant="outline-secondary"
