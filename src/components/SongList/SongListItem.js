@@ -21,10 +21,14 @@ const SongListItems = (props) => {
   }
 
   const callPlay = (song) => {
-    let newQueue = [...state.originalQueue, song];
+    let newQueue = state.originalQueue;
+
+    newQueue = [...state.originalQueue, song];
+
     if (state.shuffleOn) {
       newQueue = shufflePlaylist(newQueue, song);
     }
+
     setState((state) => ({
       ...state,
       currentSong: song,

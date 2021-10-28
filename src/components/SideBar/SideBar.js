@@ -1,66 +1,43 @@
 import React, { useState } from "react";
-import { Offcanvas, Button } from "react-bootstrap";
+import { Offcanvas, Button, Nav } from "react-bootstrap";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import Login from "../Login/Login";
+import { filtersListHome } from "../../utils/constants";
 
 const SideBar = ({ show, handleClose, ...props }) => {
-  const routes = [
-    {
-      path: "/",
-      exact: true,
-      sidebar: () => <div>home!</div>,
-      main: () => <h2>Home</h2>,
-    },
-    {
-      path: "/bubblegum",
-      sidebar: () => <div>bubblegum!</div>,
-      main: () => <h2>Bubblegum</h2>,
-    },
-    {
-      path: "/shoelaces",
-      sidebar: () => <div>shoelaces!</div>,
-      main: () => <h2>Shoelaces</h2>,
-    },
-  ];
   return (
     <>
       <Offcanvas show={show} onHide={handleClose} {...props}>
-        <Offcanvas.Header closeButton>
+        <Offcanvas.Header className="bg-dark text-white" closeButton>
           <Offcanvas.Title>
             <Login></Login>
           </Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
-          <Router>
-            <ul style={{ listStyleType: "none", padding: 0 }}>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/bubblegum">Bubblegum</Link>
-              </li>
-              <li>
-                <Link to="/shoelaces">Shoelaces</Link>
-              </li>
-            </ul>
-            <Switch>
-              {routes.map((route, index) => (
-                // You can render a <Route> in as many places
-                // as you want in your app. It will render along
-                // with any other <Route>s that also match the URL.
-                // So, a sidebar or breadcrumbs or anything else
-                // that requires you to render multiple things
-                // in multiple places at the same URL is nothing
-                // more than multiple <Route>s.
-                <Route
-                  key={index}
-                  path={route.path}
-                  exact={route.exact}
-                  children={<route.sidebar />}
-                />
-              ))}
-            </Switch>
-          </Router>
+        <Offcanvas.Body className="bg-dark text-white">
+          {filtersListHome?.map((filter, _ind) =>
+            !filter.subFilters ? (
+              <Nav.Item key={_ind} className="text-nowrap">
+                <Nav.Link eventKey={_ind}>
+                  <Link to={filter.url}>{filter.name}</Link>
+                </Nav.Link>
+              </Nav.Item>
+            ) : (
+              <>
+                {filter.subFilters?.map((subFilter, _subInd) => (
+                  <Nav.Item key={_subInd} eventKey={`${_ind}.${_subInd}`}>
+                    <Nav.Link eventKey={_subInd}>
+                      <Link to={subFilter.url}>{subFilter.name}</Link>
+                    </Nav.Link>
+                  </Nav.Item>
+                ))}
+              </>
+            )
+          )}
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+          </ul>
         </Offcanvas.Body>
       </Offcanvas>
     </>

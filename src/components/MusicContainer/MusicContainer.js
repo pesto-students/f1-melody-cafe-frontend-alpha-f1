@@ -41,11 +41,15 @@ const MusicContainer = ({ title, seeAllLink, items, type }) => {
                   item?.snippet?.thumbnails.high.url ||
                   AlbumArt
                 }
+                // width={500}
+                height={180}
               />
             </Link>
             <Card.Body>
               <p className="m-card-text">
-                {regex.editTitle(item?.snippet?.title || item?.title)}
+                {regex.editTitle(
+                  regex.truncate(item?.snippet?.title || item?.title)
+                )}
               </p>
               {/* <Card.Subtitle className="mb-2 text-muted">
             Card Subtitle

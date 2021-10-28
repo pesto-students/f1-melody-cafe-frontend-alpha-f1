@@ -51,7 +51,7 @@ const FilteredSection = ({ title, isDetails, location, type }) => {
   };
 
   useEffect(() => {
-    if (title) {
+    if (title && !match) {
       getPlaylistByFilters(title).then((data) => {
         //console.log(data);
         setItems(data);

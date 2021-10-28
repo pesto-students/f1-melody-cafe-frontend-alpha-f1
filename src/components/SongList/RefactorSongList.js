@@ -26,6 +26,7 @@ const RefactorSongList = (props) => {
           // saveSong={props.saveSong}
           // removeSong={props.removeSong}
           // index={index}
+          isQueue={true}
           user={props.user}
         />
       );
@@ -50,6 +51,7 @@ const RefactorSongList = (props) => {
           // saveSong={props.saveSong}
           // removeSong={props.removeSong}
           // index={index}
+          isQueue={false}
           user={props.user}
         />
       );

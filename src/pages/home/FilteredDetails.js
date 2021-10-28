@@ -71,14 +71,14 @@ const FilteredDetails = ({ title, location }) => {
                 // playlistId={"charts"}
                 // what={() => ({})}
                 user={null}
-                renderQueue={true}
+                renderQueue={false}
                 songs={items}
                 // items={{}}
                 // savedSongs={[]}
                 // saveSong={() => null}
                 // removeSong={() => null}
               />
-              <RowLayout
+              {/* <RowLayout
                 header="Similar Type"
                 type="song"
                 items={null}
@@ -96,7 +96,7 @@ const FilteredDetails = ({ title, location }) => {
                 cols={4}
                 type="song"
                 isRounded={true}
-              />
+              /> */}
 
               <div className="py-3 px-4 mt-4 mb-2 mx-3 d-flex-column flex-wrap text-start">
                 <h5>About {data?.snippet?.title}</h5>
