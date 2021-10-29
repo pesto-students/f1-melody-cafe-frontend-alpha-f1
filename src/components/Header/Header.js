@@ -17,9 +17,10 @@ import "./Header.scss";
 import SearchBar from "../SearchBar/SearchBar";
 import { filtersListHome } from "../../utils/constants";
 import FilterBar from "../FilterBar/FilterBar";
-
+import PaymentModal from "../Payment/PaymentModal";
 const Header = () => {
   const [show, setShow] = useState(false);
+  const [showPayment, setShowPayment] = useState(false);
   const handleClose = () => setShow(false);
   const toggleShow = () => setShow((s) => !s);
 
@@ -33,7 +34,10 @@ const Header = () => {
         variant="dark"
         className="headerHome"
       >
-        <Container fluid className="mx-2 px-4 my-2 flex-nowrap">
+        <Container
+          fluid
+          className="mx-2 px-4 my-2 ps-5 pe-4 flex-wrap flex-md-nowrap"
+        >
           <Button variant="primary" onClick={toggleShow} className="me-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +54,7 @@ const Header = () => {
             </svg>
           </Button>
 
-          <Navbar.Brand>
+          <Navbar.Brand className="ms-1 me-3">
             <Link to="/">
               <Image src={Logo} width="100px" height="50px" />
             </Link>
@@ -60,9 +64,20 @@ const Header = () => {
             <Nav className="me-auto">
               <SearchBar />
             </Nav>
-            <Nav className="d-none d-md-flex flex-wrap">
+            <Nav className="d-none d-lg-flex flex-wrap">
               <Nav.Link>
-                <Button variant="light">Go Ad Free</Button>
+                <Button
+                  variant="light"
+                  onClick={() => {
+                    setShowPayment(true);
+                  }}
+                >
+                  Go Ad Free
+                </Button>
+                <PaymentModal
+                  showPayment={showPayment}
+                  setShowPayment={setShowPayment}
+                ></PaymentModal>
               </Nav.Link>
               <Nav.Link>
                 <Button variant="light">Get Melody Plus</Button>

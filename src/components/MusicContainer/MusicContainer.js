@@ -3,7 +3,8 @@ import { Card, Container } from "react-bootstrap";
 import "./MusicContainer.scss";
 import AlbumArt from "../../assets/album_art_blank.jpg";
 import { Link } from "react-router-dom";
-const MusicContainer = ({ title, seeAllLink, items, type }) => {
+import regex from "../../helpers/helper-functions";
+const MusicContainer = ({ title, seeAllLink, items, type, isMyMusic }) => {
   return (
     <Container>
       <div className="d-flex align-items-center justify-content-between">
@@ -21,22 +22,48 @@ const MusicContainer = ({ title, seeAllLink, items, type }) => {
           ""
         )}
       </div>
-      <div className="d-flex flex-wrap align-items-center">
+      <div
+        className={
+          isMyMusic
+            ? "d-flex flex-wrap"
+            : "d-flex flex-wrap justify-content-center justify-content-md-around"
+        }
+      >
         {items?.map((item, _i) => (
-          <Card key={_i} className="bg-secondary m-card">
+          <Card
+            key={_i}
+            className={`bg-secondary m-card ${
+              isMyMusic ? "m-card-myMusic" : ""
+            }`}
+          >
             <Link
               to={{
-                pathname: `${type}/${item.slug}`,
+                pathname: `${"playlist"}/${item?.snippet?.title || item?.name}`,
                 state:
                   type === "playlist"
                     ? { playlistData: item }
                     : { songData: item },
               }}
             >
-              <Card.Img variant="top" src={AlbumArt} />
+              <Card.Img
+                variant="top"
+                src={
+                  item?.playlistInfo?.youtubeThumbnail ||
+                  item?.snippet?.thumbnails.high.url ||
+                  AlbumArt
+                }
+                // width={100}
+                // height={100}
+                // fluid
+                className="m-card-image"
+              />
             </Link>
             <Card.Body>
-              <p className="m-card-text">{item.title}</p>
+              <p className="m-card-text">
+                {regex.editTitle(
+                  regex.truncate(item?.snippet?.title || item?.name)
+                )}
+              </p>
               {/* <Card.Subtitle className="mb-2 text-muted">
             Card Subtitle
           </Card.Subtitle> */}

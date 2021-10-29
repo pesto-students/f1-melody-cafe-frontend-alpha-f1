@@ -2,25 +2,25 @@
 //     background-color: blue;
 // }
 .sideImage{
-   width: 305px;
-   height: 100%;
-   top: 130px;
-   bottom: 74px;
-   right: 0;
-   position: fixed;
-   flex-direction: column;
-   overflow: hidden;
-   z-index: 9999999;
+  top: 100px;
+  bottom: 74px;
+  right: 0;
+  left: auto;
+  position: fixed;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 9999999;
 }
 
 
 .space-top-home{
-    // position: relative;
-    // top:100px;
+    position: relative;
+    top:45px;
     // bottom: 1000px;
     // // bottom:-250px;
     // margin-bottom: 1.5%;
     // margin-top: 1.5%;
+
 }
 
 .backgroundColour{

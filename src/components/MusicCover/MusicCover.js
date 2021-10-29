@@ -6,6 +6,7 @@ import GlobalState from "../../contexts/GlobalState";
 import { shufflePlaylist } from "../../utils/utils";
 import { onPageSelect, onPlaylistSelect } from "../../entities";
 import regex from "../../helpers/helper-functions";
+import AlbumArt from "../../assets/album_art_blank.jpg";
 
 const MusicCover = ({ isRounded, data, type, slug }) => {
   const [state, setState] = useContext(GlobalState);
@@ -50,7 +51,7 @@ const MusicCover = ({ isRounded, data, type, slug }) => {
     // </div>
     <Link
       to={{
-        pathname: `/${type}/${slug}`,
+        pathname: `/${type}/${slug?.kind ? slug.playlistId : slug}`,
         // search: "?sort=name",
         // hash: "#the-hash",
         state: { songData: data },
@@ -68,7 +69,8 @@ const MusicCover = ({ isRounded, data, type, slug }) => {
             src={
               data?.playlistInfo?.youtubeThumbnail ||
               data?.snippet?.thumbnails.high.url ||
-              "/images/genres/thumbs/" + data?.genreSlug + ".png)"
+              AlbumArt
+              // data?.genreSlug ? "/images/genres/thumbs/" + data?.genreSlug + ".png"
             }
             roundedCircle
           />
@@ -87,9 +89,9 @@ const MusicCover = ({ isRounded, data, type, slug }) => {
         )}
         <Figure.Caption>
           {" "}
-          {data?.playlistInfo?.playlistTitle ||
+          {/* {data?.playlistInfo?.playlistTitle ||
             data?.genreTitle ||
-            regex.editTitle(data?.snippet?.title)}
+            regex.editTitle(data?.snippet?.title)} */}
         </Figure.Caption>
       </Figure>
     </Link>

@@ -16,7 +16,7 @@ const CurrentSection = () => {
     type === "podcast" ||
     type === "genre"
   ) {
-    return <FilteredSection type={type} title={slug} location={location} />;
+    return <FilteredSection type={type} title={type} location={location} />;
   } else if (type === "my-music") {
     return <MyMusic type="playlist" />;
   } else if (type && !slug) {

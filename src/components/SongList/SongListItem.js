@@ -21,31 +21,43 @@ const SongListItems = (props) => {
   }
 
   const callPlay = (song) => {
-    let newQueue = [...state.originalQueue, song];
+    let newQueue = state.originalQueue;
+
+    newQueue = [...state.originalQueue, song];
+
     if (state.shuffleOn) {
       newQueue = shufflePlaylist(newQueue, song);
     }
-    setState((state) => ({
-      ...state,
-      currentSong: song,
-      queue: newQueue,
-      originalQueue: [...state.originalQueue, song],
-    }));
+    if (props.isQueue) {
+      setState((state) => ({
+        ...state,
+        currentSong: song,
+        // queue: newQueue,
+        // originalQueue: [...state.originalQueue, song],
+      }));
+    } else {
+      setState((state) => ({
+        ...state,
+        currentSong: song,
+        queue: newQueue,
+        originalQueue: [...state.originalQueue, song],
+      }));
+    }
   };
 
   let songModel = () => {
-    if (props.video.kind === "youtube#video") {
+    if (props.video?.kind === "youtube#video") {
       return {
         channelTitle: props.video?.snippet?.channelTitle,
-        title: props.video.snippet.title,
+        title: props.video?.snippet?.title,
         duration: null,
       };
     }
-    if (props.video.kind === "youtube#playlistItem") {
+    if (props.video?.kind === "youtube#playlistItem") {
       return {
-        channelTitle: props.video?.channelTitle,
-        title: props.video.snippet.title,
-        duration: props.video.duration,
+        channelTitle: props.video?.snippet?.videoOwnerChannelTitle,
+        title: props.video?.snippet?.title,
+        duration: props.video?.duration,
       };
     }
   };
@@ -53,13 +65,13 @@ const SongListItems = (props) => {
   let song = songModel();
   console.log(song);
 
-  if (!song.title) {
+  if (!song?.title) {
     return (
       <tr className="list-item ">
         {/* <td className="list-save"></td> */}
-        <td className="list-track text-start px-5">Loading...</td>
-        <td className="list-artist text-center px-5">Loading...</td>
-        <td className="list-duration text-end px-5">Loading...</td>
+        <td className="list-track text-start px-4">Loading...</td>
+        <td className="list-artist text-center px-4">Loading...</td>
+        <td className="list-duration text-end px-4">Loading...</td>
         {/* <td className="list-play-count"></td> */}
       </tr>
     );
@@ -95,31 +107,31 @@ const SongListItems = (props) => {
     <tr className="py-5">
       {/* {renderSaveRemoveButton()} */}
       <td
-        className="list-track text-start px-5"
+        className="list-track text-start px-4"
         onClick={() => {
-          dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
+          //dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
           callPlay(props.video);
         }}
       >
-        {regex.editTitle(song.title)}
+        {regex.editTitle(song?.title)}
       </td>
       <td
-        className="list-artist text-center px-5"
+        className="list-artist text-center px-4"
         onClick={() => {
-          dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
+          //dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
           callPlay(props.video);
         }}
       >
-        {regex.editArtist(song.channelTitle)}
+        {regex.editArtist(song?.channelTitle)}
       </td>
       <td
-        className="list-duration text-end px-5"
+        className="list-duration text-end px-4"
         onClick={() => {
-          dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
+          //dispatch(props.onVideoSelect(props.video, props.cachedPlaylist));
           callPlay(props.video);
         }}
       >
-        {song.duration ? regex.editDuration(song.duration) : "00:00"}
+        {song.duration ? regex.editDuration(song?.duration) : "00:00"}
       </td>
       {/* <td
         className="list-play-count"

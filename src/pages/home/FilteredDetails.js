@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
@@ -8,17 +8,15 @@ import SongList from "../../components/SongList/SongList";
 import GlobalState from "../../contexts/GlobalState";
 import SideImage from "../../assets/rhs_banner_v5.jpg";
 import RowLayout from "../../components/RowLayout/RowLayout";
+import API from "../../api/services/api";
 // import "./FilteredSection.scss";
 
 const FilteredDetails = ({ title, location }) => {
-  let data = location?.state?.songData || location?.state?.playlistData;
-
-  console.log(data);
   const showPage = useSelector((state) => state.playlists.showPage);
   const [state, setState] = useContext(GlobalState);
 
   const [savedSongs, setSavedSongs] = useState({});
-  const [items, setItems] = useState({});
+  const [items, setItems] = useState(null);
 
   const saveSong = (song) => {
     setSavedSongs((state) => [...state.savedSongs, song]);
@@ -29,6 +27,34 @@ const FilteredDetails = ({ title, location }) => {
     array.splice(index, 1);
     setSavedSongs(array);
   };
+  let data = null;
+  data = location?.state?.songData || location?.state?.playlistData;
+  useEffect(() => {
+    let isPlaylist = data?.id?.kind === "youtube#playlist" ? true : false;
+    let isMyPlaylist = data?.track?.length > 0 ? true : false;
+    if (isPlaylist) {
+      const api = new API();
+      const getPlaylistItems = async () => {
+        try {
+          const res = await api.getPlaylistItems(data?.id?.playlistId);
+          //console.log(res);
+          return res?.data?.items;
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
+      getPlaylistItems().then((data) => {
+        //console.log(data);
+        setItems(data);
+      });
+    }
+
+    if (isMyPlaylist) {
+      setItems(JSON.parse(data?.track));
+    }
+  }, [data]);
+  console.log(data);
 
   return (
     <Container
@@ -36,50 +62,70 @@ const FilteredDetails = ({ title, location }) => {
       className="space-top2 backgroundColour detail_wrap my-5 py-5"
     >
       <Row>
-        <Col xs={12} md={12} xl={9}>
+        <Col xs={12} md={12} xl={10}>
           <Breadcrumbs />
           {/* <h1 className="text-left">
             {data?.snippet?.title?.slice(0, 70)
               ? data?.snippet?.title?.slice(0, 70) + " ..."
               : title}
           </h1> */}
-          <MusicDetail data={data} />
-          <RefactorSongList
-            // playlistId={"charts"}
-            // what={() => ({})}
-            user={null}
-            renderQueue={true}
-            // items={{}}
-            // savedSongs={[]}
-            // saveSong={() => null}
-            // removeSong={() => null}
-          />
-          <RowLayout header="Similar Type" type="song" items={null} cols={4} />
-          <RowLayout
-            header="More From Artist"
-            items={null}
-            cols={4}
-            type="song"
-          />
-          <RowLayout
-            header="Type(Album/Songs) Artists"
-            items={null}
-            cols={4}
-            type="song"
-            isRounded={true}
-          />
+          {data ? (
+            <>
+              <MusicDetail data={data} />
+              {items ? (
+                <RefactorSongList
+                  // playlistId={"charts"}
+                  // what={() => ({})}
+                  user={null}
+                  renderQueue={false}
+                  songs={items}
+                  // items={{}}
+                  // savedSongs={[]}
+                  // saveSong={() => null}
+                  // removeSong={() => null}
+                />
+              ) : (
+                ""
+              )}
 
-          <div className="py-3 px-4 mt-4 mb-2 mx-3 d-flex-column flex-wrap text-start">
-            <h5>About Title of song/album</h5>
-            <p>details about album songs</p>
-            <h6>Released On: </h6>
-            <h6>Duration: </h6>
-            <h6>Language:</h6>
-            <p>Label Name</p>
-          </div>
+              {/* <RowLayout
+                header="Similar Type"
+                type="song"
+                items={null}
+                cols={4}
+              />
+              <RowLayout
+                header="More From Artist"
+                items={null}
+                cols={4}
+                type="song"
+              />
+              <RowLayout
+                header="Type(Album/Songs) Artists"
+                items={null}
+                cols={4}
+                type="song"
+                isRounded={true}
+              /> */}
+
+              <div className="py-3 px-3 mt-4 mb-2  d-flex-column flex-wrap text-start">
+                <h5>About {data?.snippet?.title}</h5>
+                <p>{data?.snippet?.description}</p>
+                <h6>
+                  Released On:
+                  {new Date(data?.snippet?.publishedAt).toDateString()}
+                </h6>
+                {/* <h6>Duration: </h6>
+                <h6>Language:</h6>
+                <p>Label Name</p> */}
+              </div>
+            </>
+          ) : (
+            <div>...Loading</div>
+          )}
         </Col>
         <Col
-          xl={3}
+          xl={2}
           className={`blue sideImage ${
             state.fullscreen ? "d-none" : "d-none d-xl-block"
           }`}

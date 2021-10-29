@@ -6,17 +6,18 @@ import { Table } from "react-bootstrap";
 
 const RefactorSongList = (props) => {
   const [state, setState] = useContext(GlobalState);
+  console.log("SongListtt");
 
   const queueListArray = _.map(state.queue, (video) => {
     if (
-      video.snippet.title !== "Deleted video" &&
-      video.snippet.title !== "Private video"
+      video?.snippet?.title !== "Deleted video" &&
+      video?.snippet?.title !== "Private video"
     ) {
       // let index = _.findIndex(props.savedSongs, { id: video.id });
 
       return (
         <SongListItems
-          key={video.etag}
+          key={video?.etag}
           video={video}
           //   onVideoSelect={onVideoSelect}
           //   selectedSong={selectedSong}
@@ -25,7 +26,8 @@ const RefactorSongList = (props) => {
           // saveSong={props.saveSong}
           // removeSong={props.removeSong}
           // index={index}
-          user={props.user}
+          isQueue={true}
+          user={props?.user}
         />
       );
     }
@@ -33,14 +35,14 @@ const RefactorSongList = (props) => {
 
   const songsListArray = _.map(props.songs, (video) => {
     if (
-      video.snippet.title !== "Deleted video" &&
-      video.snippet.title !== "Private video"
+      video?.snippet?.title !== "Deleted video" &&
+      video?.snippet?.title !== "Private video"
     ) {
       // let index = _.findIndex(props.savedSongs, { id: video.id });
 
       return (
         <SongListItems
-          key={video.etag}
+          key={video?.etag}
           video={video}
           //   onVideoSelect={onVideoSelect}
           //   selectedSong={selectedSong}
@@ -49,6 +51,7 @@ const RefactorSongList = (props) => {
           // saveSong={props.saveSong}
           // removeSong={props.removeSong}
           // index={index}
+          isQueue={false}
           user={props.user}
         />
       );
@@ -99,13 +102,13 @@ const RefactorSongList = (props) => {
           </div> 
         </div>*/}
 
-      <Table hover variant="dark" className="my-3 mx-3 px-5">
+      <Table hover variant="dark" className="my-3 mx-0 px-0" responsive>
         <thead>
           <tr>
             {/* <th></th> */}
-            <th className="text-start px-5">Title</th>
-            <th className="text-center px-5">Artist</th>
-            <th className="text-end px-5">Dur</th>
+            <th className="text-start px-4">Title</th>
+            <th className="text-center px-4">Artist</th>
+            <th className="text-end px-4">Dur</th>
             {/* <th>Plays</th> */}
           </tr>
         </thead>

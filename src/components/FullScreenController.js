@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
+import API from "../api/services/api";
+import GlobalState from "../contexts/GlobalState";
+import PlaylistModal from "./Playlist/PlaylistModal";
 import RefactorSongList from "./SongList/RefactorSongList";
 import SongList from "./SongList/SongList";
 
 const FullScreenController = ({ show, setShow }) => {
+  const [state, setState] = useContext(GlobalState);
+  const [showPlaylist, setShowPlaylist] = useState(false);
+
+  const addToPlaylistHandler = (e) => {
+    e.preventDefault();
+    setShowPlaylist((state) => !state);
+  };
+
+  const clearQueueHandler = (e) => {
+    e.preventDefault();
+    setState((state) => ({
+      ...state,
+      currentSong: null,
+      queue: [],
+      originalQueue: [],
+    }));
+  };
+
   return (
     <div>
       <Modal
@@ -18,15 +39,25 @@ const FullScreenController = ({ show, setShow }) => {
           closeButton={() => setShow(false)}
         ></Modal.Header>
         <Modal.Body>
-          <div className="d-flex flex-wrap align-items-center justify-content-end mx-5 px-5">
-            <Modal.Title>
-              <h3>Queue</h3>
+          <div className="d-flex flex-wrap flex-column align-items-end flex-md-row align-items-md-end justify-content-md-end">
+            <Modal.Title className="">
+              <h4>Queue</h4>
             </Modal.Title>
-            <Button className="py-2 px-5 mx-4" variant="light" size="lg">
-              Lightdd
+            <Button
+              onClick={(e) => addToPlaylistHandler(e)}
+              className="ms-3 mb-2"
+              variant="light"
+              size="md"
+            >
+              Save as Playlist
             </Button>
-            <Button className="py-2 px-5" variant="outline-light" size="lg">
-              Light
+            <Button
+              onClick={(e) => clearQueueHandler(e)}
+              className="ms-3 mb-2"
+              variant="outline-light"
+              size="md"
+            >
+              Clear Queue
             </Button>
           </div>
           <RefactorSongList
@@ -41,6 +72,11 @@ const FullScreenController = ({ show, setShow }) => {
           />
         </Modal.Body>
       </Modal>
+      <PlaylistModal
+        show={showPlaylist}
+        setShow={setShowPlaylist}
+        type="QUEUE"
+      />
     </div>
   );
 };
