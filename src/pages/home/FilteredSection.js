@@ -11,6 +11,9 @@ import GlobalState from "../../contexts/GlobalState";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import API from "../../api/services/api";
 import SideImage from "../../assets/rhs_banner_v5.jpg";
+import SideImage1 from "../../assets/rhs_banner_1.jpg";
+import SideImage2 from "../../assets/TheMelodyCafeLogo.gif";
+import SideImage3 from "../../assets/rhs_banner_3.png";
 
 const FilteredSection = ({ title, isDetails, location, type }) => {
   const [state, setState] = useContext(GlobalState);
@@ -80,7 +83,9 @@ const FilteredSection = ({ title, isDetails, location, type }) => {
             state.fullscreen ? "d-none" : "d-none d-xl-block"
           }`}
         >
-          <Image src={SideImage} width={"100%"} height={"100%"} />
+          <Image src={SideImage1} width={"100%"} height={"60%"} />
+          <Image src={SideImage3} width={"100%"} height={"20%"} />
+          <Image src={SideImage2} width={"100%"} height={"40%"} />
         </Col>
       </Row>
     </Container>

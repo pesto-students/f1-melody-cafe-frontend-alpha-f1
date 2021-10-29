@@ -55,10 +55,8 @@ const SearchBar = (props) => {
     api
       .getSongs(null, term)
       .then((response) => {
-        _.map(response.data.items, (result) => {
-          setSearchResults({
-            items: [...searchResults.items, result],
-          });
+        setSearchResults({
+          items: [...searchResults.items, ...response.data.records],
         });
       })
       .catch((error) => {
@@ -66,7 +64,7 @@ const SearchBar = (props) => {
       });
   };
 
-  let debounced = _.debounce(videoSearch, 250);
+  let debounced = _.debounce(videoSearch, 500);
 
   const onInputChange = (event) => {
     if (event.target.value === " " || event.target.value === null) {
@@ -93,9 +91,11 @@ const SearchBar = (props) => {
   };
 
   const renderResults = () => {
+    console.log(searchResults);
     const songsArray = _.filter(searchResults.items, function (item) {
-      return item.id.kind === "youtube#video";
+      return item.id.kind === "youtube#video" || item.kind === "youtube#video";
     });
+
     const songs = _.map(songsArray, (result) => {
       return (
         <SearchResult
@@ -112,15 +112,15 @@ const SearchBar = (props) => {
         />
       );
     });
+    console.log(songs);
+    // let artistsArray = _.filter(searchResults.items, function (item) {
+    //   return item.id.kind === "youtube#channel";
+    // });
 
-    let artistsArray = _.filter(searchResults.items, function (item) {
-      return item.id.kind === "youtube#channel";
-    });
-
-    let artists = _.map(artistsArray, (result) => {
-      return <SearchResult key={result.etag} result={result} />;
-    });
-
+    // let artists = _.map(artistsArray, (result) => {
+    //   return <SearchResult key={result.etag} result={result} />;
+    // });
+    // console.log(artists);
     let playlistsArray = _.filter(searchResults.items, function (item) {
       return item.id.kind === "youtube#playlist";
     });
@@ -134,6 +134,7 @@ const SearchBar = (props) => {
         />
       );
     });
+    console.log(playlists);
 
     let history = _.map(searchHistory, (item) => {
       return (
@@ -157,8 +158,8 @@ const SearchBar = (props) => {
                       <th></th>
                       <th>Title</th>
                       <th>Artist</th>
-                      <th>Dur</th>
-                      <th>Plays</th>
+                      {/* <th>Dur</th>
+                      <th>Plays</th> */}
                     </tr>
 
                     {songs}
@@ -166,12 +167,12 @@ const SearchBar = (props) => {
                 </table>
               </div>
             )}
-            {artists.length > 0 && (
+            {/* {artists.length > 0 && (
               <div className="result-group">
                 <h3>Artists</h3>
                 {artists}
               </div>
-            )}
+            )} */}
             {playlists.length > 0 && (
               <div className="result-group">
                 <h3>Playlists</h3>
