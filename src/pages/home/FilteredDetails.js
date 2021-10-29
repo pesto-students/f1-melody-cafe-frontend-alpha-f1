@@ -16,7 +16,7 @@ const FilteredDetails = ({ title, location }) => {
   const [state, setState] = useContext(GlobalState);
 
   const [savedSongs, setSavedSongs] = useState({});
-  const [items, setItems] = useState({});
+  const [items, setItems] = useState(null);
 
   const saveSong = (song) => {
     setSavedSongs((state) => [...state.savedSongs, song]);
@@ -67,17 +67,22 @@ const FilteredDetails = ({ title, location }) => {
           {data ? (
             <>
               <MusicDetail data={data} />
-              <RefactorSongList
-                // playlistId={"charts"}
-                // what={() => ({})}
-                user={null}
-                renderQueue={false}
-                songs={items}
-                // items={{}}
-                // savedSongs={[]}
-                // saveSong={() => null}
-                // removeSong={() => null}
-              />
+              {items ? (
+                <RefactorSongList
+                  // playlistId={"charts"}
+                  // what={() => ({})}
+                  user={null}
+                  renderQueue={false}
+                  songs={items}
+                  // items={{}}
+                  // savedSongs={[]}
+                  // saveSong={() => null}
+                  // removeSong={() => null}
+                />
+              ) : (
+                ""
+              )}
+
               {/* <RowLayout
                 header="Similar Type"
                 type="song"

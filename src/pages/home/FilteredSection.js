@@ -60,7 +60,7 @@ const FilteredSection = ({ title, isDetails, location, type }) => {
   }, [title]);
 
   return (
-    <Container fluid className="space-top2 backgroundColour my-5 py-5">
+    <Container fluid className={`space-top2 backgroundColour my-5 py-5`}>
       <Row>
         <Col xs={12} md={12} xl={10}>
           <Breadcrumbs />
@@ -72,7 +72,6 @@ const FilteredSection = ({ title, isDetails, location, type }) => {
           ) : (
             ""
           )}
-          {renderSpecificGenre()}
         </Col>
         <Col
           xl={2}
