@@ -1,8 +1,12 @@
 import { Button } from "react-bootstrap";
 
 import React from "react";
+import { useEffect,useState } from "react";
+
 import Auth0Lock from "auth0-lock";
 const LoginButton = () => {
+
+
   var clientId = "LSBbWSL1NdsxKwa9TBfLJQ3crduccXGt";
   var domain = "melody-cafe.us.auth0.com";
   var redirectUri = window.location.origin;
@@ -28,33 +32,69 @@ const LoginButton = () => {
   };
   var lock = new Auth0Lock(clientId, domain, options);
 
+  const [isLogin,setIsLogin] = useState(false); 
+  const [buttonText,setButtonText] = useState('Login/Signup');
+  let logInHandler = () =>
+  lock.show({
+    responseType: "token",
+    auth: {
+      redirectUrl: redirectUri,
+    },
+  });
+  let logOutHandler = ()=>{
+    lock.logout({
+      returnTo: window.location.host + '/logout'
+    })
+    localStorage.removeItem("token");
+    localStorage.setItem("profile");
+    localStorage.setItem('isLogin');
+  }
+ 
+  async function isLoginCheck(){
+   let isLogin = await localStorage.getItem('isLogin');
+   if(isLogin){
+     setIsLogin(true)
+     changeTheState();
+   }
+ }
+  useEffect( ()=>{
+   isLoginCheck();
+  });
+
   lock.on("authenticated", function (authResult) {
-    lock.getUserInfo(authResult.accessToken, function (error, profileResult) {
+    lock.getUserInfo(authResult.accessToken,async function (error, profileResult) {
       if (error) {
-        // Handle error
         return;
       }
 
-      localStorage.setItem("token", authResult.accessToken);
-      localStorage.setItem("profile", JSON.stringify(profileResult));
-
+     await localStorage.setItem("token", authResult.accessToken);
+     await localStorage.setItem("profile", JSON.stringify(profileResult));
+     await localStorage.setItem('isLogin',true);
+     changeTheState();
       // Update DOM
     });
   });
+  function changeTheState(){
+      if(isLogin){
+        setButtonText('Logout')
+        return;
+      }
+      setButtonText('Login/Signup');
+      return
+  }
 
   return (
-    <Button
+    <Button  
       variant="primary"
-      onClick={() =>
-        lock.show({
-          responseType: "token",
-          auth: {
-            redirectUrl: redirectUri,
-          },
-        })
-      }
+      onClick={()=>{
+        if(isLogin){
+          logOutHandler();
+        }else{
+          logInHandler();
+        }
+      }}
     >
-      Login/Signup
+      {buttonText}
     </Button>
   );
 };
