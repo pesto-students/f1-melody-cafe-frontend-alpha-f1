@@ -1,15 +1,22 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
+import API from "../api/services/api";
 import GlobalState from "../contexts/GlobalState";
+import PlaylistModal from "./Playlist/PlaylistModal";
 import RefactorSongList from "./SongList/RefactorSongList";
 import SongList from "./SongList/SongList";
 
 const FullScreenController = ({ show, setShow }) => {
   const [state, setState] = useContext(GlobalState);
+  const [showPlaylist, setShowPlaylist] = useState(false);
+
+  const addToPlaylistHandler = (e) => {
+    e.preventDefault();
+    setShowPlaylist((state) => !state);
+  };
 
   const clearQueueHandler = (e) => {
     e.preventDefault();
-
     setState((state) => ({
       ...state,
       currentSong: null,
@@ -36,8 +43,13 @@ const FullScreenController = ({ show, setShow }) => {
             <Modal.Title className="">
               <h4>Queue</h4>
             </Modal.Title>
-            <Button className="ms-3 mb-2" variant="light" size="md">
-              Add to Queue
+            <Button
+              onClick={(e) => addToPlaylistHandler(e)}
+              className="ms-3 mb-2"
+              variant="light"
+              size="md"
+            >
+              Save as Playlist
             </Button>
             <Button
               onClick={(e) => clearQueueHandler(e)}
@@ -60,6 +72,11 @@ const FullScreenController = ({ show, setShow }) => {
           />
         </Modal.Body>
       </Modal>
+      <PlaylistModal
+        show={showPlaylist}
+        setShow={setShowPlaylist}
+        type="QUEUE"
+      />
     </div>
   );
 };

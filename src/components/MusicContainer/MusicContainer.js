@@ -38,7 +38,7 @@ const MusicContainer = ({ title, seeAllLink, items, type, isMyMusic }) => {
           >
             <Link
               to={{
-                pathname: `${"playlist"}/${item?.snippet?.title || item?.slug}`,
+                pathname: `${"playlist"}/${item?.snippet?.title || item?.name}`,
                 state:
                   type === "playlist"
                     ? { playlistData: item }
@@ -61,7 +61,7 @@ const MusicContainer = ({ title, seeAllLink, items, type, isMyMusic }) => {
             <Card.Body>
               <p className="m-card-text">
                 {regex.editTitle(
-                  regex.truncate(item?.snippet?.title || item?.title)
+                  regex.truncate(item?.snippet?.title || item?.name)
                 )}
               </p>
               {/* <Card.Subtitle className="mb-2 text-muted">

@@ -1,14 +1,29 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Row, Container, Col, Button, Image } from "react-bootstrap";
+import API from "../../api/services/api";
 import MusicContainer from "../../components/MusicContainer/MusicContainer";
 import PlaylistModal from "../../components/Playlist/PlaylistModal";
 import PublishMusicModal from "../../components/Playlist/PublishMusicModal";
 import GlobalState from "../../contexts/GlobalState";
+import SideImage from "../../assets/rhs_banner_v5.jpg";
 
 const MyMusic = ({ type }) => {
   const [showPlaylistModal, setShowPlaylistModal] = useState(false);
   const [showPublishModal, setShowPublishModal] = useState(false);
+  const [userPlaylist, setUserPlaylist] = useState([]);
   const [state, setState] = useContext(GlobalState);
+
+  let api = new API();
+
+  useEffect(() => {
+    api.getPlaylists().then((data) => setUserPlaylist(data.data.rows));
+    // if (userPlaylist.length) {
+    //   setState((state) => ({
+    //     ...state,
+    //     userPlaylist: [...state.userPlaylist, ...userPlaylist],
+    //   }));
+    // }
+  }, []);
 
   return (
     <Container fluid className="backgroundColour my-5 py-5">
@@ -46,10 +61,10 @@ const MyMusic = ({ type }) => {
               ""
             )}
 
-            {state.userPlaylist?.length ? (
+            {state.userPlaylist?.length || userPlaylist.length ? (
               <MusicContainer
                 title="My Playlists"
-                items={state.userPlaylist}
+                items={userPlaylist || state.userPlaylist}
                 seeAllLink={"my-playlists"}
                 type={type}
                 isMyMusic={true}
@@ -58,10 +73,10 @@ const MyMusic = ({ type }) => {
               ""
             )}
 
-            {state.userPlaylist?.length ? (
+            {state.userPlaylist?.length || userPlaylist.length ? (
               <MusicContainer
                 title="Favourite Playlists"
-                items={state.userPlaylist}
+                items={userPlaylist || state.userPlaylist}
                 seeAllLink={"my-favourite-playlists"}
                 type={type}
                 isMyMusic={true}
@@ -89,7 +104,7 @@ const MyMusic = ({ type }) => {
             state.fullscreen ? "d-none" : "d-none d-xl-block"
           }`}
         >
-          <Image src="rhs_banner_v5.jpg" width={"100%"} height={"100%"} />
+          <Image src={SideImage} width={"100%"} height={"100%"} />
         </Col>
       </Row>
       <PlaylistModal

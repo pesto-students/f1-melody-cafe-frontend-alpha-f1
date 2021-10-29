@@ -268,8 +268,8 @@ const Controller = (props) => {
         setBuffering(true);
         getAudio(video_id, getStreamQuality()).then((response) => {
           console.log(response);
-          if (response.status === 200) {
-            const streamingUrl = response.data;
+          if (response?.status === 200) {
+            const streamingUrl = response?.data;
             if (previousStreamUrl !== streamingUrl) {
               pauseAudio();
               audio = new Audio(streamingUrl);
@@ -370,10 +370,6 @@ const Controller = (props) => {
               >
                 Add to Playlist
               </Dropdown.Item>
-              <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-              <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
             </DropdownButton>
             {/* </div> */}
 

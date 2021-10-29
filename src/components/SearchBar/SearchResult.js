@@ -7,9 +7,9 @@ import { shufflePlaylist } from "../../utils/utils";
 const SearchResult = (props) => {
   const [state, setState] = useContext(GlobalState);
 
-  let title = props.result.snippet.title;
+  let title = props.result?.snippet?.title;
   let trimmedTitle = regex.truncate(title, 40);
-  let channelTitle = props.result.snippet.channelTitle;
+  let channelTitle = props.result?.snippet?.channelTitle;
 
   // Thumbnail logic
   let thumbnail;
@@ -68,39 +68,39 @@ const SearchResult = (props) => {
       }
     }
 
-    function renderSaveRemoveButton() {
-      let modifiedResult = _.cloneDeep(props.result);
-      modifiedResult.id = props.result.id.videoId;
+    // function renderSaveRemoveButton() {
+    //   let modifiedResult = _.cloneDeep(props.result);
+    //   modifiedResult.id = props.result.id.videoId;
 
-      function songSave() {
-        props.saveSong(modifiedResult);
-        props.setSearchHistory();
-      }
+    //   function songSave() {
+    //     props.saveSong(modifiedResult);
+    //     props.setSearchHistory();
+    //   }
 
-      if (props.user) {
-        if (props.index !== -1) {
-          return (
-            <td
-              className="list-remove-song"
-              onClick={() => props.removeSong(props.index)}
-            >
-              &#x2713;
-            </td>
-          );
-        } else {
-          return (
-            <td className="list-save-song" onClick={() => songSave()}>
-              &#xff0b;
-            </td>
-          );
-        }
-      } else {
-        return <td className="list-save-song"></td>;
-      }
-    }
+    //   if (props.user) {
+    //     if (props.index !== -1) {
+    //       return (
+    //         <td
+    //           className="list-remove-song"
+    //           onClick={() => props.removeSong(props.index)}
+    //         >
+    //           &#x2713;
+    //         </td>
+    //       );
+    //     } else {
+    //       return (
+    //         <td className="list-save-song" onClick={() => songSave()}>
+    //           &#xff0b;
+    //         </td>
+    //       );
+    //     }
+    //   } else {
+    //     return <td className="list-save-song"></td>;
+    //   }
+    // }
 
     function songSelect() {
-      props.onVideoSelect(modifiedResult);
+      // props.onVideoSelect(modifiedResult);
       props.setSearchHistory();
 
       let newQueue = [...state.originalQueue, modifiedResult];
@@ -117,7 +117,7 @@ const SearchResult = (props) => {
 
     return (
       <tr className={addSelectedClass}>
-        {renderSaveRemoveButton()}
+        {/* {renderSaveRemoveButton()} */}
         <td className="list-track" onClick={() => songSelect()}>
           {title}
         </td>
@@ -136,20 +136,20 @@ const SearchResult = (props) => {
 
   // List items playlists
   if (props.result.id.kind === "youtube#playlist") {
-    function playlistSelect() {
-      props.onSearchPlaylistInit(
-        props.result.id.playlistId,
-        "yourmusic",
-        thumbnail,
-        title
-      );
-      props.setSearchHistory();
-    }
+    // function playlistSelect() {
+    //   props.onSearchPlaylistInit(
+    //     props.result.id.playlistId,
+    //     "yourmusic",
+    //     thumbnail,
+    //     title
+    //   );
+    //   props.setSearchHistory();
+    // }
 
     return (
       <li
         className="playlist-result col-xs-6 col-sm-4 col-md-3 col-lg-3"
-        onClick={() => playlistSelect()}
+        // onClick={() => playlistSelect()}
       >
         <img src={thumbnail} alt="" />
         <span>{trimmedTitle}</span>

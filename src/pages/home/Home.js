@@ -9,6 +9,7 @@ import CustomCarousel from "../../components/CustomCarousel/CustomCarousel";
 import RowLayout from "../../components/RowLayout/RowLayout";
 import GlobalState from "../../contexts/GlobalState";
 import API from "../../api/services/api";
+import SideImage from "../../assets/rhs_banner_v5.jpg";
 
 // make a permanent playlist object with few songs catergory
 const playlistsIds = {
@@ -32,6 +33,7 @@ const playlistsGenres = {
   Devotional: "Bhajans and aartis",
   Artists: "best of indian singers",
   Calm: "Best stress release music",
+  ReleasedNow: "Latest Released Bollywood Songs",
 };
 
 let slowConnectionTimeout;
@@ -84,6 +86,12 @@ const Home = () => {
     getPlayListBasedOnGenre(playlistsGenres?.LatestSongs).then((data) => {
       setSongObj((prevState) => {
         return { ...prevState, ...{ latestSongs: data } };
+      });
+    });
+
+    getPlayListBasedOnGenre(playlistsGenres?.ReleasedNow).then((data) => {
+      setSongObj((prevState) => {
+        return { ...prevState, ...{ ReleasedNow: data } };
       });
     });
 
@@ -201,25 +209,17 @@ const Home = () => {
     localStorage.setItem("homePageSongObj", JSON.stringify(songObj));
   }, [songObj]);
 
-  const data = [
-    <img className="d-block w-100" src="download.jpeg" alt="Second slide" />,
-    <img className="d-block w-100" src="download.jpeg" alt="Second slide" />,
-    <img className="d-block w-100" src="download.jpeg" alt="Second slide" />,
-    <img className="d-block w-100" src="download.jpeg" alt="Second slide" />,
-    <img className="d-block w-100" src="download.jpeg" alt="Second slide" />,
-    <img className="d-block w-100" src="download.jpeg" alt="Second slide" />,
-    <img className="d-block w-100" src="download.jpeg" alt="Second slide" />,
-  ];
-
   return (
     <Container fluid className="backgroundColour my-5 py-2 space-top2">
       <Row className="m-0 p-0">
         <Col lg={12} xl={10}>
-          <Container
-            // onMouseOver={() => toggleShowArrow(false)}
-            className="space-top-home"
-          >
-            <CustomCarousel items={data} cols={2} />
+          <Container className="space-top-home">
+            <RowLayout
+              // header="Trending Now"
+              type="song"
+              items={songObj?.ReleasedNow}
+              cols={2}
+            />
           </Container>
 
           <RowLayout
@@ -291,7 +291,7 @@ const Home = () => {
             state.fullscreen ? "d-none" : "d-none d-xl-block"
           }`}
         >
-          <Image src="rhs_banner_v5.jpg" width={"100%"} height={"100%"} />
+          <Image src={SideImage} width={"100%"} height={"100%"} />
         </Col>
       </Row>
     </Container>

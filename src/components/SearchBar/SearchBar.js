@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import _ from "lodash";
-import axios from "axios";
-import api from "../../helpers/api";
 import { useSelector } from "react-redux";
 // Actions
 import {
@@ -23,6 +21,7 @@ import {
   Modal,
 } from "react-bootstrap";
 import GlobalState from "../../contexts/GlobalState";
+import API from "../../api/services/api";
 
 const SearchBar = (props) => {
   const [state, setState] = useContext(GlobalState);
@@ -42,6 +41,8 @@ const SearchBar = (props) => {
     setState((state) => ({ ...state, fullscreen: !show }));
   };
 
+  let api = new API();
+
   const selectedSong = useSelector(
     (state) => state.songController.selectedSong
   );
@@ -51,31 +52,13 @@ const SearchBar = (props) => {
       items: [],
     });
 
-    let url = `https://www.googleapis.com/youtube/v3/search?maxResults=10&relevanceLanguage=en&regionCode=IN&topicId=/m/04rlf&part=snippet&q=${term}&key=${api}`;
-
-    axios
-      .get(url)
+    api
+      .getSongs(null, term)
       .then((response) => {
-        _.map(response.data.items, (video) => {
-          if (video.id.kind === "youtube#video") {
-            let url = `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&id=${video.id.videoId}&key=${api}`;
-            axios
-              .get(url)
-              .then((result) => {
-                video.duration = result.data.items[0].contentDetails.duration;
-                video.viewCount = result.data.items[0].statistics.viewCount;
-                setSearchResults({
-                  items: [...searchResults.items, video],
-                });
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          } else {
-            setSearchResults({
-              items: [...searchResults.items, video],
-            });
-          }
+        _.map(response.data.items, (result) => {
+          setSearchResults({
+            items: [...searchResults.items, result],
+          });
         });
       })
       .catch((error) => {
@@ -83,7 +66,7 @@ const SearchBar = (props) => {
       });
   };
 
-  let debounced = _.debounce(videoSearch, 210);
+  let debounced = _.debounce(videoSearch, 250);
 
   const onInputChange = (event) => {
     if (event.target.value === " " || event.target.value === null) {
@@ -91,7 +74,6 @@ const SearchBar = (props) => {
       setSearchResults({});
     } else {
       setTerm(event.target.value);
-
       debounced(event.target.value);
     }
   };
@@ -110,34 +92,21 @@ const SearchBar = (props) => {
     searchHistoryHandler();
   };
 
-  // get results from users search history
-  //   useEffect(()=>{
-  //       if (props.user){
-  //       base.syncState(`${props.user.uid}/searchHistory`, {
-  //         context: this,
-  //         state: 'searchHistory',
-  //         asArray: true
-  //       });
-  //     }
-  //   },[])
-
   const renderResults = () => {
     const songsArray = _.filter(searchResults.items, function (item) {
       return item.id.kind === "youtube#video";
     });
     const songs = _.map(songsArray, (result) => {
-      let index = _.findIndex(props.savedSongs, { id: result.id.videoId });
-
       return (
         <SearchResult
           key={result.etag}
           result={result}
-          onVideoSelect={onVideoSelect}
+          // onVideoSelect={onVideoSelect}
           selectedSong={selectedSong}
-          savedSongs={props.savedSongs}
-          saveSong={props.saveSong}
-          removeSong={props.removeSong}
-          index={index}
+          // savedSongs={props.savedSongs}
+          // saveSong={props.saveSong}
+          // removeSong={props.removeSong}
+          // index={index}
           user={props.user}
           setSearchHistory={searchHistoryHandler}
         />
@@ -161,7 +130,7 @@ const SearchBar = (props) => {
         <SearchResult
           key={result.etag}
           result={result}
-          onSearchPlaylistInit={onSearchPlaylistInit}
+          // onSearchPlaylistInit={onSearchPlaylistInit}
         />
       );
     });
@@ -197,12 +166,12 @@ const SearchBar = (props) => {
                 </table>
               </div>
             )}
-            {/*artists.length > 0 &&
-            <div className="result-group">
-              <h3>Artists</h3>
-              {artists}
-            </div>
-          */}
+            {artists.length > 0 && (
+              <div className="result-group">
+                <h3>Artists</h3>
+                {artists}
+              </div>
+            )}
             {playlists.length > 0 && (
               <div className="result-group">
                 <h3>Playlists</h3>

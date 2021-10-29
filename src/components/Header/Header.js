@@ -17,10 +17,10 @@ import "./Header.scss";
 import SearchBar from "../SearchBar/SearchBar";
 import { filtersListHome } from "../../utils/constants";
 import FilterBar from "../FilterBar/FilterBar";
-import PaymentModal from "../payment/PaymentModal";
+import PaymentModal from "../Payment/PaymentModal";
 const Header = () => {
   const [show, setShow] = useState(false);
-  const [showPayment, setShowPayment] = useState(false)
+  const [showPayment, setShowPayment] = useState(false);
   const handleClose = () => setShow(false);
   const toggleShow = () => setShow((s) => !s);
 
@@ -66,12 +66,18 @@ const Header = () => {
             </Nav>
             <Nav className="d-none d-lg-flex flex-wrap">
               <Nav.Link>
-                <Button variant="light" onClick={
-                  ()=>{
+                <Button
+                  variant="light"
+                  onClick={() => {
                     setShowPayment(true);
-                  }
-                }>Go Ad Free</Button>
-                <PaymentModal showPayment= {showPayment} setShowPayment= {setShowPayment}></PaymentModal>
+                  }}
+                >
+                  Go Ad Free
+                </Button>
+                <PaymentModal
+                  showPayment={showPayment}
+                  setShowPayment={setShowPayment}
+                ></PaymentModal>
               </Nav.Link>
               <Nav.Link>
                 <Button variant="light">Get Melody Plus</Button>

@@ -31,6 +31,7 @@ const FilteredDetails = ({ title, location }) => {
   data = location?.state?.songData || location?.state?.playlistData;
   useEffect(() => {
     let isPlaylist = data?.id?.kind === "youtube#playlist" ? true : false;
+    let isMyPlaylist = data?.track?.length > 0 ? true : false;
     if (isPlaylist) {
       const api = new API();
       const getPlaylistItems = async () => {
@@ -47,6 +48,10 @@ const FilteredDetails = ({ title, location }) => {
         //console.log(data);
         setItems(data);
       });
+    }
+
+    if (isMyPlaylist) {
+      setItems(JSON.parse(data?.track));
     }
   }, [data]);
   console.log(data);
@@ -103,16 +108,16 @@ const FilteredDetails = ({ title, location }) => {
                 isRounded={true}
               /> */}
 
-              <div className="py-3 px-4 mt-4 mb-2 mx-3 d-flex-column flex-wrap text-start">
+              <div className="py-3 px-3 mt-4 mb-2  d-flex-column flex-wrap text-start">
                 <h5>About {data?.snippet?.title}</h5>
                 <p>{data?.snippet?.description}</p>
                 <h6>
                   Released On:
                   {new Date(data?.snippet?.publishedAt).toDateString()}
                 </h6>
-                <h6>Duration: </h6>
+                {/* <h6>Duration: </h6>
                 <h6>Language:</h6>
-                <p>Label Name</p>
+                <p>Label Name</p> */}
               </div>
             </>
           ) : (

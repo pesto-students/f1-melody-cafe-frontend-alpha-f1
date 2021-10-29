@@ -51,7 +51,7 @@ const MusicCover = ({ isRounded, data, type, slug }) => {
     // </div>
     <Link
       to={{
-        pathname: `/${type}/${slug}`,
+        pathname: `/${type}/${slug?.kind ? slug.playlistId : slug}`,
         // search: "?sort=name",
         // hash: "#the-hash",
         state: { songData: data },

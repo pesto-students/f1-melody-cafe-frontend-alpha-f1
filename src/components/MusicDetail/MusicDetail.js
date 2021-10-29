@@ -23,7 +23,7 @@ const MusicDetail = ({ data }) => {
 
   return (
     <div>
-      <div className="d-flex flex-wrap flex-md-nowrap justify-content-md-end  justify-content-center align-items-end">
+      <div className="d-flex flex-wrap flex-md-nowrap justify-content-md-start  justify-content-center align-items-end">
         <Image
           src={data?.snippet?.thumbnails?.high?.url || data?.src || AlbumArt}
           // height="300px"
@@ -39,20 +39,20 @@ const MusicDetail = ({ data }) => {
               : data?.title}
           </h1>
 
-          <p>
+          {/* <p>
             Label <span>Year</span>
           </p>
           <p>Various Artists</p>
           <p>
             {data?.songs ? data?.songs?.length + " Tracks " : ""}
             <span>duration sec</span>
-          </p>
+          </p> */}
 
           <div className="d-inline-flex flex-wrap align-items-center justify-content-md-start justify-content-center">
             <Button onClick={() => callPlay(data)} className="btn btn_solid">
               Play/Pause
             </Button>
-            <p>Favourite Button</p>
+            {/* <p>Favourite Button</p> */}
             {/* <p>Menu Button</p> */}
           </div>
         </div>

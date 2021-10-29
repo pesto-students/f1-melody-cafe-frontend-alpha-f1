@@ -10,14 +10,14 @@ const RefactorSongList = (props) => {
 
   const queueListArray = _.map(state.queue, (video) => {
     if (
-      video.snippet.title !== "Deleted video" &&
-      video.snippet.title !== "Private video"
+      video?.snippet?.title !== "Deleted video" &&
+      video?.snippet?.title !== "Private video"
     ) {
       // let index = _.findIndex(props.savedSongs, { id: video.id });
 
       return (
         <SongListItems
-          key={video.etag}
+          key={video?.etag}
           video={video}
           //   onVideoSelect={onVideoSelect}
           //   selectedSong={selectedSong}
@@ -27,7 +27,7 @@ const RefactorSongList = (props) => {
           // removeSong={props.removeSong}
           // index={index}
           isQueue={true}
-          user={props.user}
+          user={props?.user}
         />
       );
     }
@@ -35,14 +35,14 @@ const RefactorSongList = (props) => {
 
   const songsListArray = _.map(props.songs, (video) => {
     if (
-      video.snippet.title !== "Deleted video" &&
-      video.snippet.title !== "Private video"
+      video?.snippet?.title !== "Deleted video" &&
+      video?.snippet?.title !== "Private video"
     ) {
       // let index = _.findIndex(props.savedSongs, { id: video.id });
 
       return (
         <SongListItems
-          key={video.etag}
+          key={video?.etag}
           video={video}
           //   onVideoSelect={onVideoSelect}
           //   selectedSong={selectedSong}
