@@ -211,24 +211,10 @@ const Home = () => {
     <img className="d-block w-100" src="download.jpeg" alt="Second slide" />,
   ];
 
-  const renderGenreList = () => {
-    if (showPage === "browse") {
-      return (
-        <RowLayout
-          header="Browse Genres"
-          items={playlistList}
-          cols={4}
-          type="genre"
-          // slug={showPage}
-        />
-      );
-    }
-  };
-
   return (
     <Container fluid className="backgroundColour my-5 py-2 space-top2">
       <Row className="m-0 p-0">
-        <Col lg={12} xl={9}>
+        <Col lg={12} xl={10}>
           <Container
             // onMouseOver={() => toggleShowArrow(false)}
             className="space-top-home"
@@ -280,7 +266,6 @@ const Home = () => {
             cols={4}
             type="song"
           />
-          {renderGenreList()}
           <RowLayout
             header="Hit the Gym"
             items={songObj?.fitHits}
@@ -301,7 +286,7 @@ const Home = () => {
           />
         </Col>
         <Col
-          xl={3}
+          xl={2}
           className={`blue sideImage ${
             state.fullscreen ? "d-none" : "d-none d-xl-block"
           }`}

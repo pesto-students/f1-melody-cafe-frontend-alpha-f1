@@ -16,7 +16,7 @@ const FilteredDetails = ({ title, location }) => {
   const [state, setState] = useContext(GlobalState);
 
   const [savedSongs, setSavedSongs] = useState({});
-  const [items, setItems] = useState({});
+  const [items, setItems] = useState(null);
 
   const saveSong = (song) => {
     setSavedSongs((state) => [...state.savedSongs, song]);
@@ -57,7 +57,7 @@ const FilteredDetails = ({ title, location }) => {
       className="space-top2 backgroundColour detail_wrap my-5 py-5"
     >
       <Row>
-        <Col xs={12} md={12} xl={9}>
+        <Col xs={12} md={12} xl={10}>
           <Breadcrumbs />
           {/* <h1 className="text-left">
             {data?.snippet?.title?.slice(0, 70)
@@ -67,17 +67,22 @@ const FilteredDetails = ({ title, location }) => {
           {data ? (
             <>
               <MusicDetail data={data} />
-              <RefactorSongList
-                // playlistId={"charts"}
-                // what={() => ({})}
-                user={null}
-                renderQueue={false}
-                songs={items}
-                // items={{}}
-                // savedSongs={[]}
-                // saveSong={() => null}
-                // removeSong={() => null}
-              />
+              {items ? (
+                <RefactorSongList
+                  // playlistId={"charts"}
+                  // what={() => ({})}
+                  user={null}
+                  renderQueue={false}
+                  songs={items}
+                  // items={{}}
+                  // savedSongs={[]}
+                  // saveSong={() => null}
+                  // removeSong={() => null}
+                />
+              ) : (
+                ""
+              )}
+
               {/* <RowLayout
                 header="Similar Type"
                 type="song"
@@ -115,7 +120,7 @@ const FilteredDetails = ({ title, location }) => {
           )}
         </Col>
         <Col
-          xl={3}
+          xl={2}
           className={`blue sideImage ${
             state.fullscreen ? "d-none" : "d-none d-xl-block"
           }`}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import _ from "lodash";
 import axios from "axios";
 import api from "../../helpers/api";
@@ -22,8 +22,10 @@ import {
   Button,
   Modal,
 } from "react-bootstrap";
+import GlobalState from "../../contexts/GlobalState";
 
 const SearchBar = (props) => {
+  const [state, setState] = useContext(GlobalState);
   const [term, setTerm] = useState("");
   const [searchResults, setSearchResults] = useState({
     items: [],
@@ -31,8 +33,14 @@ const SearchBar = (props) => {
   const [searchHistory, setSearchHistory] = useState([]);
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => {
+    setShow(false);
+    setState((state) => ({ ...state, fullscreen: !show }));
+  };
+  const handleShow = () => {
+    setShow(true);
+    setState((state) => ({ ...state, fullscreen: !show }));
+  };
 
   const selectedSong = useSelector(
     (state) => state.songController.selectedSong
@@ -239,19 +247,28 @@ const SearchBar = (props) => {
           </Accordion.Collapse>
         </Card>
       </Accordion> */}
-      <input onClick={handleShow} placeholder="search songs" />
-      <Modal show={show} onHide={handleClose} scrollable={true}>
-        <Modal.Header>
-          <Form className="d-flex" onSubmit={onFormSubmit}>
+      <input
+        onClick={handleShow}
+        placeholder="search songs"
+        className="border rounded my-3 py-2 ps-3 pe-5"
+      />
+      <Modal
+        show={show}
+        onHide={handleClose}
+        scrollable={true}
+        fullscreen={true}
+      >
+        <Modal.Header closeButton={handleClose}>
+          <Form className="d-flex w-100" onSubmit={onFormSubmit}>
             <FormControl
               type="search"
-              className="me-2"
+              className="border rounded my-3 py-2 ps-3 pe-5 "
               aria-label="Search"
               value={term}
               onChange={(e) => onInputChange(e)}
               autoFocus={true}
               placeholder="Search artists, songs, playlists.."
-              onClick={handleShow}
+              // onClick={handleShow}
             />
           </Form>
         </Modal.Header>

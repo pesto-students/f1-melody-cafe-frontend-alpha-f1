@@ -4,7 +4,7 @@ import "./MusicContainer.scss";
 import AlbumArt from "../../assets/album_art_blank.jpg";
 import { Link } from "react-router-dom";
 import regex from "../../helpers/helper-functions";
-const MusicContainer = ({ title, seeAllLink, items, type }) => {
+const MusicContainer = ({ title, seeAllLink, items, type, isMyMusic }) => {
   return (
     <Container>
       <div className="d-flex align-items-center justify-content-between">
@@ -22,9 +22,20 @@ const MusicContainer = ({ title, seeAllLink, items, type }) => {
           ""
         )}
       </div>
-      <div className="d-flex flex-wrap align-items-center">
+      <div
+        className={
+          isMyMusic
+            ? "d-flex flex-wrap"
+            : "d-flex flex-wrap justify-content-center justify-content-md-around"
+        }
+      >
         {items?.map((item, _i) => (
-          <Card key={_i} className="bg-secondary m-card">
+          <Card
+            key={_i}
+            className={`bg-secondary m-card ${
+              isMyMusic ? "m-card-myMusic" : ""
+            }`}
+          >
             <Link
               to={{
                 pathname: `${"playlist"}/${item?.snippet?.title || item?.slug}`,
@@ -41,8 +52,10 @@ const MusicContainer = ({ title, seeAllLink, items, type }) => {
                   item?.snippet?.thumbnails.high.url ||
                   AlbumArt
                 }
-                // width={500}
-                height={180}
+                // width={100}
+                // height={100}
+                // fluid
+                className="m-card-image"
               />
             </Link>
             <Card.Body>

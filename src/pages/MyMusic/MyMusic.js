@@ -13,7 +13,7 @@ const MyMusic = ({ type }) => {
   return (
     <Container fluid className="backgroundColour my-5 py-5">
       <Row className="my-5 py-5 h-100">
-        <Col lg={12} xl={9}>
+        <Col lg={12} xl={10}>
           <div className="h-100">
             <Button
               className="d-inline-block mt-5 mb-3 mx-4"
@@ -40,6 +40,7 @@ const MyMusic = ({ type }) => {
                 items={state.userPublish}
                 seeAllLink={"my-published-one"}
                 type={"song"}
+                isMyMusic={true}
               />
             ) : (
               ""
@@ -51,6 +52,7 @@ const MyMusic = ({ type }) => {
                 items={state.userPlaylist}
                 seeAllLink={"my-playlists"}
                 type={type}
+                isMyMusic={true}
               />
             ) : (
               ""
@@ -62,6 +64,7 @@ const MyMusic = ({ type }) => {
                 items={state.userPlaylist}
                 seeAllLink={"my-favourite-playlists"}
                 type={type}
+                isMyMusic={true}
               />
             ) : (
               ""
@@ -73,6 +76,7 @@ const MyMusic = ({ type }) => {
                 items={state.userFavouriteSongs}
                 seeAllLink={"my-favourite-songs"}
                 type={"song"}
+                isMyMusic={true}
               />
             ) : (
               ""
@@ -80,7 +84,7 @@ const MyMusic = ({ type }) => {
           </div>
         </Col>
         <Col
-          xl={3}
+          xl={2}
           className={`blue sideImage ${
             state.fullscreen ? "d-none" : "d-none d-xl-block"
           }`}

@@ -9,10 +9,10 @@ const FilterBar = ({ filterList, isHome }) => {
       <p>Will be of two types simple, home page and rounded ones</p> */
   }
   return (
-    <Container fluid className={isHome ? "filter filterHome  px-4 " : "filter"}>
+    <Container fluid className={isHome ? "filter filterHome ps-5" : "filter"}>
       <Nav
         // style={{ top: "50px", position: "sticky" }}
-        variant="pills"
+        // variant="pills"
         activeKey="0"
         // onSelect={handleSelect}
         className="justify-content-center"
