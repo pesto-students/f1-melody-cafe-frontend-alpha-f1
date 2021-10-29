@@ -1,9 +1,28 @@
 .m-card {
-    width: 12rem;
+    // width: 12rem;
+    width: 250px;
     border: none !important;
     --bs-bg-opacity:0 !important;
-    align-items: flex-start;
+    // align-items: flex-start;
     margin-right: 1cm;
+    height: 275px;
+}
+
+.m-card-myMusic {
+    width: 14rem;
+    // width: 250px;
+    border: none !important;
+    --bs-bg-opacity: 0 !important;
+    // align-items: flex-start;
+    margin-right: 1cm;
+    margin-bottom: 40px;
+    // height: 350px;
+}
+
+.m-card-image{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
 }
 
 .m-card-text{

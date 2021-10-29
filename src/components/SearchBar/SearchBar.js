@@ -239,13 +239,17 @@ const SearchBar = (props) => {
           </Accordion.Collapse>
         </Card>
       </Accordion> */}
-      <input onClick={handleShow} placeholder="search songs" />
+      <input
+        onClick={handleShow}
+        placeholder="search songs"
+        className="border rounded my-3 py-2 ps-3 pe-5"
+      />
       <Modal show={show} onHide={handleClose} scrollable={true}>
         <Modal.Header>
-          <Form className="d-flex" onSubmit={onFormSubmit}>
+          <Form className="d-flex w-100" onSubmit={onFormSubmit}>
             <FormControl
               type="search"
-              className="me-2"
+              className="border rounded my-3 py-2 ps-3 pe-5 "
               aria-label="Search"
               value={term}
               onChange={(e) => onInputChange(e)}

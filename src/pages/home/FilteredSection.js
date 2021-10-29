@@ -62,9 +62,9 @@ const FilteredSection = ({ title, isDetails, location, type }) => {
   return (
     <Container fluid className="space-top2 backgroundColour my-5 py-5">
       <Row>
-        <Col xs={12} md={12} xl={9}>
+        <Col xs={12} md={12} xl={10}>
           <Breadcrumbs />
-          <h1 className="text-left">{title}</h1>
+          <h2 className="text-left">{title}</h2>
           {/* <FilterBar filterList={filtersListHome} /> */}
           <MusicContainer items={items} type={type} />
           {match ? (
@@ -75,7 +75,7 @@ const FilteredSection = ({ title, isDetails, location, type }) => {
           {renderSpecificGenre()}
         </Col>
         <Col
-          xl={3}
+          xl={2}
           className={`blue sideImage ${
             state.fullscreen ? "d-none" : "d-none d-xl-block"
           }`}

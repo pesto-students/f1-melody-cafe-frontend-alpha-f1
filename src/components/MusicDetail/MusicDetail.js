@@ -23,21 +23,22 @@ const MusicDetail = ({ data }) => {
 
   return (
     <div>
-      <div className="d-flex flex-wrap justify-content-md-start align-items-end justify-content-center">
+      <div className="d-flex flex-wrap flex-md-nowrap justify-content-md-end  justify-content-center align-items-end">
         <Image
           src={data?.snippet?.thumbnails?.high?.url || data?.src || AlbumArt}
-          height="300px"
-          width="300px"
+          // height="300px"
+          // width="300px"
           fluid
           className="p-3"
         />
 
-        <div>
+        <div className="text-left">
           <h1 className="title">
             {data?.snippet?.title?.slice(0, 70)
               ? data?.snippet?.title?.slice(0, 70) + " ..."
               : data?.title}
           </h1>
+
           <p>
             Label <span>Year</span>
           </p>
@@ -47,12 +48,12 @@ const MusicDetail = ({ data }) => {
             <span>duration sec</span>
           </p>
 
-          <div className="d-inline-flex flex-wrap align-items-center justify-content-md-start justify-content-center p-3">
+          <div className="d-inline-flex flex-wrap align-items-center justify-content-md-start justify-content-center">
             <Button onClick={() => callPlay(data)} className="btn btn_solid">
               Play/Pause
             </Button>
             <p>Favourite Button</p>
-            <p>Menu Button</p>
+            {/* <p>Menu Button</p> */}
           </div>
         </div>
       </div>

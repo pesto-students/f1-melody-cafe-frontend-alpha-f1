@@ -57,7 +57,7 @@ const FilteredDetails = ({ title, location }) => {
       className="space-top2 backgroundColour detail_wrap my-5 py-5"
     >
       <Row>
-        <Col xs={12} md={12} xl={9}>
+        <Col xs={12} md={12} xl={10}>
           <Breadcrumbs />
           {/* <h1 className="text-left">
             {data?.snippet?.title?.slice(0, 70)
@@ -115,7 +115,7 @@ const FilteredDetails = ({ title, location }) => {
           )}
         </Col>
         <Col
-          xl={3}
+          xl={2}
           className={`blue sideImage ${
             state.fullscreen ? "d-none" : "d-none d-xl-block"
           }`}

@@ -15,7 +15,7 @@ const Breadcrumbs = () => {
   };
   return (
     <div>
-      <Breadcrumb>
+      <Breadcrumb className="ps-4">
         {[...Array(pathnameArray.length).keys()].map((ind) => (
           <Breadcrumb.Item
             key={ind}

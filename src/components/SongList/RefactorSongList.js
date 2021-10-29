@@ -102,13 +102,13 @@ const RefactorSongList = (props) => {
           </div> 
         </div>*/}
 
-      <Table hover variant="dark" className="my-3 mx-3 px-5">
+      <Table hover variant="dark" className="my-3 mx-3 px-5" responsive>
         <thead>
           <tr>
             {/* <th></th> */}
-            <th className="text-start px-5">Title</th>
-            <th className="text-center px-5">Artist</th>
-            <th className="text-end px-5">Dur</th>
+            <th className="text-start px-4">Title</th>
+            <th className="text-center px-4">Artist</th>
+            <th className="text-end px-4">Dur</th>
             {/* <th>Plays</th> */}
           </tr>
         </thead>
