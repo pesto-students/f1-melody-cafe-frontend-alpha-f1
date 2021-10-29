@@ -22,5 +22,13 @@ class API {
     let result = await instance.get(`/song/${videoId}`);
     return result;
   }
+
+  async getPaymentGateWay(value){
+    let params = {
+      plan: value
+    }
+    let result = await instance.get('/payment',{params:params});
+    return result;
+  }
 }
 export default API;
