@@ -10,6 +10,7 @@ import { filtersListHome } from "../../utils/constants";
 import GlobalState from "../../contexts/GlobalState";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import API from "../../api/services/api";
+import SideImage from "../../assets/rhs_banner_v5.jpg";
 
 const FilteredSection = ({ title, isDetails, location, type }) => {
   const [state, setState] = useContext(GlobalState);
@@ -79,7 +80,7 @@ const FilteredSection = ({ title, isDetails, location, type }) => {
             state.fullscreen ? "d-none" : "d-none d-xl-block"
           }`}
         >
-          <Image src="rhs_banner_v5.jpg" width={"100%"} height={"100%"} />
+          <Image src={SideImage} width={"100%"} height={"100%"} />
         </Col>
       </Row>
     </Container>
