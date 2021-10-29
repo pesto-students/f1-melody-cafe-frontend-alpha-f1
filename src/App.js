@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./routes/Routes";
 import GlobalState from "./contexts/GlobalState";
 
-import { REPEAT_MODE } from "./utils/constants";
+import { QUALITY, REPEAT_MODE } from "./utils/constants";
 import { useEffect, useState } from "react";
 import Controller from "./components/Controller";
 import _ from "lodash";
@@ -26,6 +26,7 @@ function App() {
     shuffleOn: false,
     fullscreen: false,
     repeatMode: REPEAT_MODE.NONE,
+    qualityMode: QUALITY.HIGH,
     userPlaylist: [],
     userPublish: [],
     userFavouriteSongs: [],

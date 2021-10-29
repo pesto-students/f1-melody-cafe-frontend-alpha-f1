@@ -12,14 +12,14 @@ const PlaylistModal = ({ show, setShow, type }) => {
   const [isUpdated, setIsUpdated] = useState(false);
 
   useEffect(() => {
-    api.getPlaylists().then((data) => setUserPlaylist(data.data.rows));
+    api.getPlaylists().then((data) => setUserPlaylist(data.data.row));
     // if (userPlaylist.length) {
     //   setState((state) => ({
     //     ...state,
     //     userPlaylist: [...state.userPlaylist, ...userPlaylist],
     //   }));
     // }
-  }, [isUpdated]);
+  }, []);
 
   const addToPlaylistHandler = (e, currentPlaylist) => {
     e.preventDefault();

@@ -3,6 +3,7 @@ import { Image, Button } from "react-bootstrap";
 import GlobalState from "../../contexts/GlobalState";
 import { shufflePlaylist } from "../../utils/utils";
 import AlbumArt from "../../assets/album_art_blank.jpg";
+import regex from "../../helpers/helper-functions";
 
 const MusicDetail = ({ data }) => {
   console.log(data);
@@ -35,15 +36,19 @@ const MusicDetail = ({ data }) => {
         <div className="text-left">
           <h1 className="title">
             {data?.snippet?.title?.slice(0, 70)
-              ? data?.snippet?.title?.slice(0, 70) + " ..."
-              : data?.title}
+              ? regex.trimTitle(data?.snippet?.title).song + " ..."
+              : data?.name}
           </h1>
 
           {/* <p>
             Label <span>Year</span>
-          </p>
-          <p>Various Artists</p>
+          </p> */}
           <p>
+            {data?.snippet?.title?.slice(0, 70)
+              ? regex.trimTitle(data?.snippet?.title).detail + " ..."
+              : ""}
+          </p>
+          {/* <p>
             {data?.songs ? data?.songs?.length + " Tracks " : ""}
             <span>duration sec</span>
           </p> */}

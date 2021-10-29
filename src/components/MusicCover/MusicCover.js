@@ -89,9 +89,9 @@ const MusicCover = ({ isRounded, data, type, slug }) => {
         )}
         <Figure.Caption>
           {" "}
-          {/* {data?.playlistInfo?.playlistTitle ||
+          {regex.trimTitle(data?.playlistInfo?.playlistTitle).song ||
             data?.genreTitle ||
-            regex.editTitle(data?.snippet?.title)} */}
+            regex.trimTitle(data?.snippet?.title).song}
         </Figure.Caption>
       </Figure>
     </Link>

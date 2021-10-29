@@ -17,10 +17,13 @@ import Playlist from "../assets/playlist.svg";
 import LyricsIcon from "../assets/lyrics.svg";
 import LikeIcon from "../assets/like.svg";
 import LikeActiveIcon from "../assets/like-active.svg";
+import LowIcon from "../assets/low.png";
+import MedIcon from "../assets/medium.png";
+import HighIcon from "../assets/hd.png";
 
 import LyricsModal from "./LyricsModal";
 
-import { REPEAT_MODE } from "../utils/constants";
+import { QUALITY, REPEAT_MODE } from "../utils/constants";
 import { shufflePlaylist, toHHMMSS } from "../utils/utils";
 import getAudioLink from "../api/services/getAudioLink";
 import { getStreamQuality } from "../utils/storage";
@@ -207,6 +210,14 @@ const Controller = (props) => {
     setState((state) => ({ ...state, repeatMode: currentRepeat }));
   };
 
+  const changeQuality = () => {
+    let currentQuality = state.qualityMode;
+    currentQuality < QUALITY.HIGH
+      ? currentQuality++
+      : (currentQuality = QUALITY.LOW);
+    setState((state) => ({ ...state, qualityMode: currentQuality }));
+  };
+
   const handleSeekbarChange = (event) => {
     const selectedDuration = event.target.value;
     setCurrentTime(selectedDuration);
@@ -223,6 +234,19 @@ const Controller = (props) => {
         return RepeatOneIcon;
       default:
         return RepeatIcon;
+    }
+  };
+
+  const getQualityImage = () => {
+    switch (state.qualityMode) {
+      case QUALITY.HIGH:
+        return HighIcon;
+      case QUALITY.MED:
+        return MedIcon;
+      case REPEAT_MODE.LOW:
+        return LowIcon;
+      default:
+        return HighIcon;
     }
   };
 
@@ -266,7 +290,7 @@ const Controller = (props) => {
           video_id = song?.id;
         }
         setBuffering(true);
-        getAudio(video_id, getStreamQuality()).then((response) => {
+        getAudio(video_id, state.qualityMode).then((response) => {
           console.log(response);
           if (response?.status === 200) {
             const streamingUrl = response?.data;
@@ -388,6 +412,14 @@ const Controller = (props) => {
               height="16px"
               className="mr-4 controller-icon"
               onClick={() => changeRepeat()}
+            />
+            <img
+              alt=""
+              src={getQualityImage()}
+              width="16px"
+              height="16px"
+              className="mr-4 controller-icon bg-light"
+              onClick={() => changeQuality()}
             />
             <img
               alt=""

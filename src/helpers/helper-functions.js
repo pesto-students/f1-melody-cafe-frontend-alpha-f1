@@ -10,6 +10,20 @@ const regex = {
     }
   },
 
+  trimTitle: (str) => {
+    if (str) {
+      if (str.includes("|")) {
+        let split = str.split("|");
+        return { song: split[0], detail: split.slice(1) };
+      } else if (str.includes("-")) {
+        let split = str.split("-");
+        return { song: split[0], detail: split.slice(1) };
+      } else return { song: str, detail: str };
+    } else {
+      return { song: null, detail: null };
+    }
+  },
+
   editArtist: (str) => {
     const vevo = "VEVO";
     if (str?.includes(vevo)) {

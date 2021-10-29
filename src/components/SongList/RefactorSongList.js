@@ -107,8 +107,8 @@ const RefactorSongList = (props) => {
           <tr>
             {/* <th></th> */}
             <th className="text-start px-4">Title</th>
-            <th className="text-center px-4">Artist</th>
-            <th className="text-end px-4">Dur</th>
+            <th className="text-center px-4">Details</th>
+            <th className="text-end px-4">Label</th>
             {/* <th>Plays</th> */}
           </tr>
         </thead>
