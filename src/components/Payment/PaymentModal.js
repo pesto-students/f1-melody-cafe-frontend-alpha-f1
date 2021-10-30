@@ -1,15 +1,12 @@
-import {
-  Modal,
-  Button,
-} from "react-bootstrap";
-import { Radio, RadioGroup} from 'react-radio-group'
+import { Modal, Button } from "react-bootstrap";
+import { Radio, RadioGroup } from "react-radio-group";
 import { useState, useEffect, useCallback } from "react";
 import API from "../../api/services/api";
 import axios from "axios";
 import "./payment.scss";
-function PaymentModal({ showPayment, setShowPayment }) {
+function PaymentModal({ showPayment, setShowPayment, setSkipCount }) {
   const api = new API();
-  const [ value, setValue ] = useState(9900);
+  const [value, setValue] = useState(9900);
   async function openPayModal(amt) {
     //Razorpay consider the amount in paise
     var options = {
@@ -20,20 +17,18 @@ function PaymentModal({ showPayment, setShowPayment }) {
       description: "",
       order_id: "",
       handler: function (response) {
-        console.log(response);
+        // console.log(response);
       },
       theme: {
         color: "#528ff0",
       },
     };
     axios
-      .post(
-        `https://yhwyjsf4yb.us-east-2.awsapprunner.com/payment?plan=${amt}`
-      )
+      .post(`https://yhwyjsf4yb.us-east-2.awsapprunner.com/payment?plan=${amt}`)
       .then((res) => {
         options.order_id = res.data.id;
         options.amount = res.data.amount;
-        console.log(options);
+        // console.log(options);
         var rzp1 = new window.Razorpay(options);
         rzp1.open();
       })
@@ -55,23 +50,36 @@ function PaymentModal({ showPayment, setShowPayment }) {
       show={showPayment}
       onHide={() => {
         setShowPayment(false);
+        setSkipCount(0);
       }}
     >
       <Modal.Header closeButton>
         <Modal.Title>Select Subscription</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      <RadioGroup name="plans"  selectedValue={value} onChange={(e) => onChangeHandeler(e)}>
-   <div>
-       <Radio value={9900} />99
-   </div>
-   <div>
-       <Radio value={29900} />299
-   </div>
-   <div>
-       <Radio value={99900}  />999
-   </div>
-</RadioGroup>
+        <h5>
+          Hey! You are not Allowed More than two skips on regular plans. Why not
+          join subscription and skip songs as you like
+        </h5>
+        <hr />
+        <RadioGroup
+          name="plans"
+          selectedValue={value}
+          onChange={(e) => onChangeHandeler(e)}
+        >
+          <div className="plans-item">
+            <Radio value={9900} />
+            99
+          </div>
+          <div className="plans-item">
+            <Radio value={29900} />
+            299
+          </div>
+          <div className="plans-item">
+            <Radio value={99900} />
+            999
+          </div>
+        </RadioGroup>
       </Modal.Body>
       <Modal.Footer>
         <Button
@@ -86,6 +94,7 @@ function PaymentModal({ showPayment, setShowPayment }) {
           variant="secondary"
           onClick={() => {
             setShowPayment(false);
+            setSkipCount(0);
           }}
         >
           Close

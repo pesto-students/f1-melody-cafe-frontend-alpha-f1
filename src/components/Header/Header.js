@@ -72,16 +72,16 @@ const Header = () => {
                     setShowPayment(true);
                   }}
                 >
-                  Go Ad Free
+                  Get Melody Plus
                 </Button>
                 <PaymentModal
                   showPayment={showPayment}
                   setShowPayment={setShowPayment}
                 ></PaymentModal>
               </Nav.Link>
-              <Nav.Link>
+              {/* <Nav.Link>
                 <Button variant="light">Get Melody Plus</Button>
-              </Nav.Link>
+              </Nav.Link> */}
               <Nav.Link eventKey={2}>
                 <Login></Login>
               </Nav.Link>

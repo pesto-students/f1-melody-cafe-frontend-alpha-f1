@@ -6,7 +6,7 @@ import AlbumArt from "../../assets/album_art_blank.jpg";
 import regex from "../../helpers/helper-functions";
 
 const MusicDetail = ({ data, items }) => {
-  console.log(data);
+  // console.log(data);
   const [state, setState] = useContext(GlobalState);
 
   const callPlay = (song) => {

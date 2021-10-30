@@ -91,7 +91,7 @@ const SearchBar = (props) => {
   };
 
   const renderResults = () => {
-    console.log(searchResults);
+    // console.log(searchResults);
     const songsArray = _.filter(searchResults.items, function (item) {
       return item.id.kind === "youtube#video" || item.kind === "youtube#video";
     });
@@ -112,7 +112,7 @@ const SearchBar = (props) => {
         />
       );
     });
-    console.log(songs);
+    // console.log(songs);
     // let artistsArray = _.filter(searchResults.items, function (item) {
     //   return item.id.kind === "youtube#channel";
     // });

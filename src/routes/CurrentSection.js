@@ -7,7 +7,7 @@ import MyMusic from "../pages/MyMusic/MyMusic";
 const CurrentSection = () => {
   let location = useLocation();
   let { type, slug, filter } = useParams();
-  console.log(type, slug, filter);
+  // console.log(type, slug, filter);
   if (type === "song" || type === "playlist") {
     return <FilteredDetails title={slug} location={location} />;
   } else if (

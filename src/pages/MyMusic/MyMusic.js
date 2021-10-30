@@ -31,7 +31,7 @@ const MyMusic = ({ type }) => {
     // }
   }, []);
 
-  console.log(userPlaylist);
+  // console.log(userPlaylist);
 
   return (
     <Container fluid className="backgroundColour my-5 py-5">

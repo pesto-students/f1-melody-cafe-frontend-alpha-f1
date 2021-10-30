@@ -4,7 +4,6 @@ import API from "../api/services/api";
 import GlobalState from "../contexts/GlobalState";
 import PlaylistModal from "./Playlist/PlaylistModal";
 import RefactorSongList from "./SongList/RefactorSongList";
-import SongList from "./SongList/SongList";
 
 const FullScreenController = ({ show, setShow }) => {
   const [state, setState] = useContext(GlobalState);

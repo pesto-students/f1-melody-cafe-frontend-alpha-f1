@@ -54,7 +54,7 @@ const Home = () => {
     const getTrendingMusic = async () => {
       try {
         const res = await Api.getSongs("trending");
-        console.log(res);
+        // console.log(res);
         return res.data.items;
       } catch (err) {
         console.log(err);
@@ -73,7 +73,7 @@ const Home = () => {
     const getPlayListBasedOnGenre = async (genre) => {
       try {
         const res = await Api.getSongs("playlist", genre);
-        console.log(res);
+        // console.log(res);
         return res.data.items;
       } catch (err) {
         console.log(err);

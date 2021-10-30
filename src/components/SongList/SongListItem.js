@@ -8,7 +8,7 @@ import { shufflePlaylist } from "../../utils/utils";
 const SongListItems = (props) => {
   const [state, setState] = useContext(GlobalState);
 
-  console.log("inside song list items");
+  // console.log("inside song list items");
 
   const dispatch = useDispatch();
   // Set this song to selected if it matches the selectedSong state
@@ -86,7 +86,7 @@ const SongListItems = (props) => {
   };
 
   let song = songModel();
-  console.log(song);
+  // console.log(song);
 
   if (!song?.title) {
     return (

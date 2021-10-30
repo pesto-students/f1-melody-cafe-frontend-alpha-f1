@@ -6,7 +6,7 @@ import { Table } from "react-bootstrap";
 
 const RefactorSongList = (props) => {
   const [state, setState] = useContext(GlobalState);
-  console.log("SongListtt");
+  // console.log("SongListtt");
 
   const queueListArray = _.map(state.queue, (video) => {
     if (
