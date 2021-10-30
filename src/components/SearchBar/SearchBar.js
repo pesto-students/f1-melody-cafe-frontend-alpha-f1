@@ -91,7 +91,7 @@ const SearchBar = (props) => {
   };
 
   const renderResults = () => {
-    console.log(searchResults);
+    // console.log(searchResults);
     const songsArray = _.filter(searchResults.items, function (item) {
       return item.id.kind === "youtube#video" || item.kind === "youtube#video";
     });
@@ -112,7 +112,7 @@ const SearchBar = (props) => {
         />
       );
     });
-    console.log(songs);
+    // console.log(songs);
     // let artistsArray = _.filter(searchResults.items, function (item) {
     //   return item.id.kind === "youtube#channel";
     // });
@@ -121,20 +121,20 @@ const SearchBar = (props) => {
     //   return <SearchResult key={result.etag} result={result} />;
     // });
     // console.log(artists);
-    let playlistsArray = _.filter(searchResults.items, function (item) {
-      return item.id.kind === "youtube#playlist";
-    });
+    // let playlistsArray = _.filter(searchResults.items, function (item) {
+    //   return item.id.kind === "youtube#playlist";
+    // });
 
-    let playlists = _.map(playlistsArray, (result) => {
-      return (
-        <SearchResult
-          key={result.etag}
-          result={result}
-          // onSearchPlaylistInit={onSearchPlaylistInit}
-        />
-      );
-    });
-    console.log(playlists);
+    // let playlists = _.map(playlistsArray, (result) => {
+    //   return (
+    //     <SearchResult
+    //       key={result.etag}
+    //       result={result}
+    //       // onSearchPlaylistInit={onSearchPlaylistInit}
+    //     />
+    //   );
+    // });
+    // console.log(playlists);
 
     let history = _.map(searchHistory, (item) => {
       return (
@@ -155,9 +155,9 @@ const SearchBar = (props) => {
                 <table className="list-group">
                   <tbody>
                     <tr>
-                      <th></th>
-                      <th>Title</th>
-                      <th>Artist</th>
+                      {/* <th></th> */}
+                      <th className="px-3">Title</th>
+                      <th className="px-3">Label</th>
                       {/* <th>Dur</th>
                       <th>Plays</th> */}
                     </tr>
@@ -173,12 +173,12 @@ const SearchBar = (props) => {
                 {artists}
               </div>
             )} */}
-            {playlists.length > 0 && (
+            {/* {playlists.length > 0 && (
               <div className="result-group">
                 <h3>Playlists</h3>
                 {playlists}
               </div>
-            )}
+            )} */}
           </ul>
         </div>
       );
@@ -194,7 +194,7 @@ const SearchBar = (props) => {
 
   // function CustomToggle({ children, eventKey }) {
   //   // const decoratedOnClick = useAccordionButton(eventKey, () =>
-  //   //   console.log("totally custom!")
+  //   //                                                                                                                                                                                                                                                                                                                                                                                                                                                       ("totally custom!")
   //   // );
 
   //   return (

@@ -5,21 +5,34 @@ import { shufflePlaylist } from "../../utils/utils";
 import AlbumArt from "../../assets/album_art_blank.jpg";
 import regex from "../../helpers/helper-functions";
 
-const MusicDetail = ({ data }) => {
-  console.log(data);
+const MusicDetail = ({ data, items }) => {
+  // console.log(data);
   const [state, setState] = useContext(GlobalState);
 
   const callPlay = (song) => {
-    let newQueue = [...state.originalQueue, song];
-    if (state.shuffleOn) {
-      newQueue = shufflePlaylist(newQueue, song);
+    if (items) {
+      let newQueue = [...state.originalQueue, items[0], ...items.slice(1)];
+      if (state.shuffleOn) {
+        newQueue = shufflePlaylist(newQueue, items[0]);
+      }
+      setState((state) => ({
+        ...state,
+        currentSong: items[0],
+        queue: newQueue,
+        originalQueue: [...state.originalQueue, ...newQueue],
+      }));
+    } else {
+      let newQueue = [...state.originalQueue, song];
+      if (state.shuffleOn) {
+        newQueue = shufflePlaylist(newQueue, song);
+      }
+      setState((state) => ({
+        ...state,
+        currentSong: song,
+        queue: newQueue,
+        originalQueue: [...state.originalQueue, song],
+      }));
     }
-    setState((state) => ({
-      ...state,
-      currentSong: song,
-      queue: newQueue,
-      originalQueue: [...state.originalQueue, song],
-    }));
   };
 
   return (
@@ -55,7 +68,7 @@ const MusicDetail = ({ data }) => {
 
           <div className="d-inline-flex flex-wrap align-items-center justify-content-md-start justify-content-center">
             <Button onClick={() => callPlay(data)} className="btn btn_solid">
-              Play/Pause
+              {items ? "Play All" : "Play"}
             </Button>
             {/* <p>Favourite Button</p> */}
             {/* <p>Menu Button</p> */}

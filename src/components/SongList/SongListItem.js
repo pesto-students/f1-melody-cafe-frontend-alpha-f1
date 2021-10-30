@@ -8,7 +8,7 @@ import { shufflePlaylist } from "../../utils/utils";
 const SongListItems = (props) => {
   const [state, setState] = useContext(GlobalState);
 
-  console.log("inside song list items");
+  // console.log("inside song list items");
 
   const dispatch = useDispatch();
   // Set this song to selected if it matches the selectedSong state
@@ -21,27 +21,50 @@ const SongListItems = (props) => {
   }
 
   const callPlay = (song) => {
-    let newQueue = state.originalQueue;
-
-    newQueue = [...state.originalQueue, song];
-
-    if (state.shuffleOn) {
-      newQueue = shufflePlaylist(newQueue, song);
-    }
-    if (props.isQueue) {
-      setState((state) => ({
-        ...state,
-        currentSong: song,
-        // queue: newQueue,
-        // originalQueue: [...state.originalQueue, song],
-      }));
+    let { items } = props;
+    if (items) {
+      let newQueue = [...state.originalQueue, song, ...items];
+      if (state.shuffleOn) {
+        newQueue = shufflePlaylist(newQueue, song);
+      }
+      if (props.isQueue) {
+        setState((state) => ({
+          ...state,
+          currentSong: song,
+          // queue: newQueue,
+          // originalQueue: [...state.originalQueue, song],
+        }));
+      } else {
+        setState((state) => ({
+          ...state,
+          currentSong: song,
+          queue: newQueue,
+          originalQueue: [...state.originalQueue, ...newQueue],
+        }));
+      }
     } else {
-      setState((state) => ({
-        ...state,
-        currentSong: song,
-        queue: newQueue,
-        originalQueue: [...state.originalQueue, song],
-      }));
+      let newQueue = state.originalQueue;
+
+      newQueue = [...state.originalQueue, song];
+
+      if (state.shuffleOn) {
+        newQueue = shufflePlaylist(newQueue, song);
+      }
+      if (props.isQueue) {
+        setState((state) => ({
+          ...state,
+          currentSong: song,
+          // queue: newQueue,
+          // originalQueue: [...state.originalQueue, song],
+        }));
+      } else {
+        setState((state) => ({
+          ...state,
+          currentSong: song,
+          queue: newQueue,
+          originalQueue: [...state.originalQueue, song],
+        }));
+      }
     }
   };
 
@@ -63,7 +86,7 @@ const SongListItems = (props) => {
   };
 
   let song = songModel();
-  console.log(song);
+  // console.log(song);
 
   if (!song?.title) {
     return (

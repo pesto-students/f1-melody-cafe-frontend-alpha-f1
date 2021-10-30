@@ -4,7 +4,6 @@ import API from "../api/services/api";
 import GlobalState from "../contexts/GlobalState";
 import PlaylistModal from "./Playlist/PlaylistModal";
 import RefactorSongList from "./SongList/RefactorSongList";
-import SongList from "./SongList/SongList";
 
 const FullScreenController = ({ show, setShow }) => {
   const [state, setState] = useContext(GlobalState);
@@ -29,14 +28,20 @@ const FullScreenController = ({ show, setShow }) => {
     <div>
       <Modal
         show={show}
-        onHide={() => setShow(false)}
+        onHide={() => {
+          setShow(false);
+          setState((state) => ({ ...state, fullscreen: false }));
+        }}
         fullscreen={true}
         contentClassName="bg-dark text-white"
         scrollable
       >
         <Modal.Header
           className="border-bottom-0"
-          closeButton={() => setShow(false)}
+          closeButton={() => {
+            setShow(false);
+            setState((state) => ({ ...state, fullscreen: false }));
+          }}
         ></Modal.Header>
         <Modal.Body>
           <div className="d-flex flex-wrap flex-column align-items-end flex-md-row align-items-md-end justify-content-md-end">

@@ -6,7 +6,7 @@ import { Table } from "react-bootstrap";
 
 const RefactorSongList = (props) => {
   const [state, setState] = useContext(GlobalState);
-  console.log("SongListtt");
+  // console.log("SongListtt");
 
   const queueListArray = _.map(state.queue, (video) => {
     if (
@@ -44,6 +44,7 @@ const RefactorSongList = (props) => {
         <SongListItems
           key={video?.etag}
           video={video}
+          items={props.songs}
           //   onVideoSelect={onVideoSelect}
           //   selectedSong={selectedSong}
           // cachedPlaylist={cachedPlaylists[genre][props.playlistId].songs}

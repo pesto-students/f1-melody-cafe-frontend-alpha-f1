@@ -31,6 +31,7 @@ import regex from "../helpers/helper-functions";
 import FullScreenController from "./FullScreenController";
 import PlaylistModal from "./Playlist/PlaylistModal";
 import API from "../api/services/api";
+import PaymentModal from "./Payment/PaymentModal";
 
 let previousStreamUrl = "";
 let audio = new Audio();
@@ -38,6 +39,7 @@ audio.autoplay = false;
 
 const Controller = (props) => {
   const [state, setState] = useContext(GlobalState);
+  const [showPayment, setShowPayment] = useState(false);
 
   let api = new API();
 
@@ -74,6 +76,7 @@ const Controller = (props) => {
   const [showLyrics, setShowLyrics] = useState(false);
   const [showFullScreen, setShowFullScreen] = useState(false);
   const [showPlaylist, setShowPlaylist] = useState(false);
+  const [skipCount, setSkipCount] = useState(0);
 
   useEffect(() => {
     setSongLiked(false);
@@ -110,35 +113,41 @@ const Controller = (props) => {
 
   const goToNextSong = (force) => {
     const currentSongIndex = getCurrentSongIndex();
-    if (currentSongIndex !== -1) {
-      let nextSongIndex = currentSongIndex;
-      switch (state.repeatMode) {
-        case REPEAT_MODE.NONE:
-        default:
-          if (currentSongIndex < state.queue.length - 1) {
-            nextSongIndex++;
-          }
-          break;
-        case REPEAT_MODE.ALL:
-          if (currentSongIndex < state.queue.length - 1) {
-            nextSongIndex++;
-          } else {
-            nextSongIndex = 0;
-          }
-          break;
-        case REPEAT_MODE.ONE:
-          if (force && currentSongIndex < state.queue.length - 1) {
-            nextSongIndex++;
-          } else {
-            restartAudio();
-          }
-          break;
-      }
+    setSkipCount((currentCount) => currentCount + 1);
 
-      setState((state) => ({
-        ...state,
-        currentSong: state.queue[nextSongIndex],
-      }));
+    if (skipCount >= 2) {
+      setShowPayment(true);
+    } else {
+      if (currentSongIndex !== -1) {
+        let nextSongIndex = currentSongIndex;
+        switch (state.repeatMode) {
+          case REPEAT_MODE.NONE:
+          default:
+            if (currentSongIndex < state.queue.length - 1) {
+              nextSongIndex++;
+            }
+            break;
+          case REPEAT_MODE.ALL:
+            if (currentSongIndex < state.queue.length - 1) {
+              nextSongIndex++;
+            } else {
+              nextSongIndex = 0;
+            }
+            break;
+          case REPEAT_MODE.ONE:
+            if (force && currentSongIndex < state.queue.length - 1) {
+              nextSongIndex++;
+            } else {
+              restartAudio();
+            }
+            break;
+        }
+
+        setState((state) => ({
+          ...state,
+          currentSong: state.queue[nextSongIndex],
+        }));
+      }
     }
   };
 
@@ -283,7 +292,10 @@ const Controller = (props) => {
       pauseAudio();
       if (song?.id !== undefined) {
         let video_id = null;
-        if (song?.kind === "youtube#playlistItem") {
+        if (
+          song?.kind === "youtube#playlistItem" ||
+          song?.kind === "youtube#searchResult"
+        ) {
           video_id = song?.snippet?.resourceId?.videoId;
         }
         if (song?.kind === "youtube#video") {
@@ -291,7 +303,6 @@ const Controller = (props) => {
         }
         setBuffering(true);
         getAudio(video_id, state.qualityMode).then((response) => {
-          console.log(response);
           if (response?.status === 200) {
             const streamingUrl = response?.data;
             if (previousStreamUrl !== streamingUrl) {
@@ -451,13 +462,17 @@ const Controller = (props) => {
         <Col className="p-0 m-0 d-none d-md-block"></Col>
         <Col className="p-0 m-0" sm="auto"></Col> */}
       </Row>
-
       <LyricsModal
         song={song}
         showLyrics={showLyrics}
         setShowLyrics={setShowLyrics}
       />
-
+      <PaymentModal
+        showPayment={showPayment}
+        setShowPayment={setShowPayment}
+        setSkipCount={setSkipCount}
+      ></PaymentModal>
+      ;
       <FullScreenController show={showFullScreen} setShow={setShowFullScreen} />
       <PlaylistModal show={showPlaylist} setShow={setShowPlaylist} type="ADD" />
     </div>

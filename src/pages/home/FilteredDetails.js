@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import MusicDetail from "../../components/MusicDetail/MusicDetail";
 import RefactorSongList from "../../components/SongList/RefactorSongList";
-import SongList from "../../components/SongList/SongList";
 import GlobalState from "../../contexts/GlobalState";
 import SideImage from "../../assets/rhs_banner_v5.jpg";
 import RowLayout from "../../components/RowLayout/RowLayout";
@@ -74,7 +73,7 @@ const FilteredDetails = ({ title, location }) => {
           </h1> */}
           {data ? (
             <>
-              <MusicDetail data={data} />
+              <MusicDetail data={data} items={items} />
               {items ? (
                 <RefactorSongList
                   // playlistId={"charts"}
