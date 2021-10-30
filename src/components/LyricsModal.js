@@ -41,7 +41,11 @@ const LyricsModal = (props) => {
           Song Lyrics
         </p>
       </Modal.Header>
-      <Modal.Body className="lyric-body">{lyrics}</Modal.Body>
+      <Modal.Body className="lyric-body">
+        {lyrics
+          ? lyrics
+          : "Song lyrics are unavailable currently. Please try again later."}
+      </Modal.Body>
     </Modal>
   );
 };

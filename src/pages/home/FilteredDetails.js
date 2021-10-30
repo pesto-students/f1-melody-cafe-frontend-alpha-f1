@@ -74,7 +74,7 @@ const FilteredDetails = ({ title, location }) => {
           </h1> */}
           {data ? (
             <>
-              <MusicDetail data={data} />
+              <MusicDetail data={data} items={items} />
               {items ? (
                 <RefactorSongList
                   // playlistId={"charts"}
