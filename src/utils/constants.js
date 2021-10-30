@@ -19,7 +19,7 @@ export const blankSong = {
 };
 
 export const filtersListHome = [
-  { name: "All", url: "/all", type: "homeSec", subFilters: null },
+  { name: "All", url: "/", type: "homeSec", subFilters: null },
   {
     name: "Trending Songs",
     url: "/trending-songs",
@@ -33,100 +33,6 @@ export const filtersListHome = [
     type: "miscOldSongs",
     subFilters: null,
   },
-
-  {
-    name: "Moods & Genres",
-    url: "/old-songs",
-    type: "homeSec",
-    subFilters: null,
-    // subFilters: [
-    //   {
-    //     name: "Festivals",
-    //     url: "/festivals",
-    //     type: "occasionDetail",
-    //     subFilters: null,
-    //   },
-    //   {
-    //     name: "Romance",
-    //     url: "/romance",
-    //     type: "occasionDetail",
-    //     subFilters: null,
-    //   },
-    //   {
-    //     name: "Party",
-    //     url: "/party",
-    //     type: "occasionDetail",
-    //     subFilters: null,
-    //   },
-    //   {
-    //     name: "Friendship",
-    //     url: "/friendship",
-    //     type: "occasionDetail",
-    //     subFilters: null,
-    //   },
-    //   {
-    //     name: "Dance",
-    //     url: "/dance",
-    //     type: "occasionDetail",
-    //     subFilters: null,
-    //   },
-    //   {
-    //     name: "Kids",
-    //     url: "/kids",
-    //     type: "occasionDetail",
-    //     subFilters: null,
-    //   },
-    //   {
-    //     name: "Wedding",
-    //     url: "/wedding",
-    //     type: "occasionDetail",
-    //     subFilters: null,
-    //   },
-    //   {
-    //     name: "Stars",
-    //     url: "/stars",
-    //     type: "occasionDetail",
-    //     subFilters: null,
-    //   },
-    //   {
-    //     name: "Workout",
-    //     url: "/workout",
-    //     type: "occasionDetail",
-    //     subFilters: null,
-    //   },
-    //   {
-    //     name: "Ghazals",
-    //     url: "/ghazals",
-    //     type: "occasionDetail",
-    //     subFilters: null,
-    //   },
-    //   {
-    //     name: "EDM",
-    //     url: "/edm",
-    //     type: "occasionDetail",
-    //     subFilters: null,
-    //   },
-    //   {
-    //     name: "Indie",
-    //     url: "/indie",
-    //     type: "occasionDetail",
-    //     subFilters: null,
-    //   },
-    //   {
-    //     name: "Bhakti",
-    //     url: "/bhakti",
-    //     type: "occasionDetail",
-    //     subFilters: null,
-    //   },
-    //   {
-    //     name: "Retro",
-    //     url: "/retro",
-    //     type: "occasionDetail",
-    //     subFilters: null,
-    //   },
-    // ],
-  },
-
   { name: "Album", url: "/album", type: "albumList", subFilters: null },
   { name: "Radio", url: "/radio", type: "radioList", subFilters: null },
   { name: "Podcast", url: "/podcast", type: "podcastList", subFilters: null },
