@@ -292,7 +292,10 @@ const Controller = (props) => {
       pauseAudio();
       if (song?.id !== undefined) {
         let video_id = null;
-        if (song?.kind === "youtube#playlistItem") {
+        if (
+          song?.kind === "youtube#playlistItem" ||
+          song?.kind === "youtube#searchResult"
+        ) {
           video_id = song?.snippet?.resourceId?.videoId;
         }
         if (song?.kind === "youtube#video") {
