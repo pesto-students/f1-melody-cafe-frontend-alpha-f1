@@ -42,9 +42,7 @@ const LoginButton = () => {
     },
   });
   let logOutHandler = ()=>{
-    lock.logout({
-      returnTo: window.location.host + '/logout'
-    })
+    lock.logout()
     localStorage.removeItem("token");
     localStorage.setItem("profile");
     localStorage.setItem('isLogin');
