@@ -1,9 +1,10 @@
-import axios  from "axios";
+import axios from "axios";
 
-let baseUrl = process.env.BASE_URL || 'https://yhwyjsf4yb.us-east-2.awsapprunner.com';
+let baseUrl = "http://localhost:5000";
+// 'https://yhwyjsf4yb.us-east-2.awsapprunner.com'
 
 const instance = axios.create({
-    baseURL: baseUrl
-})
+  baseURL: baseUrl,
+});
 
 export default instance;

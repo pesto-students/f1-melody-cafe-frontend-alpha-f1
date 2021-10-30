@@ -9,7 +9,10 @@ import CustomCarousel from "../../components/CustomCarousel/CustomCarousel";
 import RowLayout from "../../components/RowLayout/RowLayout";
 import GlobalState from "../../contexts/GlobalState";
 import API from "../../api/services/api";
-import SideImage from "../../assets/rhs_banner_v5.jpg";
+// import SideImage from "../../assets/rhs_banner_v5.jpg";
+import SideImage1 from "../../assets/rhs_banner_1.jpg";
+import SideImage2 from "../../assets/TheMelodyCafeLogo.gif";
+import SideImage3 from "../../assets/rhs_banner_3.png";
 
 // make a permanent playlist object with few songs catergory
 const playlistsIds = {
@@ -291,7 +294,9 @@ const Home = () => {
             state.fullscreen ? "d-none" : "d-none d-xl-block"
           }`}
         >
-          <Image src={SideImage} width={"100%"} height={"100%"} />
+          <Image src={SideImage1} width={"100%"} height={"60%"} />
+          <Image src={SideImage2} width={"100%"} height={"40%"} />
+          <Image src={SideImage3} width={"100%"} height={"20%"} />
         </Col>
       </Row>
     </Container>

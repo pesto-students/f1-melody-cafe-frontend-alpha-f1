@@ -27,18 +27,21 @@ const SearchResult = (props) => {
   }
 
   // List items songs
-  if (props.result.id.kind === "youtube#video") {
-    if (!props.result.duration) {
-      return (
-        <tr className="list-item">
-          <td className="list-save"></td>
-          <td className="list-track">Loading...</td>
-          <td className="list-artist"></td>
-          <td className="list-duration"></td>
-          {/* <td className="list-play-count"></td> */}
-        </tr>
-      );
-    }
+  if (
+    props.result.id.kind === "youtube#video" ||
+    props.result.kind === "youtube#video"
+  ) {
+    // if (!props.result.duration) {
+    //   return (
+    //     <tr className="list-item">
+    //       <td className="list-save"></td>
+    //       <td className="list-track">Loading...</td>
+    //       <td className="list-artist"></td>
+    //       {/* <td className="list-duration"></td> */}
+    //       {/* <td className="list-play-count"></td> */}
+    //     </tr>
+    //   );
+    // }
 
     // Modifying the returned object to match what songController is expecting
     let modifiedResult = props.result;
@@ -50,7 +53,7 @@ const SearchResult = (props) => {
     let ctitle = modifiedResult.snippet.channelTitle;
     modifiedResult.channelTitle = ctitle;
 
-    let duration = props.result.duration;
+    // let duration = props.result.duration;
     // let viewCount = props.result.viewCount;
 
     // Add css selected class
@@ -124,9 +127,9 @@ const SearchResult = (props) => {
         <td className="list-artist" onClick={() => songSelect()}>
           {regex.editArtist(channelTitle)}
         </td>
-        <td className="list-duration" onClick={() => songSelect()}>
+        {/* <td className="list-duration" onClick={() => songSelect()}>
           {regex.editDuration(duration)}
-        </td>
+        </td> */}
         {/* <td className="list-play-count" onClick={() => songSelect()}>
           {regex.editPlayCount(viewCount)}
         </td> */}
@@ -158,14 +161,14 @@ const SearchResult = (props) => {
   }
 
   // List items artists
-  if (props.result.id.kind === "youtube#channel") {
-    return (
-      <li className="artist-result col-xs-6 col-sm-4 col-md-3 col-lg-3">
-        <img src={thumbnail} alt="" />
-        <span>{regex.editArtist(channelTitle)}</span>
-      </li>
-    );
-  }
+  // if (props.result.id.kind === "youtube#channel") {
+  //   return (
+  //     <li className="artist-result col-xs-6 col-sm-4 col-md-3 col-lg-3">
+  //       <img src={thumbnail} alt="" />
+  //       <span>{regex.editArtist(channelTitle)}</span>
+  //     </li>
+  //   );
+  // }
 };
 
 export default SearchResult;

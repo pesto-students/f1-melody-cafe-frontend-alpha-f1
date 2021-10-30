@@ -1,3 +1,4 @@
+import { QUALITY } from "../../utils/constants";
 import instance from "./axios";
 
 class API {
@@ -20,8 +21,16 @@ class API {
     return result;
   }
 
-  async getSongUrl(videoId) {
-    let result = await instance.get(`/song/${videoId}`);
+  async getSongUrl(videoId, quality) {
+    let params = {};
+    if (quality === QUALITY.LOW) {
+      params["quality"] = "low";
+    } else if (quality === QUALITY.MED) {
+      params["quality"] = "medium";
+    } else {
+      params["quality"] = "high";
+    }
+    let result = await instance.get(`/song/${videoId}`, { params: params });
     return result;
   }
 

@@ -4,6 +4,11 @@ export const REPEAT_MODE = {
   ONE: 1,
 };
 
+export const QUALITY = {
+  LOW: -1,
+  MED: 0,
+  HIGH: 1,
+};
 export const blankSong = {
   id: "",
   name: "",

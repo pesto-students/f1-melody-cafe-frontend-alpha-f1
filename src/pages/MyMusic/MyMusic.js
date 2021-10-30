@@ -6,6 +6,9 @@ import PlaylistModal from "../../components/Playlist/PlaylistModal";
 import PublishMusicModal from "../../components/Playlist/PublishMusicModal";
 import GlobalState from "../../contexts/GlobalState";
 import SideImage from "../../assets/rhs_banner_v5.jpg";
+import SideImage1 from "../../assets/rhs_banner_1.jpg";
+import SideImage2 from "../../assets/TheMelodyCafeLogo.gif";
+import SideImage3 from "../../assets/rhs_banner_3.png";
 
 const MyMusic = ({ type }) => {
   const [showPlaylistModal, setShowPlaylistModal] = useState(false);
@@ -16,7 +19,10 @@ const MyMusic = ({ type }) => {
   let api = new API();
 
   useEffect(() => {
-    api.getPlaylists().then((data) => setUserPlaylist(data.data.rows));
+    api
+      .getPlaylists()
+      .then((data) => setUserPlaylist(data.data.row))
+      .catch((err) => setUserPlaylist([]));
     // if (userPlaylist.length) {
     //   setState((state) => ({
     //     ...state,
@@ -24,6 +30,8 @@ const MyMusic = ({ type }) => {
     //   }));
     // }
   }, []);
+
+  console.log(userPlaylist);
 
   return (
     <Container fluid className="backgroundColour my-5 py-5">
@@ -49,10 +57,10 @@ const MyMusic = ({ type }) => {
             >
               Publish Your Music
             </Button>
-            {state.userPublish?.length ? (
+            {state?.userPublish?.length ? (
               <MusicContainer
                 title="My Published Ones"
-                items={state.userPublish}
+                items={state?.userPublish}
                 seeAllLink={"my-published-one"}
                 type={"song"}
                 isMyMusic={true}
@@ -61,7 +69,7 @@ const MyMusic = ({ type }) => {
               ""
             )}
 
-            {state.userPlaylist?.length || userPlaylist.length ? (
+            {state?.userPlaylist?.length || userPlaylist.length ? (
               <MusicContainer
                 title="My Playlists"
                 items={userPlaylist || state.userPlaylist}
@@ -73,7 +81,7 @@ const MyMusic = ({ type }) => {
               ""
             )}
 
-            {state.userPlaylist?.length || userPlaylist.length ? (
+            {state?.userPlaylist?.length || userPlaylist.length ? (
               <MusicContainer
                 title="Favourite Playlists"
                 items={userPlaylist || state.userPlaylist}
@@ -85,7 +93,7 @@ const MyMusic = ({ type }) => {
               ""
             )}
 
-            {state.userFavouriteSongs?.length ? (
+            {state?.userFavouriteSongs?.length ? (
               <MusicContainer
                 title="Favourite Songs"
                 items={state.userFavouriteSongs}
@@ -104,7 +112,9 @@ const MyMusic = ({ type }) => {
             state.fullscreen ? "d-none" : "d-none d-xl-block"
           }`}
         >
-          <Image src={SideImage} width={"100%"} height={"100%"} />
+          <Image src={SideImage1} width={"100%"} height={"60%"} />
+          <Image src={SideImage3} width={"100%"} height={"20%"} />
+          <Image src={SideImage2} width={"100%"} height={"40%"} />
         </Col>
       </Row>
       <PlaylistModal

@@ -60,9 +60,7 @@ const MusicContainer = ({ title, seeAllLink, items, type, isMyMusic }) => {
             </Link>
             <Card.Body>
               <p className="m-card-text">
-                {regex.editTitle(
-                  regex.truncate(item?.snippet?.title || item?.name)
-                )}
+                {regex.trimTitle(item?.snippet?.title || item?.name).song}
               </p>
               {/* <Card.Subtitle className="mb-2 text-muted">
             Card Subtitle
