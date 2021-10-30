@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Header from "./components/Header/Header";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -9,16 +8,8 @@ import { QUALITY, REPEAT_MODE } from "./utils/constants";
 import { useEffect, useState } from "react";
 import Controller from "./components/Controller";
 import _ from "lodash";
-import { onPlaylistInit, onPageSelect } from "./entities";
-import { useDispatch, useSelector } from "react-redux";
 
 function App() {
-  // const playlistList = useSelector((state) => state.playlistList);
-  // const dispatch = useDispatch();
-
-  // let genresArray = _.map(playlistList, (item) => item.genreSlug);
-  // genresArray.push("browse");
-
   const [state, setState] = useState({
     queue: [],
     currentSong: null,
@@ -31,14 +22,6 @@ function App() {
     userPublish: [],
     userFavouriteSongs: [],
   });
-
-  // useEffect(() => {
-  //   _.map(playlistList, (item) => {
-  //     return _.map(item.playlists, (playlist) => {
-  //       return dispatch(onPlaylistInit(playlist.playlistId, item.genreSlug));
-  //     });
-  //   });
-  // }, []);
 
   return (
     <div className="App">

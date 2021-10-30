@@ -88,7 +88,6 @@ const MusicCover = ({ isRounded, data, type, slug }) => {
           />
         )}
         <Figure.Caption>
-          {" "}
           {regex.trimTitle(data?.playlistInfo?.playlistTitle).song ||
             data?.genreTitle ||
             regex.trimTitle(data?.snippet?.title).song}
