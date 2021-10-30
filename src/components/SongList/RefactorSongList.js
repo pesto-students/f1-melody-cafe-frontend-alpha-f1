@@ -44,6 +44,7 @@ const RefactorSongList = (props) => {
         <SongListItems
           key={video?.etag}
           video={video}
+          items={props.songs}
           //   onVideoSelect={onVideoSelect}
           //   selectedSong={selectedSong}
           // cachedPlaylist={cachedPlaylists[genre][props.playlistId].songs}

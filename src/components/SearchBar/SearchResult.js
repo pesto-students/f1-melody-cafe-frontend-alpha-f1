@@ -121,10 +121,10 @@ const SearchResult = (props) => {
     return (
       <tr className={addSelectedClass}>
         {/* {renderSaveRemoveButton()} */}
-        <td className="list-track" onClick={() => songSelect()}>
+        <td className="list-track px-3" onClick={() => songSelect()}>
           {title}
         </td>
-        <td className="list-artist" onClick={() => songSelect()}>
+        <td className="list-artist px-3" onClick={() => songSelect()}>
           {regex.editArtist(channelTitle)}
         </td>
         {/* <td className="list-duration" onClick={() => songSelect()}>
@@ -138,27 +138,27 @@ const SearchResult = (props) => {
   }
 
   // List items playlists
-  if (props.result.id.kind === "youtube#playlist") {
-    // function playlistSelect() {
-    //   props.onSearchPlaylistInit(
-    //     props.result.id.playlistId,
-    //     "yourmusic",
-    //     thumbnail,
-    //     title
-    //   );
-    //   props.setSearchHistory();
-    // }
+  // if (props.result.id.kind === "youtube#playlist") {
+  // function playlistSelect() {
+  //   props.onSearchPlaylistInit(
+  //     props.result.id.playlistId,
+  //     "yourmusic",
+  //     thumbnail,
+  //     title
+  //   );
+  //   props.setSearchHistory();
+  // }
 
-    return (
-      <li
-        className="playlist-result col-xs-6 col-sm-4 col-md-3 col-lg-3"
-        // onClick={() => playlistSelect()}
-      >
-        <img src={thumbnail} alt="" />
-        <span>{trimmedTitle}</span>
-      </li>
-    );
-  }
+  // return (
+  //   <li
+  //     className="playlist-result col-xs-6 col-sm-4 col-md-3 col-lg-3"
+  //     // onClick={() => playlistSelect()}
+  //   >
+  //     <img src={thumbnail} alt="" />
+  //     <span>{trimmedTitle}</span>
+  //   </li>
+  // );
+  // }
 
   // List items artists
   // if (props.result.id.kind === "youtube#channel") {

@@ -21,27 +21,50 @@ const SongListItems = (props) => {
   }
 
   const callPlay = (song) => {
-    let newQueue = state.originalQueue;
-
-    newQueue = [...state.originalQueue, song];
-
-    if (state.shuffleOn) {
-      newQueue = shufflePlaylist(newQueue, song);
-    }
-    if (props.isQueue) {
-      setState((state) => ({
-        ...state,
-        currentSong: song,
-        // queue: newQueue,
-        // originalQueue: [...state.originalQueue, song],
-      }));
+    let { items } = props;
+    if (items) {
+      let newQueue = [...state.originalQueue, song, ...items];
+      if (state.shuffleOn) {
+        newQueue = shufflePlaylist(newQueue, song);
+      }
+      if (props.isQueue) {
+        setState((state) => ({
+          ...state,
+          currentSong: song,
+          // queue: newQueue,
+          // originalQueue: [...state.originalQueue, song],
+        }));
+      } else {
+        setState((state) => ({
+          ...state,
+          currentSong: song,
+          queue: newQueue,
+          originalQueue: [...state.originalQueue, ...newQueue],
+        }));
+      }
     } else {
-      setState((state) => ({
-        ...state,
-        currentSong: song,
-        queue: newQueue,
-        originalQueue: [...state.originalQueue, song],
-      }));
+      let newQueue = state.originalQueue;
+
+      newQueue = [...state.originalQueue, song];
+
+      if (state.shuffleOn) {
+        newQueue = shufflePlaylist(newQueue, song);
+      }
+      if (props.isQueue) {
+        setState((state) => ({
+          ...state,
+          currentSong: song,
+          // queue: newQueue,
+          // originalQueue: [...state.originalQueue, song],
+        }));
+      } else {
+        setState((state) => ({
+          ...state,
+          currentSong: song,
+          queue: newQueue,
+          originalQueue: [...state.originalQueue, song],
+        }));
+      }
     }
   };
 
