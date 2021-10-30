@@ -13,11 +13,11 @@ import { onPlaylistInit, onPageSelect } from "./entities";
 import { useDispatch, useSelector } from "react-redux";
 
 function App() {
-  const playlistList = useSelector((state) => state.playlistList);
-  const dispatch = useDispatch();
+  // const playlistList = useSelector((state) => state.playlistList);
+  // const dispatch = useDispatch();
 
-  let genresArray = _.map(playlistList, (item) => item.genreSlug);
-  genresArray.push("browse");
+  // let genresArray = _.map(playlistList, (item) => item.genreSlug);
+  // genresArray.push("browse");
 
   const [state, setState] = useState({
     queue: [],
@@ -32,13 +32,13 @@ function App() {
     userFavouriteSongs: [],
   });
 
-  useEffect(() => {
-    _.map(playlistList, (item) => {
-      return _.map(item.playlists, (playlist) => {
-        return dispatch(onPlaylistInit(playlist.playlistId, item.genreSlug));
-      });
-    });
-  }, []);
+  // useEffect(() => {
+  //   _.map(playlistList, (item) => {
+  //     return _.map(item.playlists, (playlist) => {
+  //       return dispatch(onPlaylistInit(playlist.playlistId, item.genreSlug));
+  //     });
+  //   });
+  // }, []);
 
   return (
     <div className="App">

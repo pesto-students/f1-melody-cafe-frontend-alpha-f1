@@ -45,8 +45,8 @@ const Home = () => {
   const Api = new API();
   const [state, setState] = useContext(GlobalState);
   const [songObj, setSongObj] = useState({});
-  const playlistList = useSelector((state) => state.playlistList);
-  const showPage = useSelector((state) => state.playlists.showPage);
+  // const playlistList = useSelector((state) => state.playlistList);
+  // const showPage = useSelector((state) => state.playlists.showPage);
 
   const fetchFromApi = () => {
     slowConnectionTimeout = setTimeout(() => {}, 5000);
@@ -61,14 +61,14 @@ const Home = () => {
       }
     };
 
-    const getPlayListItems = async (data) => {
-      try {
-        const res = await Api.getSongs("playlist", data);
-        return res.data.items;
-      } catch (err) {
-        console.log(err);
-      }
-    };
+    // const getPlayListItems = async (data) => {
+    //   try {
+    //     const res = await Api.getSongs("playlist", data);
+    //     return res.data.items;
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // };
 
     const getPlayListBasedOnGenre = async (genre) => {
       try {

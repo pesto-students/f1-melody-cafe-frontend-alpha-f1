@@ -27,6 +27,7 @@ const SideBar = ({ show, handleClose, ...props }) => {
           <PaymentModal
             showPayment={showPayment}
             setShowPayment={setShowPayment}
+            setSkipCount={(num) => null}
           ></PaymentModal>
           <hr />
           {filtersListHome?.map((filter, _ind) =>

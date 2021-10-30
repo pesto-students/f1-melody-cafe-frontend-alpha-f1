@@ -77,6 +77,7 @@ const Header = () => {
                 <PaymentModal
                   showPayment={showPayment}
                   setShowPayment={setShowPayment}
+                  setSkipCount={(num) => null}
                 ></PaymentModal>
               </Nav.Link>
               {/* <Nav.Link>
