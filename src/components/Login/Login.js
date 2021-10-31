@@ -44,8 +44,8 @@ const LoginButton = () => {
   let logOutHandler = ()=>{
     lock.logout()
     localStorage.removeItem("token");
-    localStorage.setItem("profile");
-    localStorage.setItem('isLogin');
+    localStorage.removeItem("profile");
+    localStorage.removeItem('isLogin');
   }
  
   async function isLoginCheck(){
@@ -64,7 +64,6 @@ const LoginButton = () => {
       if (error) {
         return;
       }
-
      await localStorage.setItem("token", authResult.accessToken);
      await localStorage.setItem("profile", JSON.stringify(profileResult));
      await localStorage.setItem('isLogin',true);
