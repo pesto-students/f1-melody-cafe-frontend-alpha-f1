@@ -55,7 +55,7 @@ We have integrated Stripe checkout. To post a job, you'll need to make a dummy p
 
 We tried to use a completely modern tech stack while testing out some new technologies that we had never used before. This resulted in a fast, performant, and easily-extensible web app that should be fairly future-proof for the coming next several years. We used:
 
-- [Bootstrap](https://mui.com)
+- [Bootstrap](https://getbootstrap.com/docs/5.1/getting-started/introduction/)
 - [Axios](https://axios-http.com/docs/intro)
 - [Auth0-lock](https://github.com/auth0/lock)
 
