@@ -1,70 +1,73 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Melody Cafe Logo](https://i.ibb.co/JddDDyM/The-Melody-Cafe-Logo.gif)
 
-## Available Scripts
+Melody Cafe is music website where you can listen songs 
+<br/>
 
-In the project directory, you can run:
+# Table of Content
 
-### `yarn start`
+1. [Demo](#demo)
+2. [Installation](#installation)
+3. [Technology Stack](#technology-stack)
+4. [Authors](#authors)
+5. [License](#license)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<br/>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# Demo
 
-### `yarn test`
+[Live Demo](https://master.d2kw5hl91dwpos.amplifyapp.com)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br/>
 
-### `yarn build`
+Please Note:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. We recommend using this app in Google Chrome.
+3. We are using Auth0 for authentication, so for recruiter login, please don't use Safari, as it blocks third-party cookies.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<br/>
+Test Credentials:
+   (use Google)
+  - Email: melodycafe.user@gmail.com
+  - Password: TestCafe@123
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br/>
 
-### `yarn eject`
+Test card details:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+We have integrated Stripe checkout. To post a job, you'll need to make a dummy payment on Stripe checkout. Use the following details:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Card Number: 4242 4242 4242 4242
+- Expiry: Any future date
+- CVC: Any random 3 digit number
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<br/>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Installation
 
-## Learn More
+- Fork or directly clone this repository to your local machine
+- Use the `npm install` command to install dependencies
+- Once the dependencies are finished installing, use the `npm start` command inside the root directory to open the app in your local browser of choice
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<br/>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Technology Stack
 
-### Code Splitting
+We tried to use a completely modern tech stack while testing out some new technologies that we had never used before. This resulted in a fast, performant, and easily-extensible web app that should be fairly future-proof for the coming next several years. We used:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- [Bootstrap](https://mui.com)
+- [Axios](https://axios-http.com/docs/intro)
+- [Auth0-lock](https://github.com/auth0/lock)
 
-### Analyzing the Bundle Size
+<br/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# Authors
 
-### Making a Progressive Web App
+- [Manish Ukirade](https://github.com/MANISHUKIRADE/)
+- [Sachin  singh](https://github.com/sachin2323)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<br/>
 
-### Advanced Configuration
+# License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[MIT](https://opensource.org/licenses/MIT)

@@ -11,16 +11,6 @@ const LoginButton = () => {
   var domain = "melody-cafe.us.auth0.com";
   var redirectUri = window.location.origin;
   var options = {
-    additionalSignUpFields: [
-      {
-        name: "first_Name",
-        placeholder: "Enter your First Name",
-      },
-      {
-        name: "last_name",
-        placeholder: "Enter your Last Name",
-      },
-    ],
     languageDictionary: {
       title: "Melody Cafe",
     },
@@ -29,18 +19,31 @@ const LoginButton = () => {
       primaryColor: "#31324F",
       title: "Melody Cafe",
     },
+    params: {
+      scope: 'openid email user_metadata app_metadata picture'
+     },
+     prefill: {
+      email: "melodycafe.user@gmail.com",
+      credential: "TestCafe@123"
+    },
+    popupOptions: { width: 200, height: 200, left: 100, top: 100 },
+    allowAutocomplete: true,
+    allowPasswordAutocomplete: true,
   };
   var lock = new Auth0Lock(clientId, domain, options);
 
   const [isLogin,setIsLogin] = useState(false); 
   const [buttonText,setButtonText] = useState('Login/Signup');
-  let logInHandler = () =>
+  let logInHandler = () =>{  
   lock.show({
     responseType: "token",
     auth: {
       redirectUrl: redirectUri,
     },
   });
+  setIsLogin(true);
+  changeTheState();
+  }
   let logOutHandler = ()=>{
     lock.logout()
     localStorage.removeItem("token");

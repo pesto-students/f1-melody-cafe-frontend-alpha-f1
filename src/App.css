@@ -82,7 +82,7 @@
   padding: 15px;
   /* background-color: #13172C; */
   background-color: #222123;
-  z-index: 9999999;
+  z-index: 6;
 }
 
 .sidebar {
