@@ -22,6 +22,7 @@ import {
 } from "react-bootstrap";
 import GlobalState from "../../contexts/GlobalState";
 import API from "../../api/services/api";
+import { Link, NavLink } from "react-router-dom";
 
 const SearchBar = (props) => {
   const [state, setState] = useContext(GlobalState);
@@ -35,6 +36,10 @@ const SearchBar = (props) => {
   const handleClose = () => {
     setShow(false);
     setState((state) => ({ ...state, fullscreen: !show }));
+    setSearchResults({
+      items: [],
+    });
+    setTerm("");
   };
   const handleShow = () => {
     setShow(true);
@@ -102,6 +107,7 @@ const SearchBar = (props) => {
           key={result.etag}
           result={result}
           // onVideoSelect={onVideoSelect}
+          handleClose={handleClose}
           selectedSong={selectedSong}
           // savedSongs={props.savedSongs}
           // saveSong={props.saveSong}
@@ -138,9 +144,13 @@ const SearchBar = (props) => {
 
     let history = _.map(searchHistory, (item) => {
       return (
-        <a className="search-history" onClick={() => searchFromHistory(item)}>
+        <li
+          className="search-history"
+          onClick={() => searchFromHistory(item)}
+          style={{ cursor: "pointer" }}
+        >
           {item}
-        </a>
+        </li>
       );
     });
 
@@ -155,7 +165,7 @@ const SearchBar = (props) => {
                 <table className="list-group">
                   <tbody>
                     <tr>
-                      {/* <th></th> */}
+                      <th className="px-3">Thumbnail</th>
                       <th className="px-3">Title</th>
                       <th className="px-3">Label</th>
                       {/* <th>Dur</th>
