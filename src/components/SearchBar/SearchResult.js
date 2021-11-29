@@ -116,11 +116,15 @@ const SearchResult = (props) => {
         queue: newQueue,
         originalQueue: [...state.originalQueue, modifiedResult],
       }));
+      props.handleClose();
     }
 
     return (
-      <tr className={addSelectedClass}>
+      <tr className={addSelectedClass} style={{ cursor: "pointer" }}>
         {/* {renderSaveRemoveButton()} */}
+        <td className="list-track px-3" onClick={() => songSelect()}>
+          <img src={thumbnail} alt="song-img" width={"100px"} height={"80px"} />
+        </td>
         <td className="list-track px-3" onClick={() => songSelect()}>
           {title}
         </td>
