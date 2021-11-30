@@ -32,6 +32,7 @@ import FullScreenController from "./FullScreenController";
 import PlaylistModal from "./Playlist/PlaylistModal";
 import API from "../api/services/api";
 import PaymentModal from "./Payment/PaymentModal";
+import toast from "react-hot-toast";
 
 let previousStreamUrl = "";
 let audio = new Audio();
@@ -48,7 +49,7 @@ const Controller = (props) => {
       const res = await api.getSongUrl(data);
       return res;
     } catch (err) {
-      console.log(err);
+      console.log("err", err);
     }
   };
 
@@ -89,7 +90,18 @@ const Controller = (props) => {
 
   const playAudio = () => {
     document.title = song?.name;
-    audio.play();
+    audio.play().catch((err) => {
+      toast("Song not available in your region fetching next playable song", {
+        icon: "👏",
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+        duration: 3000,
+      });
+      goToNextSong(true, true);
+    });
     setPlaying(true);
   };
 
@@ -111,9 +123,11 @@ const Controller = (props) => {
     return currentSongIndex;
   };
 
-  const goToNextSong = (force) => {
+  const goToNextSong = (force, dueToError) => {
     const currentSongIndex = getCurrentSongIndex();
-    setSkipCount((currentCount) => currentCount + 1);
+    if (!dueToError) {
+      setSkipCount((currentCount) => currentCount + 1);
+    }
 
     if (skipCount >= 2) {
       setShowPayment(true);
@@ -274,7 +288,7 @@ const Controller = (props) => {
   audio.onended = () => {
     audio.currentTime = 0;
     pauseAudio();
-    goToNextSong(false);
+    goToNextSong(false, false);
   };
 
   audio.onloadstart = () => {
@@ -312,7 +326,7 @@ const Controller = (props) => {
               previousStreamUrl = streamingUrl;
             }
           } else {
-            goToNextSong(true);
+            goToNextSong(true, false);
           }
         });
       }
@@ -372,7 +386,7 @@ const Controller = (props) => {
               width="16px"
               height="16px"
               className="ml-3 controller-icon"
-              onClick={() => goToNextSong(true)}
+              onClick={() => goToNextSong(true, false)}
             />
           </div>
           <div className="controller-seekbar-container d-none d-md-flex col-md-3 col-lg">

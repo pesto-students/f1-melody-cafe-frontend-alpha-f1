@@ -35,13 +35,13 @@ function PaymentModal({ showPayment, setShowPayment, setSkipCount }) {
       })
       .catch((e) => console.log(e));
   }
-  function onChangeHandler(amount) {
-    console.log(amount);
-    // e.preventDefault();
-    setValue(amount);
-  }
+  // function onChangeHandler(amount) {
+  //   console.log(amount);
+  //   // e.preventDefault();
+  //   setValue(amount);
+  // }
 
-  console.log(value);
+  // console.log(value);
 
   useEffect(() => {
     const script = document.createElement("script");

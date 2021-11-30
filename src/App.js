@@ -8,6 +8,7 @@ import { QUALITY, REPEAT_MODE } from "./utils/constants";
 import { useEffect, useState } from "react";
 import Controller from "./components/Controller";
 import _ from "lodash";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const [state, setState] = useState({
@@ -25,6 +26,7 @@ function App() {
 
   return (
     <div className="App">
+      <Toaster position="top-center" reverseOrder={false} />
       <GlobalState.Provider value={[state, setState]}>
         <Router>
           <Header />
