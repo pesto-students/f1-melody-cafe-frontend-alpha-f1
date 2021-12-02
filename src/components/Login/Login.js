@@ -24,7 +24,7 @@ const LoginButton = () => {
      },
      prefill: {
       email: "melodycafe.user@gmail.com",
-      credential: "TestCafe@123"
+      password: "TestCafe@123"
     },
     popupOptions: { width: 200, height: 200, left: 100, top: 100 },
     allowAutocomplete: true,
@@ -34,7 +34,8 @@ const LoginButton = () => {
 
   const [isLogin,setIsLogin] = useState(false); 
   const [buttonText,setButtonText] = useState('Login/Signup');
-  let logInHandler = () =>{  
+  let logInHandler = () =>{
+  alert('Copy the password and login with it : melodycafe.user@123');  
   lock.show({
     responseType: "token",
     auth: {
@@ -67,6 +68,7 @@ const LoginButton = () => {
       if (error) {
         return;
       }
+     setButtonText('Logout');
      await localStorage.setItem("token", authResult.accessToken);
      await localStorage.setItem("profile", JSON.stringify(profileResult));
      await localStorage.setItem('isLogin',true);
@@ -74,13 +76,13 @@ const LoginButton = () => {
       // Update DOM
     });
   });
-  function changeTheState(){
-      if(isLogin){
-        setButtonText('Logout')
+  function changeTheState(){  
+    if(isLogin){
+        setButtonText('Logout');
         return;
-      }
-      setButtonText('Login/Signup');
-      return
+    }
+    setButtonText('Login/Signup');
+    return;
   }
 
   return (
