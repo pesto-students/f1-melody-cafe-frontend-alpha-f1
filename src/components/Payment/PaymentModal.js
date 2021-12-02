@@ -3,11 +3,15 @@ import { useState, useEffect, useCallback } from "react";
 import API from "../../api/services/api";
 import axios from "axios";
 import "./payment.scss";
+const script = document.createElement("script");
+script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    
 function PaymentModal({ showPayment, setShowPayment, setSkipCount }) {
   const api = new API();
   const [value, setValue] = useState(false);
   async function openPayModal(amt) {
     //Razorpay consider the amount in paise
+    document.body.appendChild(script);
     var options = {
       timeout: 100,
       key: process.env.REACT_APP_razorpaytest_id || "rzp_test_Hqy8SPuxif3XKM",
@@ -44,9 +48,6 @@ function PaymentModal({ showPayment, setShowPayment, setSkipCount }) {
   // console.log(value);
 
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://checkout.razorpay.com/v1/checkout.js";
-    script.async = true;
     document.body.appendChild(script);
   });
 
@@ -56,6 +57,7 @@ function PaymentModal({ showPayment, setShowPayment, setSkipCount }) {
       onHide={() => {
         setShowPayment(false);
         setSkipCount(0);
+        document.body.removeChild(script);
       }}
     >
       <Modal.Header closeButton>
@@ -117,6 +119,7 @@ function PaymentModal({ showPayment, setShowPayment, setSkipCount }) {
           onClick={() => {
             setShowPayment(false);
             setSkipCount(0);
+            document.body.removeChild(script);
           }}
         >
           Close

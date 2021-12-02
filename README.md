@@ -4,7 +4,7 @@
 Melody Cafe is music website where you can listen songs 
 <br/>
 
-# Table of Content
+# Table of Contents
 
 1. [Demo](#demo)
 2. [Installation](#installation)
